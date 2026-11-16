@@ -1,0 +1,12 @@
+{
+  "name": "kexpense-monorepo",
+  "private": true,
+  "scripts": {
+    "commitlint": "commitlint --edit"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^19.6.0",
+    "@commitlint/config-conventional": "^19.6.0",
+    "pnpm": "^12.21.0"
+  }
+}

@@ -8,7 +8,8 @@ from decimal import Decimal
 from enum import StrEnum
 from typing import Literal
 from uuid import UUID
-from pydantic import BaseModel, Field, ConfigDict
+
+from pydantic import BaseModel, ConfigDict, Field
 
 
 class EngineUsed(StrEnum):

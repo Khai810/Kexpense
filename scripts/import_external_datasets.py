@@ -19,22 +19,22 @@ import shutil
 from datetime import date, datetime
 from decimal import Decimal
 from pathlib import Path
-from uuid import uuid5, NAMESPACE_DNS
+from uuid import NAMESPACE_DNS, uuid5
 
 from backend.app.models.schemas.ocr_schema import (
-    StandardInvoiceResult,
+    BBox,
+    CategorizerUsed,
+    CheckResult,
+    EngineUsed,
+    FallbackReason,
+    ImageQuality,
     InvoiceItem,
+    InvoiceMeta,
     InvoiceTotals,
     MerchantInfo,
-    InvoiceMeta,
-    ValidationReport,
-    CheckResult,
-    ImageQuality,
+    StandardInvoiceResult,
     Timings,
-    BBox,
-    EngineUsed,
-    CategorizerUsed,
-    FallbackReason,
+    ValidationReport,
 )
 
 

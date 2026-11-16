@@ -1,9 +1,7 @@
 """Unit tests for Dataset Validation (TC-00-01 to TC-00-06)."""
 
 import csv
-import json
-import tempfile
-from pathlib import Path
+
 from scripts.validate_dataset import validate_manifest
 
 
