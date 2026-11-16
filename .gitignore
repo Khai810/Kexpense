@@ -38,6 +38,8 @@ data/uploads/*
 !data/uploads/.gitkeep
 data/samples/*
 !data/samples/.gitkeep
+data/external/*
+!data/external/.gitkeep
 *.sqlite3
 *.db
 
