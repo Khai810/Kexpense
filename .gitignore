@@ -1,0 +1,65 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+
+# Environments & Virtualenv
+.venv/
+venv/
+ENV/
+env/
+.env
+.env.local
+.env.*.local
+*.env
+
+# Credentials & Secrets
+credentials/*.json
+!credentials/google_key.json.example
+*.pem
+*.key
+*.cert
+gitleaks.report.json
+
+# Node & Frontend
+node_modules/
+.next/
+out/
+build/
+dist/
+.pnpm-debug.log*
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Database & Storage
+data/uploads/*
+!data/uploads/.gitkeep
+data/samples/*
+!data/samples/.gitkeep
+*.sqlite3
+*.db
+
+# Testing & Coverage
+.pytest_cache/
+.coverage
+htmlcov/
+coverage/
+playwright-report/
+test-results/
+
+# IDE & OS
+.DS_Store
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# AI Agents & Skills
+.agents/
+.agent/
+_agents/
+_agent/
+SKILL.md
+
