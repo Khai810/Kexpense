@@ -1,0 +1,90 @@
+{
+  "schema_version": "1.0",
+  "job_id": "20ac4b64-94c1-532d-ab8e-5c340ff5829a",
+  "scan_id": "c9276227-e3c0-534d-b52a-e9a8fe92abf4",
+  "engine_used": "google_vision",
+  "categorizer_used": "rules",
+  "fallback_reason": "none",
+  "merchant": {
+    "name": "CƠM GÀ BẢO NGỌC",
+    "tax_code": null,
+    "address": "Cs 5: 37 Đồng Bông - Dịch",
+    "phone": null
+  },
+  "invoice": {
+    "invoice_number": "INV0057-1108",
+    "invoice_date": "2020-08-11",
+    "invoice_time": null,
+    "currency": "VND",
+    "payment_method": "Tiền mặt"
+  },
+  "items": [
+    {
+      "line_no": 1,
+      "name": "Hàng hóa & Dịch vụ (CƠM GÀ BẢO NGỌC)",
+      "quantity": "1",
+      "unit": "phần",
+      "unit_price": 1475000,
+      "line_total": 1475000,
+      "category_slug": "an-uong",
+      "confidence": 0.44,
+      "bbox": {
+        "x": 0.371,
+        "y": 0.882,
+        "w": 0.108,
+        "h": 0.026
+      }
+    }
+  ],
+  "totals": {
+    "subtotal": 1475000,
+    "discount": 0,
+    "tax_amount": 0,
+    "tax_rate": null,
+    "service_charge": 0,
+    "total": 1475000,
+    "paid_amount": 1475000
+  },
+  "validation": {
+    "status": "PASS",
+    "score": 0.44,
+    "checks": [
+      {
+        "code": "V1",
+        "passed": true,
+        "severity": "hard",
+        "message_vi": "Đã tìm thấy tổng tiền hợp lệ"
+      },
+      {
+        "code": "V3",
+        "passed": true,
+        "severity": "hard",
+        "message_vi": "Phương trình cân đối tổng tiền chính xác"
+      },
+      {
+        "code": "V4",
+        "passed": true,
+        "severity": "hard",
+        "message_vi": "Có ít nhất một mặt hàng"
+      }
+    ]
+  },
+  "quality": {
+    "is_blur": false,
+    "is_dark": false,
+    "steps_applied": [
+      "exif_transpose"
+    ],
+    "ocr_mean_confidence": 0.44
+  },
+  "timings_ms": {
+    "preprocess_ms": 65,
+    "ocr_ms": 850,
+    "parse_ms": 15,
+    "categorize_ms": 5,
+    "fallback_ms": 0,
+    "total_ms": 935
+  },
+  "needs_review": false,
+  "warnings": []
+}

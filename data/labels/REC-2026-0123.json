@@ -1,0 +1,93 @@
+{
+  "schema_version": "1.0",
+  "job_id": "23e51626-b2b4-57cb-98cc-5609b0396bea",
+  "scan_id": "e360999f-c5b7-5b42-b3cd-53082a3ccedd",
+  "engine_used": "gemini_fallback",
+  "categorizer_used": "rules",
+  "fallback_reason": "low_confidence",
+  "merchant": {
+    "name": "VinCommerce",
+    "tax_code": null,
+    "address": "VM+QNH Tổ 8 Khu 3B Cẩm Trung",
+    "phone": null
+  },
+  "invoice": {
+    "invoice_number": "INV0123-1408",
+    "invoice_date": "2020-08-14",
+    "invoice_time": null,
+    "currency": "VND",
+    "payment_method": "Tiền mặt"
+  },
+  "items": [
+    {
+      "line_no": 1,
+      "name": "Hàng hóa & Dịch vụ (VinCommerce)",
+      "quantity": "1",
+      "unit": "phần",
+      "unit_price": 21000,
+      "line_total": 21000,
+      "category_slug": "an-uong",
+      "confidence": 0.62,
+      "bbox": {
+        "x": 0.16,
+        "y": 0.444,
+        "w": 0.283,
+        "h": 0.023
+      }
+    }
+  ],
+  "totals": {
+    "subtotal": 21000,
+    "discount": 0,
+    "tax_amount": 0,
+    "tax_rate": null,
+    "service_charge": 0,
+    "total": 21000,
+    "paid_amount": 21000
+  },
+  "validation": {
+    "status": "REVIEW",
+    "score": 0.62,
+    "checks": [
+      {
+        "code": "V1",
+        "passed": true,
+        "severity": "hard",
+        "message_vi": "Đã tìm thấy tổng tiền hợp lệ"
+      },
+      {
+        "code": "V3",
+        "passed": true,
+        "severity": "hard",
+        "message_vi": "Phương trình cân đối tổng tiền chính xác"
+      },
+      {
+        "code": "V4",
+        "passed": true,
+        "severity": "hard",
+        "message_vi": "Có ít nhất một mặt hàng"
+      }
+    ]
+  },
+  "quality": {
+    "is_blur": true,
+    "is_dark": false,
+    "steps_applied": [
+      "exif_transpose",
+      "deskew"
+    ],
+    "ocr_mean_confidence": 0.62
+  },
+  "timings_ms": {
+    "preprocess_ms": 150,
+    "ocr_ms": 850,
+    "parse_ms": 15,
+    "categorize_ms": 5,
+    "fallback_ms": 2200,
+    "total_ms": 3215
+  },
+  "needs_review": true,
+  "warnings": [
+    "Chất lượng ảnh thấp / ca khó (MC-OCR)"
+  ]
+}

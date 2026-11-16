@@ -1,0 +1,90 @@
+{
+  "schema_version": "1.0",
+  "job_id": "595f1ffa-6ae1-5c06-b202-5c7dcefe47c4",
+  "scan_id": "08d50488-1ecc-5a5d-8cb9-7be94977f64e",
+  "engine_used": "google_vision",
+  "categorizer_used": "rules",
+  "fallback_reason": "none",
+  "merchant": {
+    "name": "Cafe CJ Building",
+    "tax_code": null,
+    "address": "CJ Building, 6 Le Thanh Ton Street",
+    "phone": null
+  },
+  "invoice": {
+    "invoice_number": "INV0043-0812",
+    "invoice_date": "2020-12-08",
+    "invoice_time": null,
+    "currency": "VND",
+    "payment_method": "Tiền mặt"
+  },
+  "items": [
+    {
+      "line_no": 1,
+      "name": "Hàng hóa & Dịch vụ (Cafe CJ Building)",
+      "quantity": "1",
+      "unit": "phần",
+      "unit_price": 420000,
+      "line_total": 420000,
+      "category_slug": "an-uong",
+      "confidence": 0.79,
+      "bbox": {
+        "x": 0.122,
+        "y": 0.52,
+        "w": 0.114,
+        "h": 0.035
+      }
+    }
+  ],
+  "totals": {
+    "subtotal": 420000,
+    "discount": 0,
+    "tax_amount": 0,
+    "tax_rate": null,
+    "service_charge": 0,
+    "total": 420000,
+    "paid_amount": 420000
+  },
+  "validation": {
+    "status": "PASS",
+    "score": 0.79,
+    "checks": [
+      {
+        "code": "V1",
+        "passed": true,
+        "severity": "hard",
+        "message_vi": "Đã tìm thấy tổng tiền hợp lệ"
+      },
+      {
+        "code": "V3",
+        "passed": true,
+        "severity": "hard",
+        "message_vi": "Phương trình cân đối tổng tiền chính xác"
+      },
+      {
+        "code": "V4",
+        "passed": true,
+        "severity": "hard",
+        "message_vi": "Có ít nhất một mặt hàng"
+      }
+    ]
+  },
+  "quality": {
+    "is_blur": false,
+    "is_dark": false,
+    "steps_applied": [
+      "exif_transpose"
+    ],
+    "ocr_mean_confidence": 0.79
+  },
+  "timings_ms": {
+    "preprocess_ms": 65,
+    "ocr_ms": 850,
+    "parse_ms": 15,
+    "categorize_ms": 5,
+    "fallback_ms": 0,
+    "total_ms": 935
+  },
+  "needs_review": false,
+  "warnings": []
+}

@@ -1,0 +1,90 @@
+{
+  "schema_version": "1.0",
+  "job_id": "3e58c95c-259d-5b12-9066-31a0d98447d3",
+  "scan_id": "2233857f-e05b-57e0-bc38-5328e57900ae",
+  "engine_used": "google_vision",
+  "categorizer_used": "rules",
+  "fallback_reason": "none",
+  "merchant": {
+    "name": "Legend",
+    "tax_code": null,
+    "address": "Add: 683 - 685 duong 3/2 P.6 Q.10 - HCM",
+    "phone": null
+  },
+  "invoice": {
+    "invoice_number": "INV0049-0809",
+    "invoice_date": "2026-09-08",
+    "invoice_time": null,
+    "currency": "VND",
+    "payment_method": "Tiền mặt"
+  },
+  "items": [
+    {
+      "line_no": 1,
+      "name": "Hàng hóa & Dịch vụ (Legend)",
+      "quantity": "1",
+      "unit": "phần",
+      "unit_price": 64000,
+      "line_total": 64000,
+      "category_slug": "an-uong",
+      "confidence": 0.57,
+      "bbox": {
+        "x": 0.177,
+        "y": 0.654,
+        "w": 0.145,
+        "h": 0.03
+      }
+    }
+  ],
+  "totals": {
+    "subtotal": 64000,
+    "discount": 0,
+    "tax_amount": 0,
+    "tax_rate": null,
+    "service_charge": 0,
+    "total": 64000,
+    "paid_amount": 64000
+  },
+  "validation": {
+    "status": "PASS",
+    "score": 0.57,
+    "checks": [
+      {
+        "code": "V1",
+        "passed": true,
+        "severity": "hard",
+        "message_vi": "Đã tìm thấy tổng tiền hợp lệ"
+      },
+      {
+        "code": "V3",
+        "passed": true,
+        "severity": "hard",
+        "message_vi": "Phương trình cân đối tổng tiền chính xác"
+      },
+      {
+        "code": "V4",
+        "passed": true,
+        "severity": "hard",
+        "message_vi": "Có ít nhất một mặt hàng"
+      }
+    ]
+  },
+  "quality": {
+    "is_blur": false,
+    "is_dark": false,
+    "steps_applied": [
+      "exif_transpose"
+    ],
+    "ocr_mean_confidence": 0.57
+  },
+  "timings_ms": {
+    "preprocess_ms": 65,
+    "ocr_ms": 850,
+    "parse_ms": 15,
+    "categorize_ms": 5,
+    "fallback_ms": 0,
+    "total_ms": 935
+  },
+  "needs_review": false,
+  "warnings": []
+}

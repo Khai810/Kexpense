@@ -1,0 +1,91 @@
+{
+  "schema_version": "1.0",
+  "job_id": "fd4fac21-3649-59fa-8665-3432e947ed17",
+  "scan_id": "a20d6f97-1a39-53eb-aa42-c7c213d1c5e8",
+  "engine_used": "google_vision",
+  "categorizer_used": "rules",
+  "fallback_reason": "none",
+  "merchant": {
+    "name": "LIAN CHI PU TIAN VEGETARIAN RESTAURANT SDN BHD",
+    "tax_code": null,
+    "address": "54,JALAN SS23/11 TAMAN SEA,47400 PETALING JAYA,SELANGOR",
+    "phone": null
+  },
+  "invoice": {
+    "invoice_number": "INV0064-0601",
+    "invoice_date": "2018-01-06",
+    "invoice_time": null,
+    "currency": "VND",
+    "payment_method": "Thẻ"
+  },
+  "items": [
+    {
+      "line_no": 1,
+      "name": "Hàng hóa & Dịch vụ (LIAN CHI PU TIAN VEGETARIAN RESTAUR)",
+      "quantity": "1",
+      "unit": "phần",
+      "unit_price": 270000,
+      "line_total": 270000,
+      "category_slug": "an-uong",
+      "confidence": 0.95,
+      "bbox": {
+        "x": 0.08,
+        "y": 0.45,
+        "w": 0.84,
+        "h": 0.05
+      }
+    }
+  ],
+  "totals": {
+    "subtotal": 270000,
+    "discount": 0,
+    "tax_amount": 0,
+    "tax_rate": null,
+    "service_charge": 0,
+    "total": 270000,
+    "paid_amount": 270000
+  },
+  "validation": {
+    "status": "PASS",
+    "score": 0.95,
+    "checks": [
+      {
+        "code": "V1",
+        "passed": true,
+        "severity": "hard",
+        "message_vi": "Đã tìm thấy tổng tiền hợp lệ"
+      },
+      {
+        "code": "V3",
+        "passed": true,
+        "severity": "hard",
+        "message_vi": "Phương trình cân đối tổng tiền chính xác"
+      },
+      {
+        "code": "V4",
+        "passed": true,
+        "severity": "hard",
+        "message_vi": "Có ít nhất một mặt hàng"
+      }
+    ]
+  },
+  "quality": {
+    "is_blur": false,
+    "is_dark": false,
+    "steps_applied": [
+      "exif_transpose",
+      "deskew"
+    ],
+    "ocr_mean_confidence": 0.95
+  },
+  "timings_ms": {
+    "preprocess_ms": 65,
+    "ocr_ms": 850,
+    "parse_ms": 15,
+    "categorize_ms": 5,
+    "fallback_ms": 0,
+    "total_ms": 935
+  },
+  "needs_review": false,
+  "warnings": []
+}
