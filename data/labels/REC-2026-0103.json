@@ -1,0 +1,91 @@
+{
+  "schema_version": "1.0",
+  "job_id": "30132ee6-b0d7-5003-8c57-9e2e8872f17d",
+  "scan_id": "569a51b0-6893-5f41-b5de-1eba9f30da13",
+  "engine_used": "google_vision",
+  "categorizer_used": "rules",
+  "fallback_reason": "none",
+  "merchant": {
+    "name": "ASO ELECTRICAL TRADING SDN BHD",
+    "tax_code": null,
+    "address": "NO 31G, JALAN SEPADU C 25/C, SECTION 25, TAMAN INDUSTRIES, AXIS 40400 SHAH ALAM, SELANGIR.",
+    "phone": null
+  },
+  "invoice": {
+    "invoice_number": "INV0103-2709",
+    "invoice_date": "2017-09-27",
+    "invoice_time": null,
+    "currency": "VND",
+    "payment_method": "Tiền mặt"
+  },
+  "items": [
+    {
+      "line_no": 1,
+      "name": "Hàng hóa & Dịch vụ (ASO ELECTRICAL TRADING SDN BHD)",
+      "quantity": "1",
+      "unit": "phần",
+      "unit_price": 1240000,
+      "line_total": 1240000,
+      "category_slug": "hoa-don-dien-nuoc",
+      "confidence": 0.95,
+      "bbox": {
+        "x": 0.08,
+        "y": 0.45,
+        "w": 0.84,
+        "h": 0.05
+      }
+    }
+  ],
+  "totals": {
+    "subtotal": 1240000,
+    "discount": 0,
+    "tax_amount": 0,
+    "tax_rate": null,
+    "service_charge": 0,
+    "total": 1240000,
+    "paid_amount": 1240000
+  },
+  "validation": {
+    "status": "PASS",
+    "score": 0.95,
+    "checks": [
+      {
+        "code": "V1",
+        "passed": true,
+        "severity": "hard",
+        "message_vi": "Đã tìm thấy tổng tiền hợp lệ"
+      },
+      {
+        "code": "V3",
+        "passed": true,
+        "severity": "hard",
+        "message_vi": "Phương trình cân đối tổng tiền chính xác"
+      },
+      {
+        "code": "V4",
+        "passed": true,
+        "severity": "hard",
+        "message_vi": "Có ít nhất một mặt hàng"
+      }
+    ]
+  },
+  "quality": {
+    "is_blur": false,
+    "is_dark": false,
+    "steps_applied": [
+      "exif_transpose",
+      "deskew"
+    ],
+    "ocr_mean_confidence": 0.95
+  },
+  "timings_ms": {
+    "preprocess_ms": 65,
+    "ocr_ms": 850,
+    "parse_ms": 15,
+    "categorize_ms": 5,
+    "fallback_ms": 0,
+    "total_ms": 935
+  },
+  "needs_review": false,
+  "warnings": []
+}

@@ -1,0 +1,91 @@
+{
+  "schema_version": "1.0",
+  "job_id": "fa9504ef-a91b-5120-8d9e-0ab09ef8e211",
+  "scan_id": "149238f3-12b7-58ce-a0fc-f6a6eea09d0a",
+  "engine_used": "google_vision",
+  "categorizer_used": "rules",
+  "fallback_reason": "none",
+  "merchant": {
+    "name": "BHPETROL PALEKBANG",
+    "tax_code": null,
+    "address": "LOT 1626, MUKIM KAMPUNG LAUT TUMPAT 16200 PALEKBANG, KELANTAN",
+    "phone": null
+  },
+  "invoice": {
+    "invoice_number": "INV0109-2403",
+    "invoice_date": "2018-03-24",
+    "invoice_time": null,
+    "currency": "VND",
+    "payment_method": "Tiền mặt"
+  },
+  "items": [
+    {
+      "line_no": 1,
+      "name": "Hàng hóa & Dịch vụ (BHPETROL PALEKBANG)",
+      "quantity": "1",
+      "unit": "phần",
+      "unit_price": 30000,
+      "line_total": 30000,
+      "category_slug": "hoa-don-dien-nuoc",
+      "confidence": 0.95,
+      "bbox": {
+        "x": 0.08,
+        "y": 0.45,
+        "w": 0.84,
+        "h": 0.05
+      }
+    }
+  ],
+  "totals": {
+    "subtotal": 30000,
+    "discount": 0,
+    "tax_amount": 0,
+    "tax_rate": null,
+    "service_charge": 0,
+    "total": 30000,
+    "paid_amount": 30000
+  },
+  "validation": {
+    "status": "PASS",
+    "score": 0.95,
+    "checks": [
+      {
+        "code": "V1",
+        "passed": true,
+        "severity": "hard",
+        "message_vi": "Đã tìm thấy tổng tiền hợp lệ"
+      },
+      {
+        "code": "V3",
+        "passed": true,
+        "severity": "hard",
+        "message_vi": "Phương trình cân đối tổng tiền chính xác"
+      },
+      {
+        "code": "V4",
+        "passed": true,
+        "severity": "hard",
+        "message_vi": "Có ít nhất một mặt hàng"
+      }
+    ]
+  },
+  "quality": {
+    "is_blur": false,
+    "is_dark": false,
+    "steps_applied": [
+      "exif_transpose",
+      "deskew"
+    ],
+    "ocr_mean_confidence": 0.95
+  },
+  "timings_ms": {
+    "preprocess_ms": 65,
+    "ocr_ms": 850,
+    "parse_ms": 15,
+    "categorize_ms": 5,
+    "fallback_ms": 0,
+    "total_ms": 935
+  },
+  "needs_review": false,
+  "warnings": []
+}

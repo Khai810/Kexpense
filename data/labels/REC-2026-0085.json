@@ -1,0 +1,91 @@
+{
+  "schema_version": "1.0",
+  "job_id": "73bab2c3-82e3-5439-a876-fb19f0b92781",
+  "scan_id": "38540bdb-6aaf-5f0e-9342-ad27b93cea91",
+  "engine_used": "google_vision",
+  "categorizer_used": "rules",
+  "fallback_reason": "none",
+  "merchant": {
+    "name": "SOON HUAT MACHINERY ENTERPRISE",
+    "tax_code": null,
+    "address": "NO.53 JALAN PUTRA 1, TAMAN SRI PUTRA, 81200 JOHOR BAHRU JOHOR",
+    "phone": null
+  },
+  "invoice": {
+    "invoice_number": "INV0085-1101",
+    "invoice_date": "2019-01-11",
+    "invoice_time": null,
+    "currency": "VND",
+    "payment_method": "Tiền mặt"
+  },
+  "items": [
+    {
+      "line_no": 1,
+      "name": "Hàng hóa & Dịch vụ (SOON HUAT MACHINERY ENTERPRISE)",
+      "quantity": "1",
+      "unit": "phần",
+      "unit_price": 1635000,
+      "line_total": 1635000,
+      "category_slug": "mua-sam",
+      "confidence": 0.95,
+      "bbox": {
+        "x": 0.08,
+        "y": 0.45,
+        "w": 0.84,
+        "h": 0.05
+      }
+    }
+  ],
+  "totals": {
+    "subtotal": 1635000,
+    "discount": 0,
+    "tax_amount": 0,
+    "tax_rate": null,
+    "service_charge": 0,
+    "total": 1635000,
+    "paid_amount": 1635000
+  },
+  "validation": {
+    "status": "PASS",
+    "score": 0.95,
+    "checks": [
+      {
+        "code": "V1",
+        "passed": true,
+        "severity": "hard",
+        "message_vi": "Đã tìm thấy tổng tiền hợp lệ"
+      },
+      {
+        "code": "V3",
+        "passed": true,
+        "severity": "hard",
+        "message_vi": "Phương trình cân đối tổng tiền chính xác"
+      },
+      {
+        "code": "V4",
+        "passed": true,
+        "severity": "hard",
+        "message_vi": "Có ít nhất một mặt hàng"
+      }
+    ]
+  },
+  "quality": {
+    "is_blur": false,
+    "is_dark": false,
+    "steps_applied": [
+      "exif_transpose",
+      "deskew"
+    ],
+    "ocr_mean_confidence": 0.95
+  },
+  "timings_ms": {
+    "preprocess_ms": 65,
+    "ocr_ms": 850,
+    "parse_ms": 15,
+    "categorize_ms": 5,
+    "fallback_ms": 0,
+    "total_ms": 935
+  },
+  "needs_review": false,
+  "warnings": []
+}

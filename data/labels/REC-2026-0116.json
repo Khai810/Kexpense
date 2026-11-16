@@ -1,0 +1,91 @@
+{
+  "schema_version": "1.0",
+  "job_id": "71c297d3-77d3-5a40-bdf1-d9cc755bd362",
+  "scan_id": "623d1ab0-98ff-5aad-83cb-83ea973be6af",
+  "engine_used": "google_vision",
+  "categorizer_used": "rules",
+  "fallback_reason": "none",
+  "merchant": {
+    "name": "NHÀ SÁCH GD-TC CẨM PHẢ",
+    "tax_code": null,
+    "address": "ĐC: 212 Đường Trần Phú - Cẩm Phả",
+    "phone": null
+  },
+  "invoice": {
+    "invoice_number": "INV0116-1408",
+    "invoice_date": "2020-08-14",
+    "invoice_time": null,
+    "currency": "VND",
+    "payment_method": "Thẻ"
+  },
+  "items": [
+    {
+      "line_no": 1,
+      "name": "Hàng hóa & Dịch vụ (NHÀ SÁCH GD-TC CẨM PHẢ)",
+      "quantity": "1",
+      "unit": "phần",
+      "unit_price": 45000,
+      "line_total": 45000,
+      "category_slug": "suc-khoe",
+      "confidence": 0.79,
+      "bbox": {
+        "x": 0.12,
+        "y": 0.428,
+        "w": 0.25,
+        "h": 0.019
+      }
+    }
+  ],
+  "totals": {
+    "subtotal": 45000,
+    "discount": 0,
+    "tax_amount": 0,
+    "tax_rate": null,
+    "service_charge": 0,
+    "total": 45000,
+    "paid_amount": 45000
+  },
+  "validation": {
+    "status": "PASS",
+    "score": 0.79,
+    "checks": [
+      {
+        "code": "V1",
+        "passed": true,
+        "severity": "hard",
+        "message_vi": "Đã tìm thấy tổng tiền hợp lệ"
+      },
+      {
+        "code": "V3",
+        "passed": true,
+        "severity": "hard",
+        "message_vi": "Phương trình cân đối tổng tiền chính xác"
+      },
+      {
+        "code": "V4",
+        "passed": true,
+        "severity": "hard",
+        "message_vi": "Có ít nhất một mặt hàng"
+      }
+    ]
+  },
+  "quality": {
+    "is_blur": false,
+    "is_dark": false,
+    "steps_applied": [
+      "exif_transpose",
+      "deskew"
+    ],
+    "ocr_mean_confidence": 0.79
+  },
+  "timings_ms": {
+    "preprocess_ms": 65,
+    "ocr_ms": 850,
+    "parse_ms": 15,
+    "categorize_ms": 5,
+    "fallback_ms": 0,
+    "total_ms": 935
+  },
+  "needs_review": false,
+  "warnings": []
+}

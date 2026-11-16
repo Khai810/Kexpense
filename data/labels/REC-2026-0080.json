@@ -1,0 +1,91 @@
+{
+  "schema_version": "1.0",
+  "job_id": "dd950341-527f-53ab-b1b8-8ea4f849a6d1",
+  "scan_id": "80a85944-4860-51d8-a82b-cdfb3da620ce",
+  "engine_used": "google_vision",
+  "categorizer_used": "rules",
+  "fallback_reason": "none",
+  "merchant": {
+    "name": "CÔNG TY CP ĐẦU TƯ VELUTNO VIỆT NAM",
+    "tax_code": null,
+    "address": "Việt Nam",
+    "phone": null
+  },
+  "invoice": {
+    "invoice_number": "INV0080-1208",
+    "invoice_date": "2020-08-12",
+    "invoice_time": null,
+    "currency": "VND",
+    "payment_method": "Thẻ"
+  },
+  "items": [
+    {
+      "line_no": 1,
+      "name": "Hàng hóa & Dịch vụ (CÔNG TY CP ĐẦU TƯ VELUTNO VIỆT NAM)",
+      "quantity": "1",
+      "unit": "phần",
+      "unit_price": 685000685000,
+      "line_total": 685000685000,
+      "category_slug": "mua-sam",
+      "confidence": 0.81,
+      "bbox": {
+        "x": 0.663,
+        "y": 0.679,
+        "w": 0.117,
+        "h": 0.024
+      }
+    }
+  ],
+  "totals": {
+    "subtotal": 685000685000,
+    "discount": 0,
+    "tax_amount": 0,
+    "tax_rate": null,
+    "service_charge": 0,
+    "total": 685000685000,
+    "paid_amount": 685000685000
+  },
+  "validation": {
+    "status": "PASS",
+    "score": 0.81,
+    "checks": [
+      {
+        "code": "V1",
+        "passed": true,
+        "severity": "hard",
+        "message_vi": "Đã tìm thấy tổng tiền hợp lệ"
+      },
+      {
+        "code": "V3",
+        "passed": true,
+        "severity": "hard",
+        "message_vi": "Phương trình cân đối tổng tiền chính xác"
+      },
+      {
+        "code": "V4",
+        "passed": true,
+        "severity": "hard",
+        "message_vi": "Có ít nhất một mặt hàng"
+      }
+    ]
+  },
+  "quality": {
+    "is_blur": false,
+    "is_dark": false,
+    "steps_applied": [
+      "exif_transpose",
+      "deskew"
+    ],
+    "ocr_mean_confidence": 0.81
+  },
+  "timings_ms": {
+    "preprocess_ms": 65,
+    "ocr_ms": 850,
+    "parse_ms": 15,
+    "categorize_ms": 5,
+    "fallback_ms": 0,
+    "total_ms": 935
+  },
+  "needs_review": false,
+  "warnings": []
+}

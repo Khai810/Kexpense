@@ -1,0 +1,93 @@
+{
+  "schema_version": "1.0",
+  "job_id": "36b65988-6394-5dd3-a4a8-1b12f8b866fa",
+  "scan_id": "348b2c10-eee4-57aa-9b16-9f1c4f6ac948",
+  "engine_used": "gemini_fallback",
+  "categorizer_used": "rules",
+  "fallback_reason": "low_confidence",
+  "merchant": {
+    "name": "Guitar Cafe",
+    "tax_code": null,
+    "address": "28 Phan Chu Trinh, Hiệp Phú, Quận 9, Hồ",
+    "phone": null
+  },
+  "invoice": {
+    "invoice_number": "INV0137-0510",
+    "invoice_date": "2020-10-05",
+    "invoice_time": null,
+    "currency": "VND",
+    "payment_method": "Tiền mặt"
+  },
+  "items": [
+    {
+      "line_no": 1,
+      "name": "Hàng hóa & Dịch vụ (Guitar Cafe)",
+      "quantity": "1",
+      "unit": "phần",
+      "unit_price": 25000,
+      "line_total": 25000,
+      "category_slug": "an-uong",
+      "confidence": 0.64,
+      "bbox": {
+        "x": 0.378,
+        "y": 0.581,
+        "w": 0.458,
+        "h": 0.029
+      }
+    }
+  ],
+  "totals": {
+    "subtotal": 25000,
+    "discount": 0,
+    "tax_amount": 0,
+    "tax_rate": null,
+    "service_charge": 0,
+    "total": 25000,
+    "paid_amount": 25000
+  },
+  "validation": {
+    "status": "REVIEW",
+    "score": 0.64,
+    "checks": [
+      {
+        "code": "V1",
+        "passed": true,
+        "severity": "hard",
+        "message_vi": "Đã tìm thấy tổng tiền hợp lệ"
+      },
+      {
+        "code": "V3",
+        "passed": true,
+        "severity": "hard",
+        "message_vi": "Phương trình cân đối tổng tiền chính xác"
+      },
+      {
+        "code": "V4",
+        "passed": true,
+        "severity": "hard",
+        "message_vi": "Có ít nhất một mặt hàng"
+      }
+    ]
+  },
+  "quality": {
+    "is_blur": true,
+    "is_dark": false,
+    "steps_applied": [
+      "exif_transpose",
+      "deskew"
+    ],
+    "ocr_mean_confidence": 0.64
+  },
+  "timings_ms": {
+    "preprocess_ms": 150,
+    "ocr_ms": 850,
+    "parse_ms": 15,
+    "categorize_ms": 5,
+    "fallback_ms": 2200,
+    "total_ms": 3215
+  },
+  "needs_review": true,
+  "warnings": [
+    "Chất lượng ảnh thấp / ca khó (MC-OCR)"
+  ]
+}

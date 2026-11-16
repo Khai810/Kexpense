@@ -1,0 +1,93 @@
+{
+  "schema_version": "1.0",
+  "job_id": "413a60fc-ab4f-55c6-8fa1-ac1642e19dde",
+  "scan_id": "e5d47df9-27ec-508f-9968-82370a0c828a",
+  "engine_used": "gemini_fallback",
+  "categorizer_used": "rules",
+  "fallback_reason": "low_confidence",
+  "merchant": {
+    "name": "VinCommerce",
+    "tax_code": null,
+    "address": "VM+QNH 86 Trần Phú",
+    "phone": null
+  },
+  "invoice": {
+    "invoice_number": "INV0133-0908",
+    "invoice_date": "2020-08-09",
+    "invoice_time": null,
+    "currency": "VND",
+    "payment_method": "Tiền mặt"
+  },
+  "items": [
+    {
+      "line_no": 1,
+      "name": "Hàng hóa & Dịch vụ (VinCommerce)",
+      "quantity": "1",
+      "unit": "phần",
+      "unit_price": 32500,
+      "line_total": 32500,
+      "category_slug": "an-uong",
+      "confidence": 0.65,
+      "bbox": {
+        "x": 0.731,
+        "y": 0.428,
+        "w": 0.089,
+        "h": 0.017
+      }
+    }
+  ],
+  "totals": {
+    "subtotal": 32500,
+    "discount": 0,
+    "tax_amount": 0,
+    "tax_rate": null,
+    "service_charge": 0,
+    "total": 32500,
+    "paid_amount": 32500
+  },
+  "validation": {
+    "status": "REVIEW",
+    "score": 0.65,
+    "checks": [
+      {
+        "code": "V1",
+        "passed": true,
+        "severity": "hard",
+        "message_vi": "Đã tìm thấy tổng tiền hợp lệ"
+      },
+      {
+        "code": "V3",
+        "passed": true,
+        "severity": "hard",
+        "message_vi": "Phương trình cân đối tổng tiền chính xác"
+      },
+      {
+        "code": "V4",
+        "passed": true,
+        "severity": "hard",
+        "message_vi": "Có ít nhất một mặt hàng"
+      }
+    ]
+  },
+  "quality": {
+    "is_blur": true,
+    "is_dark": false,
+    "steps_applied": [
+      "exif_transpose",
+      "deskew"
+    ],
+    "ocr_mean_confidence": 0.65
+  },
+  "timings_ms": {
+    "preprocess_ms": 150,
+    "ocr_ms": 850,
+    "parse_ms": 15,
+    "categorize_ms": 5,
+    "fallback_ms": 2200,
+    "total_ms": 3215
+  },
+  "needs_review": true,
+  "warnings": [
+    "Chất lượng ảnh thấp / ca khó (MC-OCR)"
+  ]
+}

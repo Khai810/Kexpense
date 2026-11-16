@@ -1,0 +1,93 @@
+{
+  "schema_version": "1.0",
+  "job_id": "9af42fa7-4ce8-54ac-80ad-f4f24141beaa",
+  "scan_id": "4c835eee-a0fb-5673-9d6f-ae1c4af1ce16",
+  "engine_used": "gemini_fallback",
+  "categorizer_used": "rules",
+  "fallback_reason": "low_confidence",
+  "merchant": {
+    "name": "VinCommerce",
+    "tax_code": null,
+    "address": "VM+QNH Dự án KDC lấn biển cọc 6",
+    "phone": null
+  },
+  "invoice": {
+    "invoice_number": "INV0130-1208",
+    "invoice_date": "2020-08-12",
+    "invoice_time": null,
+    "currency": "VND",
+    "payment_method": "Thẻ"
+  },
+  "items": [
+    {
+      "line_no": 1,
+      "name": "Hàng hóa & Dịch vụ (VinCommerce)",
+      "quantity": "1",
+      "unit": "phần",
+      "unit_price": 309000,
+      "line_total": 309000,
+      "category_slug": "an-uong",
+      "confidence": 0.64,
+      "bbox": {
+        "x": 0.276,
+        "y": 0.502,
+        "w": 0.278,
+        "h": 0.017
+      }
+    }
+  ],
+  "totals": {
+    "subtotal": 309000,
+    "discount": 0,
+    "tax_amount": 0,
+    "tax_rate": null,
+    "service_charge": 0,
+    "total": 309000,
+    "paid_amount": 309000
+  },
+  "validation": {
+    "status": "REVIEW",
+    "score": 0.64,
+    "checks": [
+      {
+        "code": "V1",
+        "passed": true,
+        "severity": "hard",
+        "message_vi": "Đã tìm thấy tổng tiền hợp lệ"
+      },
+      {
+        "code": "V3",
+        "passed": true,
+        "severity": "hard",
+        "message_vi": "Phương trình cân đối tổng tiền chính xác"
+      },
+      {
+        "code": "V4",
+        "passed": true,
+        "severity": "hard",
+        "message_vi": "Có ít nhất một mặt hàng"
+      }
+    ]
+  },
+  "quality": {
+    "is_blur": true,
+    "is_dark": true,
+    "steps_applied": [
+      "exif_transpose",
+      "deskew"
+    ],
+    "ocr_mean_confidence": 0.64
+  },
+  "timings_ms": {
+    "preprocess_ms": 150,
+    "ocr_ms": 850,
+    "parse_ms": 15,
+    "categorize_ms": 5,
+    "fallback_ms": 2200,
+    "total_ms": 3215
+  },
+  "needs_review": true,
+  "warnings": [
+    "Chất lượng ảnh thấp / ca khó (MC-OCR)"
+  ]
+}

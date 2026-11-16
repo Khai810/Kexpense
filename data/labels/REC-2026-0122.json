@@ -1,0 +1,93 @@
+{
+  "schema_version": "1.0",
+  "job_id": "044d6f0b-c2d3-5e41-a7dc-7c09273c54ec",
+  "scan_id": "85d78c68-0a70-5bf8-897c-2afe2ae91efd",
+  "engine_used": "gemini_fallback",
+  "categorizer_used": "rules",
+  "fallback_reason": "low_confidence",
+  "merchant": {
+    "name": "TÊN ĐẠI LÝ:",
+    "tax_code": null,
+    "address": "ĐỊA CHỈ:",
+    "phone": null
+  },
+  "invoice": {
+    "invoice_number": "INV0122-0508",
+    "invoice_date": "2026-08-05",
+    "invoice_time": null,
+    "currency": "VND",
+    "payment_method": "Thẻ"
+  },
+  "items": [
+    {
+      "line_no": 1,
+      "name": "Hàng hóa & Dịch vụ (TÊN ĐẠI LÝ:)",
+      "quantity": "1",
+      "unit": "phần",
+      "unit_price": 100000,
+      "line_total": 100000,
+      "category_slug": "an-uong",
+      "confidence": 0.46,
+      "bbox": {
+        "x": 0.161,
+        "y": 0.742,
+        "w": 0.134,
+        "h": 0.049
+      }
+    }
+  ],
+  "totals": {
+    "subtotal": 100000,
+    "discount": 0,
+    "tax_amount": 0,
+    "tax_rate": null,
+    "service_charge": 0,
+    "total": 100000,
+    "paid_amount": 100000
+  },
+  "validation": {
+    "status": "REVIEW",
+    "score": 0.46,
+    "checks": [
+      {
+        "code": "V1",
+        "passed": true,
+        "severity": "hard",
+        "message_vi": "Đã tìm thấy tổng tiền hợp lệ"
+      },
+      {
+        "code": "V3",
+        "passed": true,
+        "severity": "hard",
+        "message_vi": "Phương trình cân đối tổng tiền chính xác"
+      },
+      {
+        "code": "V4",
+        "passed": true,
+        "severity": "hard",
+        "message_vi": "Có ít nhất một mặt hàng"
+      }
+    ]
+  },
+  "quality": {
+    "is_blur": true,
+    "is_dark": true,
+    "steps_applied": [
+      "exif_transpose",
+      "deskew"
+    ],
+    "ocr_mean_confidence": 0.46
+  },
+  "timings_ms": {
+    "preprocess_ms": 150,
+    "ocr_ms": 850,
+    "parse_ms": 15,
+    "categorize_ms": 5,
+    "fallback_ms": 2200,
+    "total_ms": 3215
+  },
+  "needs_review": true,
+  "warnings": [
+    "Chất lượng ảnh thấp / ca khó (MC-OCR)"
+  ]
+}

@@ -1,0 +1,374 @@
+{
+  "total_sampled": 28,
+  "percentage_sampled": 20.0,
+  "total_agreement_rate": 100.0,
+  "date_agreement_rate": 100.0,
+  "target_rate_minimum": 98.0,
+  "passed": true,
+  "samples": [
+    {
+      "id": "REC-2026-0001",
+      "annotator_1": {
+        "total": 16200,
+        "date": "2020-05-21"
+      },
+      "annotator_2": {
+        "total": 16200,
+        "date": "2020-05-21"
+      },
+      "total_agreed": true,
+      "date_agreed": true
+    },
+    {
+      "id": "REC-2026-0006",
+      "annotator_1": {
+        "total": 335500,
+        "date": "2020-08-16"
+      },
+      "annotator_2": {
+        "total": 335500,
+        "date": "2020-08-16"
+      },
+      "total_agreed": true,
+      "date_agreed": true
+    },
+    {
+      "id": "REC-2026-0011",
+      "annotator_1": {
+        "total": 102000,
+        "date": "2020-08-11"
+      },
+      "annotator_2": {
+        "total": 102000,
+        "date": "2020-08-11"
+      },
+      "total_agreed": true,
+      "date_agreed": true
+    },
+    {
+      "id": "REC-2026-0016",
+      "annotator_1": {
+        "total": 99000,
+        "date": "2026-09-02"
+      },
+      "annotator_2": {
+        "total": 99000,
+        "date": "2026-09-02"
+      },
+      "total_agreed": true,
+      "date_agreed": true
+    },
+    {
+      "id": "REC-2026-0021",
+      "annotator_1": {
+        "total": 116000,
+        "date": "2020-08-15"
+      },
+      "annotator_2": {
+        "total": 116000,
+        "date": "2020-08-15"
+      },
+      "total_agreed": true,
+      "date_agreed": true
+    },
+    {
+      "id": "REC-2026-0026",
+      "annotator_1": {
+        "total": 136000,
+        "date": "2020-08-16"
+      },
+      "annotator_2": {
+        "total": 136000,
+        "date": "2020-08-16"
+      },
+      "total_agreed": true,
+      "date_agreed": true
+    },
+    {
+      "id": "REC-2026-0031",
+      "annotator_1": {
+        "total": 165000,
+        "date": "2017-12-22"
+      },
+      "annotator_2": {
+        "total": 165000,
+        "date": "2017-12-22"
+      },
+      "total_agreed": true,
+      "date_agreed": true
+    },
+    {
+      "id": "REC-2026-0036",
+      "annotator_1": {
+        "total": 710000,
+        "date": "2018-02-05"
+      },
+      "annotator_2": {
+        "total": 710000,
+        "date": "2018-02-05"
+      },
+      "total_agreed": true,
+      "date_agreed": true
+    },
+    {
+      "id": "REC-2026-0041",
+      "annotator_1": {
+        "total": 210000,
+        "date": "2017-05-05"
+      },
+      "annotator_2": {
+        "total": 210000,
+        "date": "2017-05-05"
+      },
+      "total_agreed": true,
+      "date_agreed": true
+    },
+    {
+      "id": "REC-2026-0046",
+      "annotator_1": {
+        "total": 2700027000,
+        "date": "2020-08-09"
+      },
+      "annotator_2": {
+        "total": 2700027000,
+        "date": "2020-08-09"
+      },
+      "total_agreed": true,
+      "date_agreed": true
+    },
+    {
+      "id": "REC-2026-0051",
+      "annotator_1": {
+        "total": 25000,
+        "date": "2020-10-03"
+      },
+      "annotator_2": {
+        "total": 25000,
+        "date": "2020-10-03"
+      },
+      "total_agreed": true,
+      "date_agreed": true
+    },
+    {
+      "id": "REC-2026-0056",
+      "annotator_1": {
+        "total": 35000,
+        "date": "2010-03-18"
+      },
+      "annotator_2": {
+        "total": 35000,
+        "date": "2010-03-18"
+      },
+      "total_agreed": true,
+      "date_agreed": true
+    },
+    {
+      "id": "REC-2026-0061",
+      "annotator_1": {
+        "total": 850000,
+        "date": "2018-03-09"
+      },
+      "annotator_2": {
+        "total": 850000,
+        "date": "2018-03-09"
+      },
+      "total_agreed": true,
+      "date_agreed": true
+    },
+    {
+      "id": "REC-2026-0066",
+      "annotator_1": {
+        "total": 465000,
+        "date": "2017-02-02"
+      },
+      "annotator_2": {
+        "total": 465000,
+        "date": "2017-02-02"
+      },
+      "total_agreed": true,
+      "date_agreed": true
+    },
+    {
+      "id": "REC-2026-0071",
+      "annotator_1": {
+        "total": 65000,
+        "date": "2018-03-18"
+      },
+      "annotator_2": {
+        "total": 65000,
+        "date": "2018-03-18"
+      },
+      "total_agreed": true,
+      "date_agreed": true
+    },
+    {
+      "id": "REC-2026-0076",
+      "annotator_1": {
+        "total": 35000,
+        "date": "2017-02-10"
+      },
+      "annotator_2": {
+        "total": 35000,
+        "date": "2017-02-10"
+      },
+      "total_agreed": true,
+      "date_agreed": true
+    },
+    {
+      "id": "REC-2026-0081",
+      "annotator_1": {
+        "total": 170000,
+        "date": "2019-01-12"
+      },
+      "annotator_2": {
+        "total": 170000,
+        "date": "2019-01-12"
+      },
+      "total_agreed": true,
+      "date_agreed": true
+    },
+    {
+      "id": "REC-2026-0086",
+      "annotator_1": {
+        "total": 70000,
+        "date": "2017-12-29"
+      },
+      "annotator_2": {
+        "total": 70000,
+        "date": "2017-12-29"
+      },
+      "total_agreed": true,
+      "date_agreed": true
+    },
+    {
+      "id": "REC-2026-0091",
+      "annotator_1": {
+        "total": 185000,
+        "date": "2018-03-14"
+      },
+      "annotator_2": {
+        "total": 185000,
+        "date": "2018-03-14"
+      },
+      "total_agreed": true,
+      "date_agreed": true
+    },
+    {
+      "id": "REC-2026-0096",
+      "annotator_1": {
+        "total": 40000,
+        "date": "2026-08-13"
+      },
+      "annotator_2": {
+        "total": 40000,
+        "date": "2026-08-13"
+      },
+      "total_agreed": true,
+      "date_agreed": true
+    },
+    {
+      "id": "REC-2026-0101",
+      "annotator_1": {
+        "total": 430000,
+        "date": "2018-03-18"
+      },
+      "annotator_2": {
+        "total": 430000,
+        "date": "2018-03-18"
+      },
+      "total_agreed": true,
+      "date_agreed": true
+    },
+    {
+      "id": "REC-2026-0106",
+      "annotator_1": {
+        "total": 45000,
+        "date": "2018-01-21"
+      },
+      "annotator_2": {
+        "total": 45000,
+        "date": "2018-01-21"
+      },
+      "total_agreed": true,
+      "date_agreed": true
+    },
+    {
+      "id": "REC-2026-0111",
+      "annotator_1": {
+        "total": 1250000,
+        "date": "2026-09-12"
+      },
+      "annotator_2": {
+        "total": 1250000,
+        "date": "2026-09-12"
+      },
+      "total_agreed": true,
+      "date_agreed": true
+    },
+    {
+      "id": "REC-2026-0116",
+      "annotator_1": {
+        "total": 45000,
+        "date": "2020-08-14"
+      },
+      "annotator_2": {
+        "total": 45000,
+        "date": "2020-08-14"
+      },
+      "total_agreed": true,
+      "date_agreed": true
+    },
+    {
+      "id": "REC-2026-0121",
+      "annotator_1": {
+        "total": 36490,
+        "date": "2019-09-19"
+      },
+      "annotator_2": {
+        "total": 36490,
+        "date": "2019-09-19"
+      },
+      "total_agreed": true,
+      "date_agreed": true
+    },
+    {
+      "id": "REC-2026-0126",
+      "annotator_1": {
+        "total": 1528279,
+        "date": "2026-08-13"
+      },
+      "annotator_2": {
+        "total": 1528279,
+        "date": "2026-08-13"
+      },
+      "total_agreed": true,
+      "date_agreed": true
+    },
+    {
+      "id": "REC-2026-0131",
+      "annotator_1": {
+        "total": 8435,
+        "date": "2020-08-14"
+      },
+      "annotator_2": {
+        "total": 8435,
+        "date": "2020-08-14"
+      },
+      "total_agreed": true,
+      "date_agreed": true
+    },
+    {
+      "id": "REC-2026-0136",
+      "annotator_1": {
+        "total": 170400,
+        "date": "2020-08-09"
+      },
+      "annotator_2": {
+        "total": 170400,
+        "date": "2020-08-09"
+      },
+      "total_agreed": true,
+      "date_agreed": true
+    }
+  ]
+}
