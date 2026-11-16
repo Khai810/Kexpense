@@ -1,0 +1,114 @@
+{
+  "schema_version": "1.0",
+  "job_id": "2ea59224-caff-5775-9624-b4b89e8d6c9f",
+  "scan_id": "471cd31d-72bd-5c61-9fb2-3da67f6b5350",
+  "engine_used": "google_vision",
+  "categorizer_used": "rules",
+  "fallback_reason": "none",
+  "merchant": {
+    "name": "Trung Tâm Kinh Doanh VNPT TP.HCM",
+    "tax_code": "0100686209-002",
+    "address": "121 Pasteur, P. Võ Thị Sáu, Q.3, TP.HCM",
+    "phone": "1800 1166"
+  },
+  "invoice": {
+    "invoice_number": "HD0131-0309",
+    "invoice_date": "2026-09-03",
+    "invoice_time": "18:17:01",
+    "currency": "VND",
+    "payment_method": "Tiền mặt"
+  },
+  "items": [
+    {
+      "line_no": 1,
+      "name": "Cước dịch vụ Internet cáp quang FiberVNN gói Home Net 2",
+      "quantity": "1",
+      "unit": "tháng",
+      "unit_price": 220000,
+      "line_total": 220000,
+      "category_slug": "hoa-don-dien-nuoc",
+      "confidence": 0.95,
+      "bbox": {
+        "x": 0.08,
+        "y": 0.28,
+        "w": 0.84,
+        "h": 0.04
+      }
+    }
+  ],
+  "totals": {
+    "subtotal": 220000,
+    "discount": 0,
+    "tax_amount": 0,
+    "tax_rate": null,
+    "service_charge": 0,
+    "total": 220000,
+    "paid_amount": 270000
+  },
+  "validation": {
+    "status": "PASS",
+    "score": 0.98,
+    "checks": [
+      {
+        "code": "V1",
+        "passed": true,
+        "severity": "hard",
+        "message_vi": "Đã tìm thấy tổng tiền hợp lệ"
+      },
+      {
+        "code": "V2",
+        "passed": true,
+        "severity": "soft",
+        "message_vi": "Khớp đơn giá và số lượng từng dòng"
+      },
+      {
+        "code": "V3",
+        "passed": true,
+        "severity": "hard",
+        "message_vi": "Phương trình cân đối tổng tiền chính xác"
+      },
+      {
+        "code": "V4",
+        "passed": true,
+        "severity": "hard",
+        "message_vi": "Số lượng mặt hàng hợp lệ"
+      },
+      {
+        "code": "V5",
+        "passed": true,
+        "severity": "soft",
+        "message_vi": "Ngày hóa đơn trong giới hạn cho phép"
+      },
+      {
+        "code": "V6",
+        "passed": true,
+        "severity": "soft",
+        "message_vi": "Đã trích xuất tên cửa hàng"
+      },
+      {
+        "code": "V7",
+        "passed": true,
+        "severity": "soft",
+        "message_vi": "Độ tin cậy OCR cao"
+      }
+    ]
+  },
+  "quality": {
+    "is_blur": false,
+    "is_dark": false,
+    "steps_applied": [
+      "exif_transpose"
+    ],
+    "ocr_mean_confidence": 0.96
+  },
+  "timings_ms": {
+    "preprocess_ms": 45,
+    "ocr_ms": 850,
+    "parse_ms": 15,
+    "categorize_ms": 5,
+    "fallback_ms": 0,
+    "total_ms": 990
+  },
+  "needs_review": false,
+  "warnings": []
+}

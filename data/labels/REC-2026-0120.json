@@ -1,0 +1,116 @@
+{
+  "schema_version": "1.0",
+  "job_id": "7115b5c5-9023-5436-955c-2513bd36f115",
+  "scan_id": "dde313ad-45b4-5e9d-bb79-0b8681a45a14",
+  "engine_used": "google_vision",
+  "categorizer_used": "rules",
+  "fallback_reason": "none",
+  "merchant": {
+    "name": "Highlands Coffee Nhà Thờ Lớn",
+    "tax_code": "0302061099",
+    "address": "Số 5 Nhà Thờ, Hàng Trống, Hoàn Kiếm, Hà Nội",
+    "phone": "024 3938 1816"
+  },
+  "invoice": {
+    "invoice_number": "HD0120-0108",
+    "invoice_date": "2026-08-01",
+    "invoice_time": "10:00:00",
+    "currency": "VND",
+    "payment_method": "Thẻ / Chuyển khoản"
+  },
+  "items": [
+    {
+      "line_no": 1,
+      "name": "Phin Sữa Đá Size L",
+      "quantity": "2",
+      "unit": "ly",
+      "unit_price": 45000,
+      "line_total": 90000,
+      "category_slug": "an-uong",
+      "confidence": 0.92,
+      "bbox": {
+        "x": 0.08,
+        "y": 0.28,
+        "w": 0.84,
+        "h": 0.04
+      }
+    }
+  ],
+  "totals": {
+    "subtotal": 90000,
+    "discount": 0,
+    "tax_amount": 0,
+    "tax_rate": null,
+    "service_charge": 0,
+    "total": 90000,
+    "paid_amount": 90000
+  },
+  "validation": {
+    "status": "PASS",
+    "score": 0.89,
+    "checks": [
+      {
+        "code": "V1",
+        "passed": true,
+        "severity": "hard",
+        "message_vi": "Đã tìm thấy tổng tiền hợp lệ"
+      },
+      {
+        "code": "V2",
+        "passed": true,
+        "severity": "soft",
+        "message_vi": "Khớp đơn giá và số lượng từng dòng"
+      },
+      {
+        "code": "V3",
+        "passed": true,
+        "severity": "hard",
+        "message_vi": "Phương trình cân đối tổng tiền chính xác"
+      },
+      {
+        "code": "V4",
+        "passed": true,
+        "severity": "hard",
+        "message_vi": "Số lượng mặt hàng hợp lệ"
+      },
+      {
+        "code": "V5",
+        "passed": true,
+        "severity": "soft",
+        "message_vi": "Ngày hóa đơn trong giới hạn cho phép"
+      },
+      {
+        "code": "V6",
+        "passed": true,
+        "severity": "soft",
+        "message_vi": "Đã trích xuất tên cửa hàng"
+      },
+      {
+        "code": "V7",
+        "passed": true,
+        "severity": "soft",
+        "message_vi": "Độ tin cậy OCR cao"
+      }
+    ]
+  },
+  "quality": {
+    "is_blur": false,
+    "is_dark": false,
+    "steps_applied": [
+      "exif_transpose",
+      "deskew",
+      "clahe_contrast"
+    ],
+    "ocr_mean_confidence": 0.88
+  },
+  "timings_ms": {
+    "preprocess_ms": 120,
+    "ocr_ms": 850,
+    "parse_ms": 15,
+    "categorize_ms": 5,
+    "fallback_ms": 0,
+    "total_ms": 990
+  },
+  "needs_review": false,
+  "warnings": []
+}

@@ -1,0 +1,130 @@
+{
+  "schema_version": "1.0",
+  "job_id": "311b2ca5-5256-5870-b1e3-1f8961b72fd1",
+  "scan_id": "67ed1e0d-a215-5347-8ce8-7436eec22e77",
+  "engine_used": "google_vision",
+  "categorizer_used": "rules",
+  "fallback_reason": "none",
+  "merchant": {
+    "name": "Phúc Long Coffee & Tea Ngô Đức Kế",
+    "tax_code": "0313627993",
+    "address": "42 Ngô Đức Kế, P. Bến Nghé, Q.1, TP.HCM",
+    "phone": "028 3822 8333"
+  },
+  "invoice": {
+    "invoice_number": "HD0033-1008",
+    "invoice_date": "2026-08-10",
+    "invoice_time": "18:51:03",
+    "currency": "VND",
+    "payment_method": "Tiền mặt"
+  },
+  "items": [
+    {
+      "line_no": 1,
+      "name": "Trà Sữa Phúc Long Lớn",
+      "quantity": "2",
+      "unit": "ly",
+      "unit_price": 55000,
+      "line_total": 110000,
+      "category_slug": "an-uong",
+      "confidence": 0.93,
+      "bbox": {
+        "x": 0.08,
+        "y": 0.28,
+        "w": 0.84,
+        "h": 0.04
+      }
+    },
+    {
+      "line_no": 2,
+      "name": "Trà Đào Cam Sả Lớn",
+      "quantity": "3",
+      "unit": "ly",
+      "unit_price": 60000,
+      "line_total": 180000,
+      "category_slug": "an-uong",
+      "confidence": 0.93,
+      "bbox": {
+        "x": 0.08,
+        "y": 0.33,
+        "w": 0.84,
+        "h": 0.04
+      }
+    }
+  ],
+  "totals": {
+    "subtotal": 290000,
+    "discount": 0,
+    "tax_amount": 0,
+    "tax_rate": null,
+    "service_charge": 0,
+    "total": 290000,
+    "paid_amount": 340000
+  },
+  "validation": {
+    "status": "PASS",
+    "score": 0.98,
+    "checks": [
+      {
+        "code": "V1",
+        "passed": true,
+        "severity": "hard",
+        "message_vi": "Đã tìm thấy tổng tiền hợp lệ"
+      },
+      {
+        "code": "V2",
+        "passed": true,
+        "severity": "soft",
+        "message_vi": "Khớp đơn giá và số lượng từng dòng"
+      },
+      {
+        "code": "V3",
+        "passed": true,
+        "severity": "hard",
+        "message_vi": "Phương trình cân đối tổng tiền chính xác"
+      },
+      {
+        "code": "V4",
+        "passed": true,
+        "severity": "hard",
+        "message_vi": "Số lượng mặt hàng hợp lệ"
+      },
+      {
+        "code": "V5",
+        "passed": true,
+        "severity": "soft",
+        "message_vi": "Ngày hóa đơn trong giới hạn cho phép"
+      },
+      {
+        "code": "V6",
+        "passed": true,
+        "severity": "soft",
+        "message_vi": "Đã trích xuất tên cửa hàng"
+      },
+      {
+        "code": "V7",
+        "passed": true,
+        "severity": "soft",
+        "message_vi": "Độ tin cậy OCR cao"
+      }
+    ]
+  },
+  "quality": {
+    "is_blur": false,
+    "is_dark": false,
+    "steps_applied": [
+      "exif_transpose"
+    ],
+    "ocr_mean_confidence": 0.96
+  },
+  "timings_ms": {
+    "preprocess_ms": 45,
+    "ocr_ms": 850,
+    "parse_ms": 15,
+    "categorize_ms": 5,
+    "fallback_ms": 0,
+    "total_ms": 990
+  },
+  "needs_review": false,
+  "warnings": []
+}

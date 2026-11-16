@@ -1,0 +1,116 @@
+{
+  "schema_version": "1.0",
+  "job_id": "dd950341-527f-53ab-b1b8-8ea4f849a6d1",
+  "scan_id": "80a85944-4860-51d8-a82b-cdfb3da620ce",
+  "engine_used": "google_vision",
+  "categorizer_used": "rules",
+  "fallback_reason": "none",
+  "merchant": {
+    "name": "Trung Tâm Kinh Doanh VNPT TP.HCM",
+    "tax_code": "0100686209-002",
+    "address": "121 Pasteur, P. Võ Thị Sáu, Q.3, TP.HCM",
+    "phone": "1800 1166"
+  },
+  "invoice": {
+    "invoice_number": "HD0080-3009",
+    "invoice_date": "2026-09-30",
+    "invoice_time": "14:20:40",
+    "currency": "VND",
+    "payment_method": "Thẻ / Chuyển khoản"
+  },
+  "items": [
+    {
+      "line_no": 1,
+      "name": "Cước dịch vụ Internet cáp quang FiberVNN gói Home Net 2",
+      "quantity": "1",
+      "unit": "tháng",
+      "unit_price": 220000,
+      "line_total": 220000,
+      "category_slug": "hoa-don-dien-nuoc",
+      "confidence": 0.92,
+      "bbox": {
+        "x": 0.08,
+        "y": 0.28,
+        "w": 0.84,
+        "h": 0.04
+      }
+    }
+  ],
+  "totals": {
+    "subtotal": 220000,
+    "discount": 10000,
+    "tax_amount": 0,
+    "tax_rate": null,
+    "service_charge": 0,
+    "total": 210000,
+    "paid_amount": 210000
+  },
+  "validation": {
+    "status": "PASS",
+    "score": 0.89,
+    "checks": [
+      {
+        "code": "V1",
+        "passed": true,
+        "severity": "hard",
+        "message_vi": "Đã tìm thấy tổng tiền hợp lệ"
+      },
+      {
+        "code": "V2",
+        "passed": true,
+        "severity": "soft",
+        "message_vi": "Khớp đơn giá và số lượng từng dòng"
+      },
+      {
+        "code": "V3",
+        "passed": true,
+        "severity": "hard",
+        "message_vi": "Phương trình cân đối tổng tiền chính xác"
+      },
+      {
+        "code": "V4",
+        "passed": true,
+        "severity": "hard",
+        "message_vi": "Số lượng mặt hàng hợp lệ"
+      },
+      {
+        "code": "V5",
+        "passed": true,
+        "severity": "soft",
+        "message_vi": "Ngày hóa đơn trong giới hạn cho phép"
+      },
+      {
+        "code": "V6",
+        "passed": true,
+        "severity": "soft",
+        "message_vi": "Đã trích xuất tên cửa hàng"
+      },
+      {
+        "code": "V7",
+        "passed": true,
+        "severity": "soft",
+        "message_vi": "Độ tin cậy OCR cao"
+      }
+    ]
+  },
+  "quality": {
+    "is_blur": false,
+    "is_dark": false,
+    "steps_applied": [
+      "exif_transpose",
+      "deskew",
+      "clahe_contrast"
+    ],
+    "ocr_mean_confidence": 0.88
+  },
+  "timings_ms": {
+    "preprocess_ms": 120,
+    "ocr_ms": 850,
+    "parse_ms": 15,
+    "categorize_ms": 5,
+    "fallback_ms": 0,
+    "total_ms": 990
+  },
+  "needs_review": false,
+  "warnings": []
+}

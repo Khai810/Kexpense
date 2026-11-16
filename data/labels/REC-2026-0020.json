@@ -1,0 +1,116 @@
+{
+  "schema_version": "1.0",
+  "job_id": "201179d4-a772-5e9c-840b-8eb2f2bef4dc",
+  "scan_id": "5728717a-2671-5989-8941-1b6366f2cbd9",
+  "engine_used": "google_vision",
+  "categorizer_used": "rules",
+  "fallback_reason": "none",
+  "merchant": {
+    "name": "Co.opmart Cống Quỳnh",
+    "tax_code": "0300588520",
+    "address": "189C Cống Quỳnh, P. Nguyễn Cư Trinh, Q.1, TP.HCM",
+    "phone": "028 3832 5227"
+  },
+  "invoice": {
+    "invoice_number": "HD0020-3009",
+    "invoice_date": "2026-09-30",
+    "invoice_time": "20:20:40",
+    "currency": "VND",
+    "payment_method": "Thẻ / Chuyển khoản"
+  },
+  "items": [
+    {
+      "line_no": 1,
+      "name": "Gạo ST25 Neptune 5kg",
+      "quantity": "1",
+      "unit": "túi",
+      "unit_price": 185000,
+      "line_total": 185000,
+      "category_slug": "di-cho-sieu-thi",
+      "confidence": 0.96,
+      "bbox": {
+        "x": 0.08,
+        "y": 0.28,
+        "w": 0.84,
+        "h": 0.04
+      }
+    }
+  ],
+  "totals": {
+    "subtotal": 185000,
+    "discount": 10000,
+    "tax_amount": 0,
+    "tax_rate": null,
+    "service_charge": 0,
+    "total": 175000,
+    "paid_amount": 175000
+  },
+  "validation": {
+    "status": "PASS",
+    "score": 0.89,
+    "checks": [
+      {
+        "code": "V1",
+        "passed": true,
+        "severity": "hard",
+        "message_vi": "Đã tìm thấy tổng tiền hợp lệ"
+      },
+      {
+        "code": "V2",
+        "passed": true,
+        "severity": "soft",
+        "message_vi": "Khớp đơn giá và số lượng từng dòng"
+      },
+      {
+        "code": "V3",
+        "passed": true,
+        "severity": "hard",
+        "message_vi": "Phương trình cân đối tổng tiền chính xác"
+      },
+      {
+        "code": "V4",
+        "passed": true,
+        "severity": "hard",
+        "message_vi": "Số lượng mặt hàng hợp lệ"
+      },
+      {
+        "code": "V5",
+        "passed": true,
+        "severity": "soft",
+        "message_vi": "Ngày hóa đơn trong giới hạn cho phép"
+      },
+      {
+        "code": "V6",
+        "passed": true,
+        "severity": "soft",
+        "message_vi": "Đã trích xuất tên cửa hàng"
+      },
+      {
+        "code": "V7",
+        "passed": true,
+        "severity": "soft",
+        "message_vi": "Độ tin cậy OCR cao"
+      }
+    ]
+  },
+  "quality": {
+    "is_blur": false,
+    "is_dark": false,
+    "steps_applied": [
+      "exif_transpose",
+      "deskew",
+      "clahe_contrast"
+    ],
+    "ocr_mean_confidence": 0.88
+  },
+  "timings_ms": {
+    "preprocess_ms": 120,
+    "ocr_ms": 850,
+    "parse_ms": 15,
+    "categorize_ms": 5,
+    "fallback_ms": 0,
+    "total_ms": 990
+  },
+  "needs_review": false,
+  "warnings": []
+}

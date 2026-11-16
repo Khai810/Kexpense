@@ -1,0 +1,134 @@
+{
+  "schema_version": "1.0",
+  "job_id": "4c0814e3-382e-59ac-b01c-9be24cb0b262",
+  "scan_id": "2b995844-97e3-5434-8d09-04bbf6cd44b3",
+  "engine_used": "gemini_fallback",
+  "categorizer_used": "rules",
+  "fallback_reason": "low_confidence",
+  "merchant": {
+    "name": "Quán Ốc Đào Nguyễn Trãi (Nhàu nát & dính giọt nước)",
+    "tax_code": "0316489201",
+    "address": "Hẻm 212 Nguyễn Trãi, P. Nguyễn Cư Trinh, Q.1, TP.HCM",
+    "phone": "0909 437 033"
+  },
+  "invoice": {
+    "invoice_number": "HD0089-2710",
+    "invoice_date": "2026-10-27",
+    "invoice_time": "18:23:19",
+    "currency": "VND",
+    "payment_method": "Tiền mặt"
+  },
+  "items": [
+    {
+      "line_no": 1,
+      "name": "Ốc hương xào bơ tỏi",
+      "quantity": "1",
+      "unit": "đĩa",
+      "unit_price": 130000,
+      "line_total": 130000,
+      "category_slug": "an-uong",
+      "confidence": 0.84,
+      "bbox": {
+        "x": 0.08,
+        "y": 0.28,
+        "w": 0.84,
+        "h": 0.04
+      }
+    },
+    {
+      "line_no": 2,
+      "name": "Sò điệp nướng phô mai",
+      "quantity": "2",
+      "unit": "đĩa",
+      "unit_price": 90000,
+      "line_total": 180000,
+      "category_slug": "an-uong",
+      "confidence": 0.84,
+      "bbox": {
+        "x": 0.08,
+        "y": 0.33,
+        "w": 0.84,
+        "h": 0.04
+      }
+    }
+  ],
+  "totals": {
+    "subtotal": 310000,
+    "discount": 0,
+    "tax_amount": 0,
+    "tax_rate": null,
+    "service_charge": 0,
+    "total": 310000,
+    "paid_amount": 360000
+  },
+  "validation": {
+    "status": "REVIEW",
+    "score": 0.76,
+    "checks": [
+      {
+        "code": "V1",
+        "passed": true,
+        "severity": "hard",
+        "message_vi": "Đã tìm thấy tổng tiền hợp lệ"
+      },
+      {
+        "code": "V2",
+        "passed": true,
+        "severity": "soft",
+        "message_vi": "Khớp đơn giá và số lượng từng dòng"
+      },
+      {
+        "code": "V3",
+        "passed": true,
+        "severity": "hard",
+        "message_vi": "Phương trình cân đối tổng tiền chính xác"
+      },
+      {
+        "code": "V4",
+        "passed": true,
+        "severity": "hard",
+        "message_vi": "Số lượng mặt hàng hợp lệ"
+      },
+      {
+        "code": "V5",
+        "passed": true,
+        "severity": "soft",
+        "message_vi": "Ngày hóa đơn trong giới hạn cho phép"
+      },
+      {
+        "code": "V6",
+        "passed": true,
+        "severity": "soft",
+        "message_vi": "Đã trích xuất tên cửa hàng"
+      },
+      {
+        "code": "V7",
+        "passed": false,
+        "severity": "soft",
+        "message_vi": "Độ tin cậy OCR trung bình (ca khó)"
+      }
+    ]
+  },
+  "quality": {
+    "is_blur": false,
+    "is_dark": false,
+    "steps_applied": [
+      "exif_transpose",
+      "deskew",
+      "clahe_contrast"
+    ],
+    "ocr_mean_confidence": 0.74
+  },
+  "timings_ms": {
+    "preprocess_ms": 120,
+    "ocr_ms": 850,
+    "parse_ms": 15,
+    "categorize_ms": 5,
+    "fallback_ms": 2100,
+    "total_ms": 3090
+  },
+  "needs_review": true,
+  "warnings": [
+    "Chất lượng ảnh hơi mờ/nghiêng"
+  ]
+}
