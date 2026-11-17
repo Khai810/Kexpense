@@ -17,7 +17,6 @@ from pathlib import Path
 
 from backend.app.models.schemas.ocr_schema import StandardInvoiceResult
 
-
 TARGET_STRATIFICATION = {
     "supermarket": 0.30,
     "restaurant_cafe": 0.25,

@@ -28,6 +28,8 @@ node_modules/
 out/
 build/
 dist/
+*.tsbuildinfo
+.pnpm-store/
 .pnpm-debug.log*
 npm-debug.log*
 yarn-debug.log*
@@ -54,7 +56,10 @@ test-results/
 # IDE & OS
 .DS_Store
 .idea/
-.vscode/
+.vscode/*
+!.vscode/settings.json
+!.vscode/extensions.json
+!.vscode/launch.json
 *.swp
 *.swo
 
@@ -64,4 +69,6 @@ test-results/
 _agents/
 _agent/
 SKILL.md
+ROADMAP.md
+ROADMAP*.md
 
