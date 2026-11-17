@@ -50,6 +50,9 @@ Mức độ: 🔴 **P0** (chặn/tạo rủi ro lớn nếu bỏ qua) · 🟠 **
 | R-24 | 🟡 | Mục 1.1/F03 | "Kế thừa Buổi 2–5 Sorimachi - IUH" là tài liệu ngoài repo, người khác không tái lập được | Viết `docs/algorithms/*.md` mô tả thuật toán trong repo |
 | R-25 | 🟡 | 1.1 | Nhắc GPT-4o-mini nhưng không có engine nào | Chỉ giữ như phương án thay thế qua `BaseOCREngine` |
 | R-26 | 🟡 | Kiến trúc | Chưa chứng minh Hybrid tốt hơn Gemini-only (đơn giản hơn nhiều) | **Decision gate** ở F00 (ADR-007) |
+| R-27 | 🟠 | F02/F06/F09 | Hóa đơn có VAT/giảm giá/phí phục vụ nên **Σ `line_total` ≠ `total`** → thống kê theo danh mục (cộng từ món) lệch tổng chi (cộng từ hóa đơn), KPI ≠ Σ donut | Cột `receipt_items.allocated_amount` + ADR-010 (largest-remainder, Σ == total) |
+| R-28 | 🟠 | F10 vs F06–F09 | `TC-10-10` yêu cầu "nhập tay vẫn dùng được" khi OCR hỏng nhưng **không có luồng nhập tay** nào | Thêm **Feature 13** vào MVP (nhập tay nhanh + nút cứu từ màn quét) |
+| R-29 | 🟡 | F02 | Thiếu bảng cho mở rộng gần: chỉnh sửa của user, nhiều lần chạy engine, merchant chuẩn hóa, luật phân loại, bộ đếm bền, idempotency, audit | 11 bảng bổ sung ở F02; Phase 2 thêm Thẻ, Ngân sách, Định kỳ (F14–F16) |
 
 ### 0.3. Thứ tự thực hiện khuyến nghị
 
@@ -59,7 +62,7 @@ ID Feature giữ nguyên để không phá tham chiếu TC; **thứ tự làm** 
 |---|---|---|---|
 | 1 | **F00** Dataset, ground truth & quyết định kỹ thuật (mới) | — | ~1 tuần |
 | 2 | **F01** Project setup (+CI sớm, pre-commit, hạ tầng test) | F00 | 2–3 ngày |
-| 3 | **F02** Database & schema | F01 | 3–4 ngày |
+| 3 | **F02** Database & schema (15 bảng + ADR-010 allocated_amount) | F01 | ~1 tuần |
 | 4 | **F03** OpenCV + Google Vision + Parser + Validator | F00, F02 | ~1,5 tuần |
 | 5 | **F04** Gemini Vision | F00, F03 (data_cleaner) | ~1 tuần |
 | 6 | **F05** Hybrid Router + Categorizer | F03, F04 | ~1 tuần |
@@ -68,10 +71,15 @@ ID Feature giữ nguyên để không phá tham chiếu TC; **thứ tự làm** 
 | 9 | **F07** Frontend setup, camera, PWA | F06 (hoặc mock bằng OpenAPI) | ~1 tuần |
 | 10 | **F08** Review split-view | F07 | ~1 tuần |
 | 11 | **F09** Dashboard | F08 | ~1 tuần |
-| 12 | **F12** Bảo mật, quyền riêng tư, observability (mới) | F06–F09 | 4–5 ngày |
-| 13 | **F10** Docker, CI/CD, Benchmark, Release | tất cả | ~1 tuần |
+| 12 | **F13** Chi tiêu không có hóa đơn / nhập tay (mới, **MVP**) | F06, F08 | 4–5 ngày |
+| 13 | **F12** Bảo mật, quyền riêng tư, observability (mới) | F06–F09, F13 | 4–5 ngày |
+| 14 | **F10** Docker, CI/CD, Benchmark, Release | tất cả MVP | ~1 tuần |
+| — | **▼ Gate G4 → phát hành v1.0 → Giai đoạn 2 ▼** | | |
+| 15 | **F14** Thẻ (Tags) | F06, F08 | 3–4 ngày |
+| 16 | **F15** Ngân sách & cảnh báo (+ thông báo, scheduler) | F13, F02 | ~1,5 tuần |
+| 17 | **F16** Chi tiêu định kỳ (+ phát hiện tự động) | F15, F13, F14 | ~1,5–2 tuần |
 
-Tổng ước lượng: **~11–13 tuần** làm một mình, bao gồm test và tài liệu. Mốc kiểm soát chất lượng (Go/No-Go) xem mục 8.
+Tổng ước lượng: **MVP ~12–14 tuần** (F00–F13) và **Giai đoạn 2 thêm ~5–6 tuần** (F14–F16) khi làm một mình, đã gồm test và tài liệu. Mốc kiểm soát chất lượng (Go/No-Go) xem mục 8.
 
 ---
 
@@ -128,6 +136,8 @@ Hệ thống giải quyết trọn vẹn bài toán ghi chép và kiểm soát t
 | Người dùng cá nhân, mỗi người một kho dữ liệu riêng | Chia sẻ/nhóm gia đình, phân quyền theo vai trò |
 | Online-first; PWA cài được, có trang offline | Nhập liệu offline đầy đủ và đồng bộ nền |
 | Xuất `.xlsx`/CSV | Kết nối ngân hàng, hoàn thuế, kế toán doanh nghiệp |
+| **Chi tiêu nhập tay không hóa đơn (F13, MVP)** | Nhập tay offline có đồng bộ sau |
+| **Giai đoạn 2:** thẻ (F14), ngân sách & cảnh báo (F15), chi tiêu định kỳ (F16) | Rollover ngân sách, ngân sách tuần/năm/theo thẻ, chia hóa đơn, đối soát sao kê |
 
 ### 1.4. [v2] Các quyết định kiến trúc cần chốt (ADR) trước khi code
 
@@ -143,6 +153,8 @@ Mỗi ADR là một file ngắn `docs/adr/NNN-ten.md` (Bối cảnh → Quyết 
 | 006 | Model Gemini | Cấu hình bằng `GEMINI_MODEL` + `GEMINI_MODEL_FALLBACK`; theo dõi trang deprecations của Google; benchmark ≥2 model (Flash vs Flash-Lite) về chất lượng/chi phí/độ trễ. |
 | 007 | Hybrid có đáng không? | **Decision gate** sau benchmark baseline ở F00: so 3 nhánh (Vision+rule / Gemini-only / Hybrid). Nếu Gemini-only đạt chất lượng mục tiêu với chi phí chấp nhận được, đơn giản hóa kiến trúc (giữ Vision làm engine phụ). |
 | 008 | Nơi triển khai | Chốt cụ thể (ví dụ FE Vercel + BE Cloud Run/Fly/Render + DB Supabase/Neon). Chọn managed DB thì `docker-compose.prod.yml` chỉ dùng cho self-host. |
+| 009 | Job nền/scheduler *(chốt ở F15)* | Scheduler ngoài gọi `POST /internal/jobs/{name}` (có token) **hoặc** APScheduler nếu chạy 1 instance; mọi job **idempotent** + `pg_try_advisory_lock`; ghi `job_runs`. |
+| 010 | Phân bổ số tiền thực chi cho món *(chốt ở F02)* | `receipt_items.allocated_amount` với `Σ == receipts.total_amount` (largest-remainder); mọi thống kê/ngân sách dùng cột này, không dùng `line_total`. |
 
 > **Lưu ý sơ đồ 1.2:** khối `Background Queue` là Phase 2 theo ADR-001; luồng MVP là `Gateway → Preprocess → Vision → Parser → Validate → (Categorizer | Gemini) → Adapter → DB`.
 
@@ -358,6 +370,8 @@ smart-expense-ocr/
 │   └── public/offline.html
 ├── .pre-commit-config.yaml · commitlint.config.js · .editorconfig · .python-version · .nvmrc
 ├── Makefile · README.md · CONTRIBUTING.md · SECURITY.md · CHANGELOG.md
+├── [F13–F16] backend/app/services/{expenses,tags,budget,recurring,notification,scheduler}/ · api/v1/endpoints/{expenses,tags,budgets,recurring,notifications,internal_jobs}.py
+├── [F13–F16] frontend/src/app/(dashboard)/{expenses/new,budgets,recurring,notifications}/ · lib/vnd-shorthand.ts · components/{quick-add,tags,budget,recurring}/ · sw push handler
 ```
 
 > Kiến trúc lớp: `api → services → repositories → models`, `utils` dùng chung. Dùng `import-linter` (hoặc test kiến trúc) để cấm `services` import từ `api` và cấm `api` truy cập DB trực tiếp.
@@ -457,6 +471,9 @@ Mọi lỗi trả cùng một dạng (không lộ traceback): `{"error": {"code"
 | `NOT_FOUND` | 404 | Không có hoặc **không thuộc về user** (không phân biệt, chống dò) |
 | `DUPLICATE_RECEIPT` | 409 | Nghi trùng hóa đơn (kèm `existing_id`) |
 | `RATE_LIMITED` / `QUOTA_EXCEEDED` | 429 | Vượt rate limit / hạn mức Gemini-OCR |
+| `TAG_NAME_TAKEN` / `TAG_LIMIT_EXCEEDED` | 409 / 422 | Thẻ trùng tên (sau chuẩn hóa) / vượt giới hạn thẻ |
+| `BUDGET_ALREADY_EXISTS` | 409 | Đã có ngân sách active cùng phạm vi |
+| `RECURRING_INVALID_SCHEDULE` | 422 | Lịch định kỳ thiếu/mâu thuẫn trường |
 | `INTERNAL_ERROR` | 500 | Lỗi không lường trước (chỉ có `request_id`) |
 
 *Kết quả OCR "kém tin cậy" **không phải lỗi**: trả 200 với `needs_review=true` + `warnings`.*
@@ -474,7 +491,7 @@ Mọi lỗi trả cùng một dạng (không lộ traceback): `{"error": {"code"
 
 * Tiền tố `/api/v1`; thay đổi phá vỡ → `/api/v2`. Mọi response có `X-Request-ID`.
 * **Phân trang:** `limit` (mặc định 20, tối đa 100) + `cursor` (hoặc `offset` nếu chưa cần cursor); envelope `{items, total, next_cursor}`.
-* **Lọc/sắp xếp** thống nhất: `from`, `to` (ngày), `category_id`, `q` (tên quán/món), `min_amount`, `max_amount`, `engine`, `status`; `sort=-invoice_date`.
+* **Lọc/sắp xếp** thống nhất: `from`, `to` (ngày), `category_id`, `q` (tên quán/món), `min_amount`, `max_amount`, `engine`, `status`, `source` (F13), `tag_ids` + `tag_mode=any|all` (F14); `sort=-invoice_date`.
 * **Idempotency:** header `Idempotency-Key` cho `POST /receipts` (lưu 24 h).
 * **OpenAPI là hợp đồng:** commit `openapi.json`; CI fail khi lệch; FE sinh type bằng `openapi-typescript`.
 * **Rate limit** trả `429` + `Retry-After`. Mọi endpoint có `response_model`, ví dụ, và các mã lỗi tài liệu hóa.
@@ -557,7 +574,7 @@ Mỗi feature branch dưới đây bao gồm đầy đủ: **Mục tiêu**, **C�
 | Tax code | Khớp tuyệt đối (chỉ tính hóa đơn có MST) |
 | Item P/R/F1 | Ghép món pred↔gt bằng độ tương đồng tên ≥ 0,8; "đúng" khi khớp cả `quantity` và `line_total` |
 | Category accuracy | Theo món; thêm "danh mục chính của hóa đơn" |
-| **Auto-accept precision** | `P(total đúng ∧ date đúng | validation.status == PASS)` — đo độ tin cậy của nhánh *không cần cứu* |
+| **Auto-accept precision** | `P(total đúng ∧ date đúng ∣ validation.status == PASS)` (xác suất có điều kiện) — đo độ tin cậy của nhánh *không cần cứu* |
 | Fallback rate | Tỷ lệ ca chuyển sang Gemini |
 | Latency | p50/p95/p99 theo nhánh (không dùng riêng trung bình) |
 | Cost/receipt | Theo mô hình mục 1.6 |
@@ -645,7 +662,7 @@ Mỗi feature branch dưới đây bao gồm đầy đủ: **Mục tiêu**, **C�
 ### FEATURE 02: Thiết kế Cơ sở Dữ liệu & Schema Entity
 * **Branch:** `feature/02-database-schema`
 * **Mục tiêu:** Xây dựng mô hình dữ liệu quan hệ cho bài toán chi tiêu, tích hợp SQLAlchemy 2.0 Async và migration với Alembic.
-* **Các bảng cần thiết kế:** `users`, `categories`, `receipts`, `receipt_items`, **`ocr_jobs` `[v2]`** (đặc tả cột ở mục BỔ SUNG v2 của F02).
+* **Các bảng cần thiết kế:** `users`, `categories`, `receipts`, `receipt_items`, **+ 11 bảng bổ sung `[v2]`**: `user_settings`, `merchants`, `category_rules`, `receipt_images`, `receipt_ocr_data`, `receipt_corrections`, `ocr_jobs`, `ocr_engine_runs`, `usage_counters`, `idempotency_keys`, `audit_logs` (+ `sessions` nếu tự quản auth) — đặc tả cột ở mục BỔ SUNG v2 của F02.
 * **Các công việc cần làm:**
   1. Cấu hình kết nối async DB trong `backend/app/core/database.py`.
   2. Tạo models SQLAlchemy 2.0 trong `backend/app/models/entities/`.
@@ -666,7 +683,7 @@ Mỗi feature branch dưới đây bao gồm đầy đủ: **Mục tiêu**, **C�
     pytest tests/unit/test_models.py -v
     ```
   * **Test Cases bắt buộc:**
-    * `TC-02-01`: Migration thành công tạo đúng ~~4~~ **5** bảng nghiệp vụ (thêm `ocr_jobs`) với kiểu dữ liệu: `receipts.total_amount` là ~~`NUMERIC(15, 2)`~~ **`BIGINT` (số đồng, ADR-004) `[v2]`**, `id` là `UUID`.
+    * `TC-02-01`: Migration thành công tạo đúng ~~4~~ **15** bảng nghiệp vụ (+`sessions` nếu tự quản auth) với kiểu dữ liệu: `receipts.total_amount` là ~~`NUMERIC(15, 2)`~~ **`BIGINT` (số đồng, ADR-004) `[v2]`**, `id` là `UUID`.
     * `TC-02-02`: Cascade Delete: Xóa 1 bản ghi `receipts` thì toàn bộ các `receipt_items` tương ứng phải tự động bị xóa theo.
     * `TC-02-03`: Bảng `categories` có đúng 8 danh mục mặc định sau khi seed: Ăn uống, Đi chợ siêu thị, Mua sắm, Di chuyển, Hóa đơn điện nước, Sức khỏe, Giải trí, Khác.
   * **Kịch bản kiểm thử thủ công:** Mở TablePlus / DBeaver / pgAdmin kết nối vào DB, kiểm tra schema có đúng foreign keys và indices trên cột `receipts.invoice_date` và `receipts.user_id`.
@@ -675,34 +692,115 @@ Mỗi feature branch dưới đây bao gồm đầy đủ: **Mục tiêu**, **C�
 * **Prompt Thực Thi Mẫu:**
   > "Hãy viết mã nguồn tầng Database cho `backend/app/models/entities/` sử dụng SQLAlchemy 2.0 Async và PostgreSQL. Định nghĩa các bảng `users`, `categories`, `receipts`, `receipt_items` có khóa ngoại, index tìm kiếm theo ngày và user_id. Đi kèm file cấu hình `alembic.ini`, file `env.py` hỗ trợ async migration, script `seed_categories.py` tạo danh mục mẫu và file `tests/unit/test_models.py` kiểm tra quan hệ cascade delete."
 
-#### 🔧 BỔ SUNG v2 — FEATURE 02
-**Vấn đề phát hiện:** schema thiếu cột để *lưu và tái xử lý* kết quả OCR (ảnh, engine, trạng thái, JSON thô, hash chống trùng); `NUMERIC(15,2)` mâu thuẫn với quy ước số nguyên VND; không có ràng buộc dữ liệu; test có thể bị chạy trên SQLite thay Postgres; `seed_categories` không có trong cấu trúc thư mục.
+#### 🔧 BỔ SUNG v2 — FEATURE 02 (đặc tả mở rộng)
+**Vấn đề phát hiện:** schema gốc thiếu cột để *lưu, tái xử lý và học từ* kết quả OCR (ảnh, engine, trạng thái, JSON thô, hash chống trùng); `NUMERIC(15,2)` mâu thuẫn quy ước số nguyên VND; không có ràng buộc dữ liệu; một job có thể chạy 2 engine nhưng chỉ ghi được 1; chỉnh sửa của người dùng không được ghi lại để đo chất lượng; rate limit/idempotency chưa có chỗ lưu bền; `seed_categories` không có trong cấu trúc; test có thể chạy nhầm trên SQLite. **Thêm một lỗ hổng khác:** tổng hóa đơn có VAT/giảm giá/phí phục vụ ≠ Σ `line_total`, nên thống kê theo danh mục (cộng từ món) sẽ **lệch** so với tổng chi (cộng từ hóa đơn) → giải bằng cột `allocated_amount` (ADR-010 bên dưới).
 
-**Đặc tả cột bổ sung (tối thiểu):**
+##### A. Danh sách bảng (15 bảng nghiệp vụ, +`sessions` nếu tự quản auth)
+
+| # | Bảng | Mục đích | Dùng bởi |
+|---|---|---|---|
+| 1 | `users` | Tài khoản, consent | F11, F12 |
+| 2 | `user_settings` | Múi giờ, locale, ngày bắt đầu tháng tài chính, tùy chọn thông báo | F09, F15, F16 |
+| 3 | `categories` | Danh mục hệ thống + của user | Mọi nơi |
+| 4 | `merchants` | Chuẩn hóa tên quán, MST, danh mục mặc định | F05, F09, F16 |
+| 5 | `category_rules` | Luật phân loại học từ lịch sử (quán/từ khóa → danh mục) | F05 (categorizer) |
+| 6 | `receipts` | Hóa đơn/khoản chi (quét **hoặc nhập tay**) | Mọi nơi |
+| 7 | `receipt_items` | Dòng chi tiết + số tiền đã phân bổ | Thống kê, ngân sách |
+| 8 | `receipt_images` | Ảnh gốc/ảnh xử lý/đính kèm | F06, F13 |
+| 9 | `receipt_ocr_data` | `raw_ocr` + `ocr_snapshot` (JSON nặng, tách khỏi `receipts`) | F05, F08 |
+| 10 | `receipt_corrections` | Từng chỉnh sửa của user so với kết quả AI | F08, F10 (đo edit rate) |
+| 11 | `ocr_jobs` | 1 lần user bấm quét | F05, F06 |
+| 12 | `ocr_engine_runs` | Mỗi lần chạy một engine trong job (kể cả fallback) | F05, F10 |
+| 13 | `usage_counters` | Bộ đếm bền vững cho rate limit/cost guard | F05, F12 |
+| 14 | `idempotency_keys` | Chống ghi trùng khi retry | F06 |
+| 15 | `audit_logs` | Sự kiện nhạy cảm (xóa/xuất dữ liệu, đổi consent) | F11, F12 |
+| — | `sessions` *(chỉ khi tự quản auth)* | Refresh token rotation, thu hồi đăng nhập | F11 |
+
+##### B. Đặc tả cột
 
 | Bảng | Cột / ràng buộc |
 |---|---|
-| `users` | `id UUID PK`, `email UNIQUE`, `password_hash` *(nếu tự quản auth)*, `consent_ocr_at`, `consent_version`, `created_at`, `deleted_at` |
-| `categories` | `id`, `user_id NULL` (NULL = danh mục hệ thống), `slug`, `name`, `icon`, `color`, `keywords JSONB`, `is_system`; **UNIQUE(`user_id`,`slug`)** |
-| `receipts` | `id UUID`, `user_id FK`, `merchant_name`, `merchant_tax_code`, `invoice_number`, **`invoice_date DATE`**, `invoice_time TIME NULL`, `currency CHAR(3)='VND'`, `subtotal`, `discount`, `tax_amount`, `service_charge`, **`total_amount BIGINT`**, `payment_method`, `image_path`, `content_hash CHAR(64)`, `engine_used`, `categorizer_used`, `fallback_reason`, `validation_status`, `ocr_confidence`, `needs_review BOOL`, `status ('draft','confirmed')`, `raw_ocr JSONB NULL`, `ocr_snapshot JSONB NULL` (kết quả AI gốc để đo edit rate), `created_at`, `updated_at`, `deleted_at NULL` |
-| `receipt_items` | `id`, `receipt_id FK ON DELETE CASCADE`, `line_no`, `name`, `quantity NUMERIC(10,3)`, `unit`, `unit_price BIGINT`, `line_total BIGINT`, `category_id FK`, `confidence`, `bbox JSONB NULL` |
-| `ocr_jobs` | `id UUID`, `user_id`, `scan_id`, `content_hash`, `engine_used`, `fallback_reason`, `status`, `latency_ms`, `tokens_in`, `tokens_out`, `cost_usd`, `error_code`, `created_at` — phục vụ audit, cache, cost guard |
+| `users` | `id UUID PK`, `email UNIQUE`, `password_hash` *(nếu tự quản auth)*, `created_at`, `deleted_at` |
+| `user_settings` | `user_id PK/FK`, `timezone` (IANA, mặc định `Asia/Ho_Chi_Minh`), `locale='vi-VN'`, `month_start_day SMALLINT CHECK 1–28 DEFAULT 1`, `small_number_as_thousand BOOL DEFAULT false`, `notification_prefs JSONB`, `consent_ocr_at`, `consent_version`. Tự tạo khi tạo user |
+| `categories` | `id`, `user_id NULL` (NULL = hệ thống), `slug`, `name`, `icon`, `color`, `keywords JSONB`, `is_system`, `archived_at`; **UNIQUE(`user_id`,`slug`)** |
+| `merchants` | `id`, `user_id`, `canonical_name`, `name_normalized`, `tax_code NULL`, `default_category_id FK NULL`, `aliases JSONB`, `created_at`; **UNIQUE(`user_id`,`name_normalized`)**; partial **UNIQUE(`user_id`,`tax_code`) WHERE tax_code IS NOT NULL** |
+| `category_rules` | `id`, `user_id`, `match_type ('merchant','keyword')`, `pattern`, `category_id FK ON DELETE CASCADE`, `priority INT`, `hit_count INT`, `source ('seed','learned','user')`, `created_at`; UNIQUE(`user_id`,`match_type`,`pattern`) |
+| `receipts` | `id UUID`, `user_id FK`, `merchant_id FK NULL ON DELETE SET NULL`, `merchant_name`, `merchant_tax_code`, `invoice_number`, **`invoice_date DATE`**, `invoice_time TIME NULL`, `currency CHAR(3)='VND'`, `subtotal`, `discount`, `tax_amount`, `service_charge`, **`total_amount BIGINT`**, `payment_method`, `notes VARCHAR(500)`, **`source ('camera','upload','manual','recurring')`**, `content_hash CHAR(64) NULL`, `ocr_job_id FK NULL`, `engine_used ('google_vision','gemini_fallback','manual')`, `categorizer_used`, `fallback_reason`, `validation_status NULL`, `ocr_confidence NULL`, `needs_review BOOL`, `status ('draft','confirmed')`, `recurring_rule_id UUID NULL` *(FK thêm ở F16)*, `created_at`, `updated_at`, `deleted_at NULL`. **Không còn** `image_path`, `raw_ocr`, `ocr_snapshot` |
+| `receipt_items` | `id`, `receipt_id FK ON DELETE CASCADE`, `line_no`, `name`, `original_name` (chữ OCR đọc được), `sku NULL`, `quantity NUMERIC(10,3)`, `unit`, `unit_price BIGINT`, `line_total BIGINT`, `discount BIGINT DEFAULT 0`, `tax_rate NUMERIC(5,2) NULL`, **`allocated_amount BIGINT`**, `category_id FK`, `confidence`, `bbox JSONB NULL`, `is_user_edited BOOL` |
+| `receipt_images` | `id`, `receipt_id FK ON DELETE CASCADE`, `kind ('original','processed','attachment')`, `storage_path`, `mime`, `width`, `height`, `size_bytes`, `sha256`, `created_at`; partial UNIQUE(`receipt_id`) WHERE `kind='original'` |
+| `receipt_ocr_data` | `receipt_id PK/FK ON DELETE CASCADE`, `raw_ocr JSONB NULL`, `ocr_snapshot JSONB NULL`, `prompt_version`, `parser_version`, `created_at` |
+| `receipt_corrections` | `id`, `receipt_id FK ON DELETE CASCADE`, `field_path` (vd `merchant.name`, `items[2].line_total`), `ai_value`, `user_value`, `created_at`; index (`receipt_id`), (`field_path`) |
+| `ocr_jobs` | `id UUID`, `user_id`, `scan_id`, `content_hash`, `final_engine`, `fallback_reason`, `status ('running','succeeded','needs_review','failed')`, `total_latency_ms`, `error_code`, `created_at` |
+| `ocr_engine_runs` | `id`, `job_id FK ON DELETE CASCADE`, `attempt_no`, `engine`, `model_version`, `prompt_version`, `parser_version`, `status`, `latency_ms`, `tokens_in`, `tokens_out`, `cost_usd NUMERIC(10,6)`, `error_code`, `validation_score`; **UNIQUE(`job_id`,`attempt_no`)** |
+| `usage_counters` | PK (`user_id`,`day DATE`), `scans INT`, `gemini_calls INT`, `cost_usd NUMERIC(10,6)` — cập nhật bằng `INSERT … ON CONFLICT DO UPDATE SET x = x + EXCLUDED.x` (atomic) |
+| `idempotency_keys` | `key`, `user_id`, `request_hash`, `response_status`, `response_body JSONB`, `created_at`, `expires_at`; **UNIQUE(`user_id`,`key`)**; index `expires_at` |
+| `audit_logs` | `id`, `user_id NULL`, `action`, `target_type`, `target_id`, `ip_hash`, `meta JSONB`, `created_at`; **append-only** (role ứng dụng chỉ có INSERT/SELECT) |
+| `sessions` | `id`, `user_id`, `family_id UUID`, `token_hash UNIQUE`, `device_name`, `ip_hash`, `created_at`, `last_used_at`, `expires_at`, `revoked_at NULL` |
 
-**Ràng buộc & chỉ mục:** `CHECK (total_amount >= 0)`, `CHECK (quantity > 0)`, `CHECK (line_total >= 0)`; FK `ON DELETE CASCADE` đặt **ở cấp DB** (không chỉ ORM); index `(user_id, invoice_date DESC)`, `(user_id, content_hash)`, `(user_id, created_at)`, `receipt_items(receipt_id)`, `receipt_items(category_id)`; trigger hoặc ORM event cập nhật `updated_at`. Quyết định *soft delete* (`deleted_at`) hay xóa cứng phải được ghi ở ADR — mặc định: xóa cứng + xóa ảnh (tôn trọng quyền xóa dữ liệu).
+**Ràng buộc & chỉ mục:**
+- `CHECK (total_amount >= 0)`, `CHECK (quantity > 0)`, `CHECK (line_total >= 0 AND allocated_amount >= 0)`, `CHECK (source IN (...))`.
+- `source='manual'` ⇒ `engine_used='manual'`, `content_hash/ocr_*/validation_status` là NULL, `needs_review=false` (kiểm bằng CHECK hoặc test).
+- FK `ON DELETE CASCADE` đặt **ở cấp DB**; mọi bảng có `user_id` đều có index bắt đầu bằng `user_id`.
+- Index: `receipts(user_id, invoice_date DESC)`, `receipts(user_id, content_hash)`, `receipts(user_id, merchant_id)`, `receipts(user_id, source)`, `receipt_items(receipt_id)`, `receipt_items(category_id)`, `ocr_jobs(user_id, created_at)`.
+- Truy vấn danh sách/thống kê **không** đọc `receipt_ocr_data` (chỉ join khi mở chi tiết/audit).
+- Xóa cứng + xóa ảnh khi user xóa dữ liệu (ghi ADR; không dùng `deleted_at` làm cơ chế xóa dữ liệu cá nhân — cột này chỉ để khôi phục tạm trong thời gian ngắn nếu có).
+- Chưa thêm `workspace_id`: chia sẻ nhóm đang là non-goal (mục 1.3). Nếu muốn mở sớm, quyết định ở ADR trước khi chạy migration đầu.
 
-**Sửa TC gốc:** `TC-02-01` → *5 bảng nghiệp vụ*, `total_amount BIGINT` (xem ADR-004).
+##### C. ADR-010 — Phân bổ số tiền thực chi cho từng món (`allocated_amount`)
+
+Quy tắc: `Σ allocated_amount` của mọi món **luôn bằng** `receipts.total_amount`. Nhờ vậy **tổng chi = Σ theo danh mục = Σ theo thẻ/ngày** (không lệch khi có VAT, giảm giá, phí phục vụ, hoặc khi user chọn "giữ tổng trên hóa đơn" ở F08). Mọi thống kê (F06/F09), ngân sách (F15) dùng `allocated_amount`, không dùng `line_total`.
+
+```python
+def allocate(total: int, line_totals: list[int]) -> list[int]:
+    """Phân bổ `total` theo tỷ lệ line_total (số nguyên, largest-remainder). Σ kết quả == total."""
+    n = len(line_totals)
+    if n == 0:
+        return []
+    base = sum(line_totals)
+    if base == 0:                                   # không có giá từng dòng → chia đều
+        q, r = divmod(total, n)
+        return [q + (1 if i < r else 0) for i in range(n)]
+    floors = [total * lt // base for lt in line_totals]
+    rema   = [total * lt %  base for lt in line_totals]
+    left   = total - sum(floors)
+    for i in sorted(range(n), key=lambda i: (-rema[i], i))[:left]:
+        floors[i] += 1
+    return floors
+```
+
+Gọi trong service lưu/sửa hóa đơn (cùng transaction với việc ghi items). Hóa đơn nhập tay có đúng 1 món ⇒ `allocated_amount = total_amount`.
+
+##### D. Chiến lược migration
+
+Tách thành các revision Alembic nhỏ, mỗi revision có `downgrade`: (1) `users`, `user_settings`, `categories`, `merchants`, `category_rules` → (2) `receipts`, `receipt_items`, `receipt_images`, `receipt_ocr_data`, `receipt_corrections` → (3) `ocr_jobs`, `ocr_engine_runs`, `usage_counters` → (4) `idempotency_keys`, `audit_logs`, `sessions`. Sinh bằng `--autogenerate` **rồi đọc lại bằng tay** (autogenerate không bắt được CHECK, partial index, trigger). Với bảng nặng ghi nhiều (`audit_logs`, `ocr_engine_runs`), cân nhắc partition theo tháng khi dữ liệu lớn (chưa cần ở MVP).
+
+**Sửa TC gốc:** `TC-02-01` → *15 bảng nghiệp vụ (+`sessions` nếu tự quản auth)*, `total_amount BIGINT`.
 
 **TC bổ sung:**
-* `TC-02-04`: Vi phạm ràng buộc (`total_amount < 0`, `quantity = 0`) bị DB từ chối (`IntegrityError`).
+* `TC-02-04`: Vi phạm ràng buộc (`total_amount < 0`, `quantity = 0`, `source` ngoài danh sách) bị DB từ chối (`IntegrityError`).
 * `TC-02-05`: `alembic upgrade head` → `downgrade base` → `upgrade head` sạch; `alembic check` báo **không lệch** giữa model và migration.
-* `TC-02-06`: Seed **idempotent** — chạy 2 lần vẫn đúng 8 danh mục hệ thống, không trùng.
-* `TC-02-07`: Với ≥ 10.000 hóa đơn giả, `EXPLAIN` của truy vấn "hóa đơn của user theo tháng" **dùng index** `(user_id, invoice_date)` (không Seq Scan).
-* `TC-02-08`: Tiền round-trip chính xác (`1_234_567` đồng, và giá trị lớn `9_999_999_999`) với kiểu `int`; không có cột tiền kiểu `float`.
-* `TC-02-09`: Test chạy trên **PostgreSQL thật** (service container/testcontainers); cấm SQLite.
-* `TC-02-10`: Repository luôn yêu cầu `user_id`; user A không đọc/sửa/xóa được dữ liệu user B ở tầng repository.
+* `TC-02-06`: Seed **idempotent** — chạy 2 lần vẫn đúng 8 danh mục hệ thống + bộ `category_rules` seed, không trùng.
+* `TC-02-07`: Với ≥ 10.000 hóa đơn giả, `EXPLAIN` truy vấn "hóa đơn của user theo tháng" **dùng index** `(user_id, invoice_date)`; truy vấn list không đọc `receipt_ocr_data`.
+* `TC-02-08`: Tiền round-trip chính xác (`1_234_567`, `9_999_999_999`) kiểu `int`; không có cột tiền kiểu `float`.
+* `TC-02-09`: Test chạy trên **PostgreSQL thật**; cấm SQLite.
+* `TC-02-10`: Repository luôn yêu cầu `user_id`; user A không đọc/sửa/xóa được dữ liệu user B ở mọi bảng có `user_id`.
+* `TC-02-11`: `ocr_engine_runs`: một job fallback tạo đúng 2 dòng `attempt_no=1,2`; chèn trùng `(job_id, attempt_no)` bị từ chối.
+* `TC-02-12`: `receipt_corrections`: so sánh `ocr_snapshot` với dữ liệu cuối → sinh đúng các `field_path` đã đổi (kể cả `items[i].*`, món bị thêm/xóa); không đổi gì → không sinh dòng nào.
+* `TC-02-13`: `merchants`: "HIGHLANDS COFFEE" và "Highlands  Coffee" cùng `name_normalized` → 1 dòng; trùng `tax_code` trong cùng user bị từ chối; xóa merchant → `receipts.merchant_id` thành NULL (không xóa hóa đơn).
+* `TC-02-14`: `category_rules`: khi nhiều luật cùng khớp, luật `priority` cao thắng; xóa category → các rule liên quan bị xóa theo; `hit_count` tăng đúng khi áp dụng.
+* `TC-02-15`: `receipt_images`: xóa receipt → xóa dòng ảnh (cascade) **và** hook dọn file trong storage; không thể có 2 ảnh `kind='original'` cho 1 receipt.
+* `TC-02-16`: `usage_counters`: 50 tác vụ đồng thời tăng bộ đếm → kết quả **đúng 50** (không mất cập nhật).
+* `TC-02-17`: `idempotency_keys`: trùng `(user_id,key)` bị từ chối; cùng key khác `request_hash` → báo xung đột; job dọn xóa dòng quá `expires_at`.
+* `TC-02-18`: `user_settings` tự tạo khi tạo user với giá trị mặc định; `timezone` sai IANA, `month_start_day = 29` bị từ chối.
+* `TC-02-19`: `audit_logs` append-only (UPDATE/DELETE bằng role ứng dụng bị từ chối); không chứa email/IP thô.
+* `TC-02-20`: `receipt_ocr_data`: xóa receipt → xóa theo; `raw_ocr` có thể NULL khi tắt lưu.
+* `TC-02-21` *(nếu tự quản auth)*: `sessions`: `token_hash` unique; thu hồi theo `family_id` làm mọi token cùng chuỗi mất hiệu lực.
+* `TC-02-22`: Hóa đơn `source='manual'` hợp lệ khi không có ảnh/hash/OCR; `source='manual'` mà `engine_used='google_vision'` bị từ chối.
+* `TC-02-23`: **`allocate()`** — property-based (hypothesis): ∀ `total ≥ 0`, `line_totals ≥ 0` thì `Σ == total`, mọi phần tử ≥ 0, thứ tự ổn định; ca đặc biệt: danh sách rỗng, tất cả bằng 0, 1 món, total nhỏ hơn số món, tổng in lệch tổng dòng ±12%.
+* `TC-02-24`: Lưu hóa đơn có giảm giá + VAT → `Σ allocated_amount == total_amount`; thống kê theo danh mục cộng lại đúng bằng tổng chi.
 
-**DoD bổ sung:** DoD toàn cục; sơ đồ ERD xuất vào `docs/architecture.md`; script seed nằm đúng `app/core/seed_categories.py`.
-**Prompt bổ sung:** *"Dùng đặc tả cột ở mục BỔ SUNG v2 của F02; tiền là BIGINT; thêm CHECK constraint, index composite, bảng `ocr_jobs`; test chạy trên Postgres thật; có test upgrade/downgrade và seed idempotent."*
+**DoD bổ sung:** DoD toàn cục; ERD (Mermaid) xuất vào `docs/architecture.md`; `seed_categories.py` nằm đúng `app/core/`; ADR-010 đã ghi.
+**Prompt bổ sung:** *"Dùng đặc tả 15 bảng + cột ở mục BỔ SUNG v2 của F02; tiền là BIGINT; thêm CHECK/partial index/composite index; `receipt_items.allocated_amount` tính bằng `allocate()` (largest-remainder, Σ == total); `raw_ocr` và `ocr_snapshot` nằm ở `receipt_ocr_data`; `usage_counters` dùng upsert atomic; test trên Postgres thật gồm upgrade/downgrade, seed idempotent, property-based cho `allocate()`."*
 
 ---
 
@@ -890,13 +988,13 @@ Kết luận: **PASS** (không hard-fail, score ≥ 0,8) · **REVIEW** (đạt h
 | | Không có gì | Lỗi `OCR_PROVIDER_UNAVAILABLE` (503) → UI gợi ý **nhập tay** |
 
 **Yêu cầu kỹ thuật bổ sung:**
-1. **Categorizer `services/categorizer/` theo thứ tự rẻ → đắt:** (1) lịch sử/override của user (merchant→category, tên món→category từ hóa đơn đã xác nhận) → (2) từ điển keyword + luật theo thương hiệu (cà phê, trà sữa, bún/phở/cơm, xăng, Grab, siêu thị...) → (3) **một** lời gọi LLM text *theo lô* cho mọi món chưa phân loại → (4) mặc định `Khác`. Lỗi LLM **không làm hỏng scan**.
+1. **Categorizer `services/categorizer/` theo thứ tự rẻ → đắt:** (1) lịch sử/override của user (bảng `category_rules` + `merchants.default_category_id`, học từ hóa đơn đã xác nhận) → (2) từ điển keyword + luật theo thương hiệu (cà phê, trà sữa, bún/phở/cơm, xăng, Grab, siêu thị...) → (3) **một** lời gọi LLM text *theo lô* cho mọi món chưa phân loại → (4) mặc định `Khác`. Lỗi LLM **không làm hỏng scan**.
 2. `engine_used` + `categorizer_used` + `fallback_reason` theo enum 3.5.
 3. **Timeout tổng** 25 s (`asyncio.timeout`), hủy việc khi client ngắt kết nối; **semaphore** giới hạn đồng thời cho Vision/Gemini; circuit breaker.
-4. **Cost guard:** giới hạn số lần Gemini/ngày/user và ngân sách tháng; vượt → trả kết quả Vision `needs_review` + cảnh báo `FALLBACK_QUOTA_EXCEEDED`.
+4. **Cost guard:** giới hạn số lần Gemini/ngày/user và ngân sách tháng (đếm bền vững ở bảng `usage_counters`, upsert atomic); vượt → trả kết quả Vision `needs_review` + cảnh báo `FALLBACK_QUOTA_EXCEEDED`.
 5. **Cache/Idempotency:** `content_hash` SHA-256 (sau EXIF transpose); trùng trong 24 h → trả kết quả cũ.
 6. **Hiệu chỉnh ngưỡng bằng dữ liệu:** chọn ngưỡng validator sao cho **auto-accept precision ≥ 97%** với **fallback rate ≤ 25–30%** (đường ROC/precision-recall trên dev set; xác nhận trên held-out).
-7. **Audit log** mỗi job đúng 1 dòng JSON: `job_id`, `user_id_hash`, `engine_used`, `fallback_reason`, độ trễ từng pha, `validation.score`, token — **không** có text hóa đơn.
+7. **Audit log** (ghi `ocr_jobs` + mỗi lần chạy engine một dòng `ocr_engine_runs`) mỗi job đúng 1 dòng JSON: `job_id`, `user_id_hash`, `engine_used`, `fallback_reason`, độ trễ từng pha, `validation.score`, token — **không** có text hóa đơn.
 
 **Sửa TC gốc:** `TC-05-01` — LLM categorizer chỉ được gọi khi còn món chưa phân loại được bằng luật/lịch sử (xem `TC-05-08`).
 
@@ -923,7 +1021,7 @@ Kết luận: **PASS** (không hard-fail, score ≥ 0,8) · **REVIEW** (đạt h
 * **Mục tiêu:** Mỗi người dùng chỉ truy cập dữ liệu của mình; token và mật khẩu được xử lý đúng chuẩn; có xóa tài khoản/dữ liệu.
 * **Các công việc cần làm:**
   1. Chốt ADR-002 (Supabase Auth *hoặc* JWT tự quản).
-  2. **Nếu tự quản:** `POST /auth/register|login|refresh|logout`, `GET /auth/me`, `DELETE /auth/me`; mật khẩu băm `argon2id`; access token 15 phút + **refresh rotation có phát hiện tái sử dụng**; refresh trong cookie `HttpOnly; Secure; SameSite`. **Nếu Supabase:** verify JWT (JWKS) trong dependency `get_current_user`.
+  2. **Nếu tự quản:** `POST /auth/register|login|refresh|logout`, `GET /auth/me`, `DELETE /auth/me`; mật khẩu băm `argon2id`; access token 15 phút + **refresh rotation có phát hiện tái sử dụng**; refresh trong cookie `HttpOnly; Secure; SameSite`, phía server lưu bảng `sessions` (`family_id`, `token_hash`, `revoked_at`). **Nếu Supabase:** verify JWT (JWKS) trong dependency `get_current_user`.
   3. Dependency `get_current_user` bắt buộc cho mọi route nghiệp vụ; **mọi repository** nhận `user_id`.
   4. Rate limit đăng nhập (5 lần/phút/IP+tài khoản); chính sách mật khẩu (≥ 8 ký tự, chặn mật khẩu phổ biến).
   5. FE: trang `(auth)/login`, `register`; middleware Next.js bảo vệ route; token **không** lưu `localStorage`.
@@ -990,14 +1088,14 @@ Kết luận: **PASS** (không hard-fail, score ≥ 0,8) · **REVIEW** (đạt h
 |---|---|
 | `POST /ocr/scan` | Nhận ảnh → trả `StandardInvoiceResult` (**bản nháp, chưa ghi `receipts`**) + `scan_id`; ảnh nằm vùng tạm (TTL 24 h) |
 | `GET /ocr/scans/{scan_id}` | Dùng khi chuyển sang job bất đồng bộ (Phase 2) |
-| `POST /receipts` | Lưu chính thức, nhận `scan_id` + dữ liệu đã sửa + `ocr_snapshot` (để tính edit rate); hỗ trợ `Idempotency-Key`; `409 DUPLICATE_RECEIPT` kèm `existing_id`, cho phép `force=true` |
+| `POST /receipts` | Lưu chính thức, nhận `scan_id` + dữ liệu đã sửa + `ocr_snapshot` (lưu ở `receipt_ocr_data`; BE diff với dữ liệu cuối và ghi `receipt_corrections`); hỗ trợ `Idempotency-Key` (bảng `idempotency_keys`, TTL 24 h); `409 DUPLICATE_RECEIPT` kèm `existing_id`, cho phép `force=true` |
 | `PATCH /receipts/{id}` | Sửa sau khi lưu (header + items) trong **một transaction** |
 | `GET /receipts` | Phân trang + lọc + sắp xếp theo 3.8 |
 | `GET /receipts/{id}/image` | Trả ảnh qua endpoint có auth/signed URL |
 | `GET/POST/PATCH/DELETE /categories` | Danh mục hệ thống chỉ đọc; xóa danh mục đang dùng → 409 (hoặc yêu cầu gán lại) |
 | `GET /stats/summary` | `month&year` **hoặc** `from&to`; `compare=previous`; zero-fill theo ngày; `percentage` tổng = 100,0 ± 0,1 (largest-remainder) |
-| `GET /stats/top` | `?by=receipt|item&limit=5` |
-| `GET /receipts/export` | `format=xlsx|csv`, stream phía server |
+| `GET /stats/top` | `?by=receipt\|item&limit=5` |
+| `GET /receipts/export` | `format=xlsx\|csv`, stream phía server |
 | `DELETE /me`, `GET /me/export` | Thuộc F11 |
 
 **Yêu cầu kỹ thuật bổ sung:**
@@ -1006,7 +1104,7 @@ Kết luận: **PASS** (không hard-fail, score ≥ 0,8) · **REVIEW** (đạt h
 3. **Chống N+1** (`selectinload`), phân trang bắt buộc cho list.
 4. **OpenAPI:** tags, ví dụ, các mã lỗi 3.6; xuất & commit `openapi.json`; FE sinh type từ file này.
 5. **Rate limit** cho `/ocr/scan` (xem F12); `X-Request-ID` ở mọi response.
-6. Thống kê gom theo `invoice_date` (giờ VN), không chuyển múi giờ lần nữa.
+6. Thống kê gom theo `invoice_date` (giờ VN), không chuyển múi giờ lần nữa; **cộng tiền theo `receipt_items.allocated_amount` (ADR-010)** để KPI = Σ danh mục = Σ ngày kể cả khi hóa đơn có VAT/giảm giá.
 
 **Sửa TC gốc:** `TC-06-01` chốt — `.exe` đổi đuôi `.jpg` (magic bytes sai) → **415 `INVALID_FILE_TYPE`**; PDF → 415; file 11 MB → **413**; ảnh nén nhỏ nhưng 20.000×20.000 px → **422 `IMAGE_TOO_LARGE`**; file rỗng → 422.
 
@@ -1131,7 +1229,7 @@ Kết luận: **PASS** (không hard-fail, score ≥ 0,8) · **REVIEW** (đạt h
 7. **Validation (Zod):** tên 1–200 ký tự; `quantity` > 0 và ≤ 9.999 (tối đa 3 chữ số thập phân); `unit_price` ∈ [0, 10⁹]; ngày không ở tương lai > 1 ngày và không trước năm 2000; lỗi hiển thị inline.
 8. **Nhập tiền:** `inputMode="numeric"`, mask phân cách hàng nghìn, không nhảy con trỏ.
 9. **Danh mục:** chọn theo từng món + "áp dụng cho tất cả"; mặc định theo AI.
-10. **Lưu:** vô hiệu hóa nút khi đang gửi + `Idempotency-Key`; `409` → hộp thoại "Hóa đơn có vẻ đã lưu — vẫn lưu?"; lỗi mạng giữ nguyên draft; gửi kèm `ocr_snapshot` để BE tính **edit rate**.
+10. **Lưu:** vô hiệu hóa nút khi đang gửi + `Idempotency-Key`; `409` → hộp thoại "Hóa đơn có vẻ đã lưu — vẫn lưu?"; lỗi mạng giữ nguyên draft; gửi kèm `ocr_snapshot`; BE so với dữ liệu cuối và ghi `receipt_corrections` để tính **edit rate**.
 11. **A11y:** nhãn đầy đủ, quản lý focus, `aria-live` thông báo khi tổng đổi; badge có chữ + icon.
 
 **Sửa TC gốc:** `TC-08-03` — badge có nhãn chữ + icon, không chỉ khác màu.
@@ -1210,6 +1308,55 @@ Kết luận: **PASS** (không hard-fail, score ≥ 0,8) · **REVIEW** (đạt h
 
 **DoD bổ sung:** DoD toàn cục; E2E `/stats` xanh trong CI; số liệu khớp 100% giữa các thành phần.
 **Prompt bổ sung:** *"Export `.xlsx` phía server + CSV có BOM chống formula injection; KPI xử lý tháng trước = 0; top 5 hóa đơn/món; zero-fill ngày, biên tháng giờ VN, KPI = Σ biểu đồ; error/empty/skeleton; bộ lọc đồng bộ URL; bảng thay thế cho biểu đồ (a11y)."*
+
+---
+
+### FEATURE 13 [v2 – MỚI]: Chi tiêu không có hóa đơn (Nhập tay nhanh) — thuộc MVP, chạy sau F09, trước F12
+* **Branch:** `feature/13-manual-expenses`
+* **Vì sao nằm trong MVP:** nhiều khoản chi không có hóa đơn (cà phê vỉa hè, gửi xe, tiền chợ, tiền mặt); và khi OCR lỗi (`OCR_PROVIDER_UNAVAILABLE`, ảnh quá mờ) người dùng **phải** có đường lui — `TC-10-10` đã yêu cầu "nhập tay vẫn dùng được".
+* **Mục tiêu:** thêm một khoản chi trong **≤ 5 giây** (gõ số tiền, chọn danh mục, lưu), dùng chung mô hình dữ liệu với hóa đơn quét để thống kê/ngân sách/xuất file không cần xử lý riêng.
+* **Thiết kế dữ liệu (không tạo bảng mới):**
+  * Ghi vào `receipts` với `source='manual'`, `engine_used='manual'`, `status='confirmed'`, `needs_review=false`; `content_hash`, `ocr_*`, `validation_status` = NULL.
+  * **Luôn có ≥ 1 dòng `receipt_items`**: nếu user không tách món, tạo 1 món (`line_no=1`, `name` = ghi chú hoặc tên danh mục, `quantity=1`, `unit_price=line_total=amount`, `category_id` đã chọn, `allocated_amount=amount`). Nhờ vậy mọi thống kê theo danh mục chạy qua `receipt_items` như hóa đơn quét, **không có nhánh đặc biệt**.
+  * Ảnh đính kèm (tuỳ chọn) lưu ở `receipt_images` với `kind='attachment'`, **không gọi OCR**.
+* **Các công việc cần làm:**
+  1. **Backend:** `POST /expenses` (body: `amount`, `date`, `category_id`, `note?`, `merchant_name?`, `items?[]`, `tag_ids?`, `attachment_scan_id?`) → gọi cùng `ReceiptService.create()` với `source='manual'`; hỗ trợ `Idempotency-Key`. Sửa/xóa dùng lại `PATCH/DELETE /receipts/{id}`. Thêm bộ lọc `source` cho `GET /receipts`, `/stats/*`, `/receipts/export` (cột "Nguồn").
+  2. **Gợi ý thông minh (rẻ, không LLM):** từ `note`/`merchant_name` → danh mục bằng `category_rules` + từ điển keyword của categorizer (F05); autocomplete ghi chú/quán từ lịch sử; chip "số tiền hay dùng" (top 5 theo tần suất của user).
+  3. **Bộ phân tích số tiền viết tắt** `parseVndShorthand` (FE, hàm thuần, dùng chung test với BE nếu cần): bảng quy tắc bên dưới.
+  4. **Frontend:** nút `+` nổi (FAB) ở Bottom Nav → bottom sheet: ô số tiền cỡ lớn (autofocus, `inputMode="decimal"`, hiển thị bản định dạng `35.000 đ` ngay khi gõ), chip danh mục (gần đây nhất lên đầu), chọn ngày (*Hôm nay / Hôm qua / Chọn ngày*), ghi chú, nút **Lưu** và **Lưu & thêm tiếp** (giữ ngày + danh mục).
+  5. **Luồng cứu khi OCR lỗi:** ở màn `/scan`, khi nhận `OCR_PROVIDER_UNAVAILABLE`/`OCR_NO_TEXT` hiện nút **"Nhập tay với ảnh này"** → mở sheet nhập tay, ảnh đã tải được đính kèm (`attachment_scan_id`).
+  6. **Hiển thị:** badge xám "Nhập tay" (có chữ + icon) ở danh sách/chi tiết; chi tiết không có split-view/ảnh nếu không có đính kèm.
+  7. **Cảnh báo trùng mềm:** cùng `amount + category + date` trong 10 phút → hộp thoại "Có vẻ bạn vừa thêm khoản này — vẫn lưu?" (dùng `409 DUPLICATE_RECEIPT` + `force=true`).
+
+  | Nhập | Kết quả | Ghi chú |
+  |---|---|---|
+  | `35k`, `35K` | 35.000 | `k` = nghìn |
+  | `1tr`, `1tr2`, `1.2tr`, `1,2tr` | 1.000.000 · 1.200.000 · 1.200.000 · 1.200.000 | `tr`/`triệu` |
+  | `35.000`, `35,000`, `35 000` | 35.000 | dấu phân cách hàng nghìn |
+  | `500` | 500 (mặc định) | nếu `small_number_as_thousand=true` thì 500.000; luôn hiển thị bản định dạng để người dùng nhìn thấy trước khi lưu |
+  | `0`, `-5`, `abc`, `1tr2k` | lỗi | thông báo tiếng Việt, không lưu |
+  | số > 10¹⁰ | lỗi | chống nhập nhầm |
+* **Validation:** `amount` ∈ [1; 10¹⁰]; `date` không quá hôm nay + 1 ngày và không trước 2000; `note` ≤ 200 ký tự; tối đa 50 món nếu tách; danh mục phải thuộc user hoặc hệ thống.
+* **BỘ TEST ĐẦU RA:**
+  * **Lệnh test tự động:** `pytest tests/integration/test_manual_expense.py -v` · `pnpm test vnd-shorthand` · `pnpm test:e2e --grep manual`
+  * **Test Cases bắt buộc:**
+    * `TC-13-01`: Tạo tối thiểu (`amount`, `category_id`) → 1 receipt `source=manual`, ngày mặc định = hôm nay **giờ VN**, đúng 1 item, `total == line_total == allocated_amount == amount`.
+    * `TC-13-02`: `parseVndShorthand` đúng toàn bộ bảng trên (≥ 20 ca, thêm hypothesis: `parse(format(x)) == x`); đầu vào lỗi trả lỗi có mã, không ném exception không bắt.
+    * `TC-13-03`: Validation (amount 0/âm/> 10¹⁰, ngày tương lai > 1 ngày, note > 200, danh mục của user khác) → `422`/`404` đúng mã lỗi chuẩn.
+    * `TC-13-04`: Chi tiêu nhập tay được tính vào `/stats/summary`, top, export; lọc `source=manual` đúng; **KPI = Σ donut = Σ bar** vẫn đúng khi trộn hóa đơn quét và nhập tay.
+    * `TC-13-05`: Trùng mềm: cùng amount+category+date trong 10 phút → 409 `DUPLICATE_RECEIPT`; `force=true` lưu được; cùng `Idempotency-Key` → 1 bản ghi.
+    * `TC-13-06`: Đính kèm ảnh: **không** gọi OCR (`engine.call_count == 0`), EXIF/GPS bị strip, vượt giới hạn dung lượng → 413; xóa khoản chi → xóa ảnh.
+    * `TC-13-07`: Sửa khoản nhập tay (đổi amount/danh mục) → item, total, `allocated_amount` đồng bộ; không thể đặt `engine_used` khác `manual` qua API.
+    * `TC-13-08`: Gợi ý danh mục từ ghi chú "cà phê" → "Ăn uống" bằng luật (**LLM `call_count == 0`**); ghi chú lạ → không gợi ý (không đoán bừa).
+    * `TC-13-09`: IDOR — user B không đọc/sửa/xóa khoản chi của A (404).
+    * `TC-13-10` *(E2E)*: mở FAB → gõ `35k` → chọn danh mục → Lưu → xuất hiện ở `/receipts` trong < 1 s và `/stats` cập nhật; "Lưu & thêm tiếp" giữ ngày + danh mục.
+    * `TC-13-11` *(luồng cứu)*: mock `/ocr/scan` trả `503 OCR_PROVIDER_UNAVAILABLE` → hiện nút "Nhập tay với ảnh này"; lưu xong khoản chi có ảnh đính kèm, không có dữ liệu OCR.
+    * `TC-13-12` *(UX/A11y)*: bàn phím số tự bật trên di động; touch target ≥ 44 px; nhãn `aria` đầy đủ; axe-core 0 lỗi critical; hoàn tất nhập trong ≤ 3 thao tác chạm (đo bằng Playwright).
+  * **Kịch bản thủ công:** trên iPhone/Android thật, thêm 5 khoản chi liên tiếp bằng "Lưu & thêm tiếp" và đo thời gian; thử tắt mạng giữa chừng → thấy lỗi thân thiện, nhập liệu không mất.
+* **Ngoài phạm vi:** nhập tay offline có đồng bộ sau (ghi vào backlog "offline queue"), chi tiêu lặp (xem F16).
+* **Tiêu chí nghiệm thu (DoD):** TC-13-01→12 pass; DoD toàn cục; `TC-10-10` (drill OCR hỏng → nhập tay) chạy được trên staging.
+* **Prompt Thực Thi Mẫu:**
+  > "Hãy thêm tính năng chi tiêu không có hóa đơn: endpoint `POST /expenses` dùng chung `ReceiptService` với `source='manual'`, luôn tạo ≥1 `receipt_items` và tính `allocated_amount`; gợi ý danh mục bằng `category_rules` (không LLM); lọc `source` ở list/stats/export. Frontend: FAB `+` mở bottom sheet nhập nhanh (hàm thuần `parseVndShorthand` với bảng quy tắc kèm test), 'Lưu & thêm tiếp', badge 'Nhập tay', và nút 'Nhập tay với ảnh này' khi OCR lỗi. Viết test theo TC-13-01→12."
 
 ---
 
@@ -1317,6 +1464,174 @@ Kết luận: **PASS** (không hard-fail, score ≥ 0,8) · **REVIEW** (đạt h
 
 ---
 
+## 4B. [v2] GIAI ĐOẠN 2 — MỞ RỘNG CHỨC NĂNG (sau Gate G4, phát hành v1.1)
+
+> Ba Feature dưới đây (F14–F16) làm **sau khi MVP đã phát hành**. Bảng nền tảng (`merchants`, `category_rules`, `user_settings`, `receipts.source`, `allocated_amount`…) đã có từ F02 nên không phải đập lại schema. Thứ tự: **F14 (Thẻ) → F15 (Ngân sách & cảnh báo, kèm hạ tầng thông báo + scheduler) → F16 (Chi tiêu định kỳ, dùng lại thông báo + scheduler)**. F13 (nhập tay) đã nằm trong MVP.
+
+---
+
+### FEATURE 14 [v2 – MỚI]: Thẻ (Tags)
+* **Branch:** `feature/14-tags`
+* **Mục tiêu:** gắn nhãn tự do cho khoản chi để xem theo ngữ cảnh *xuyên danh mục* (vd `công tác`, `quà tặng`, `du lịch Đà Lạt`) — thứ mà danh mục không làm được.
+* **Quyết định thiết kế:** thẻ gắn ở **cấp hóa đơn** (không gắn từng món, tránh phức tạp). Một hóa đơn có nhiều thẻ ⇒ tổng theo thẻ **có thể vượt** tổng chi; UI ghi rõ "một khoản chi có thể thuộc nhiều thẻ" và thống kê theo thẻ **không** nằm trong ràng buộc KPI = Σ donut.
+* **Bảng mới (migration riêng của F14):**
+
+| Bảng | Cột / ràng buộc |
+|---|---|
+| `tags` | `id UUID`, `user_id FK`, `name VARCHAR(30)`, `name_normalized` (NFC, lowercase, bỏ dấu, gộp khoảng trắng), `color`, `archived_at NULL`, `created_at`; **UNIQUE(`user_id`,`name_normalized`)** |
+| `receipt_tags` | `receipt_id FK ON DELETE CASCADE`, `tag_id FK ON DELETE CASCADE`, `user_id` (khử chuẩn để kiểm tra chéo user), `created_at`; **PK(`receipt_id`,`tag_id`)**; index (`tag_id`,`receipt_id`) và (`user_id`,`tag_id`) |
+
+* **Giới hạn:** ≤ 10 thẻ/hóa đơn, ≤ 100 thẻ/user; tên 1–30 ký tự (cho phép emoji).
+* **Các công việc cần làm:**
+  1. **API:** `GET /tags` (kèm `usage_count`) · `POST /tags` · `PATCH /tags/{id}` (đổi tên/màu/archive) · `DELETE /tags/{id}` (xóa liên kết, **không** xóa hóa đơn) · `POST /tags/{id}/merge` `{into_id}` · `PUT /receipts/{id}/tags` `{tag_ids}` (**thay thế** toàn bộ tập thẻ, idempotent) · `POST /receipts/bulk-tag` `{receipt_ids≤200, add_tag_ids, remove_tag_ids}`. Thêm `tag_ids` + `tag_mode=any|all` vào `GET /receipts`, `/stats/summary`, `/receipts/export`; thêm `GET /stats/by-tag`.
+  2. **Service:** chuẩn hóa tên → tìm thẻ có sẵn trước khi tạo ("Công tác" và "cong tac" là một); **kiểm tra chéo user** (thẻ phải thuộc cùng user với hóa đơn — chặn gắn thẻ của người khác); merge trong **một transaction** (chuyển liên kết, gộp trùng bằng `INSERT … ON CONFLICT DO NOTHING`, xóa thẻ nguồn). Tải thẻ cho danh sách bằng `selectinload`/join tổng hợp, **không N+1**.
+  3. **Gợi ý thẻ:** lấy 3 thẻ được dùng nhiều nhất cho cùng `merchant_id` ở 5 hóa đơn gần nhất (chỉ *gợi ý*, không tự gắn).
+  4. **Frontend:** ô nhập chip (gõ → autocomplete → Enter/phẩy tạo thẻ, Backspace xóa), tích hợp ở màn Review (F08), chi tiết hóa đơn, form nhập tay (F13); chọn nhiều hóa đơn ở danh sách → gắn/bỏ thẻ hàng loạt; bộ lọc thẻ (any/all) ở `/receipts` và `/stats`; trang quản lý thẻ (đổi tên, màu, gộp, archive); cột "Thẻ" trong export (nối bằng `; `).
+* **BỘ TEST ĐẦU RA:**
+  * **Lệnh test tự động:** `pytest tests/integration/test_tags.py -v` · `pnpm test tags` · `pnpm test:e2e --grep tags`
+  * **Test Cases bắt buộc:**
+    * `TC-14-01`: Tạo "Công tác" rồi "cong tac " → `409 TAG_NAME_TAKEN` (trùng sau chuẩn hóa); tên rỗng/> 30 ký tự → 422.
+    * `TC-14-02`: Vượt 10 thẻ/hóa đơn hoặc 100 thẻ/user → `422 TAG_LIMIT_EXCEEDED`.
+    * `TC-14-03`: `PUT /receipts/{id}/tags` thay thế đúng tập (thêm/bớt), gọi lặp 2 lần cho cùng kết quả, không tạo dòng thừa.
+    * `TC-14-04`: Lọc `tag_mode=any` trả hóa đơn có ≥ 1 thẻ; `all` trả hóa đơn có đủ mọi thẻ; kết hợp với `from/to`, `category_id`.
+    * `TC-14-05`: `/stats/by-tag`: hóa đơn nhiều thẻ được tính vào **từng** thẻ; Σ theo thẻ có thể > tổng chi (có test fixture xác nhận và response có cờ `overlapping=true`).
+    * `TC-14-06`: Merge A→B: liên kết chuyển sang B, hóa đơn có cả A và B chỉ còn 1 liên kết, thẻ A bị xóa; lỗi giữa chừng → rollback.
+    * `TC-14-07`: Xóa thẻ không xóa hóa đơn; xóa hóa đơn tự xóa `receipt_tags` (cascade).
+    * `TC-14-08` *(bảo mật)*: gắn thẻ của user B vào hóa đơn của A → 404/422; user B không thấy/sửa thẻ của A (IDOR).
+    * `TC-14-09`: `bulk-tag` nguyên tử (một ID lạ → rollback cả lô); > 200 ID → 422.
+    * `TC-14-10`: Export có cột "Thẻ" đúng; ô bắt đầu `= + - @` được vô hiệu hóa (formula injection).
+    * `TC-14-11`: Hiệu năng — 10.000 hóa đơn, lọc theo 1 thẻ: p95 ≤ 300 ms; số truy vấn SQL của danh sách không tăng theo số dòng (test đếm query).
+    * `TC-14-12`: Gợi ý thẻ theo quán đúng 3 thẻ phổ biến; quán chưa có lịch sử → không gợi ý.
+    * `TC-14-13` *(FE/A11y)*: chip input thao tác được bằng bàn phím, có `aria-label`; màu thẻ có chữ (không chỉ màu); Playwright: gắn thẻ ở Review → lọc ở `/receipts` thấy đúng hóa đơn.
+* **Tiêu chí nghiệm thu (DoD):** TC-14-01→13 pass; DoD toàn cục; `openapi.json` + type FE cập nhật.
+* **Prompt Thực Thi Mẫu:**
+  > "Hãy thêm Thẻ: bảng `tags` (UNIQUE theo `name_normalized` mỗi user) và `receipt_tags`; API CRUD, merge, `PUT /receipts/{id}/tags` (thay thế tập), bulk-tag nguyên tử, lọc `tag_ids`+`tag_mode`, `/stats/by-tag` (có cờ overlapping). Kiểm tra chéo user ở service, không N+1. Frontend: chip input có autocomplete, gắn hàng loạt, bộ lọc, trang quản lý thẻ, cột Thẻ trong export. Viết test theo TC-14-01→13."
+
+---
+
+### FEATURE 15 [v2 – MỚI]: Ngân sách & Cảnh báo (kèm hạ tầng Thông báo + Scheduler)
+* **Branch:** `feature/15-budgets-and-alerts`
+* **Mục tiêu:** đặt hạn mức chi theo **tổng** hoặc theo **danh mục** trong chu kỳ tháng; theo dõi tiến độ (đã chi, còn lại, dự báo cuối kỳ); cảnh báo đúng lúc ở **80% / 100%** (cấu hình được) và cho người dùng thấy **tác động ngay khi lưu hóa đơn**.
+* **Bảng mới (migration riêng của F15):**
+
+| Bảng | Cột / ràng buộc |
+|---|---|
+| `budgets` | `id`, `user_id`, `scope ('overall','category')`, `category_id NULL`, `amount BIGINT CHECK >0`, `period ('monthly')`, `alert_thresholds SMALLINT[] DEFAULT '{80,100}'`, `starts_on DATE`, `ends_on NULL`, `is_active`, `created_at`, `updated_at`. **CHECK** `(scope='overall' AND category_id IS NULL) OR (scope='category' AND category_id IS NOT NULL)`; partial **UNIQUE**(`user_id`,`scope`,`category_id`) WHERE `is_active` (dùng `COALESCE(category_id, zero-uuid)` hoặc 2 index riêng cho `overall` và `category`) |
+| `budget_alert_events` | `id`, `budget_id FK CASCADE`, `period_start DATE`, `threshold SMALLINT`, `spent_amount BIGINT`, `budget_amount BIGINT`, `triggered_at`, `notification_id FK NULL`; **UNIQUE(`budget_id`,`period_start`,`threshold`)** — mỗi ngưỡng chỉ bắn **một lần mỗi chu kỳ** |
+| `notifications` | `id`, `user_id`, `type ('budget_threshold','budget_exceeded','recurring_due','recurring_posted','recurring_missed','review_pending','system')`, `title`, `body`, `data JSONB` (đích điều hướng), `severity ('info','warning','critical')`, `dedupe_key`, `read_at NULL`, `created_at`; **UNIQUE(`user_id`,`dedupe_key`)**; index (`user_id`,`read_at`,`created_at DESC`) |
+| `push_subscriptions` | `id`, `user_id`, `endpoint UNIQUE`, `p256dh`, `auth`, `user_agent`, `created_at`, `last_success_at`, `revoked_at NULL` |
+| `job_runs` | `id`, `job_name`, `started_at`, `finished_at`, `status ('ok','error','skipped')`, `details JSONB` — quan sát và kiểm tra tính idempotent của job nền |
+
+* **Quy tắc nghiệp vụ (chốt để tránh mơ hồ):**
+  1. **"Đã chi" = Σ `allocated_amount`** của các món thuộc hóa đơn `status='confirmed'`, `invoice_date` trong chu kỳ, của user đó, không tính hóa đơn đã xóa. Ngân sách *tổng* = Σ `receipts.total_amount` (bằng Σ allocated nhờ ADR-010). Hóa đơn nhập tay (F13) tính như hóa đơn thường.
+  2. **Chu kỳ** theo `user_settings.month_start_day` (1–28) và múi giờ VN:
+     ```python
+     def period_bounds(d: date, start_day: int) -> tuple[date, date]:
+         start = d.replace(day=start_day) if d.day >= start_day \
+                 else (d.replace(day=1) - timedelta(days=1)).replace(day=start_day)
+         nxt = (start.replace(day=1) + timedelta(days=32)).replace(day=start_day)
+         return start, nxt - timedelta(days=1)          # [start, end] gồm cả hai đầu
+     ```
+  3. **Tiến độ** trả về cho mỗi ngân sách: `spent`, `remaining = amount − spent`, `pct = spent/amount`, `status ∈ {ok (<80%), warning (80–<100%), exceeded (≥100%)}` (ngưỡng theo `alert_thresholds`), `days_left`, `daily_allowance = max(0, remaining) / max(1, days_left)`, `projected_end = spent / days_elapsed × days_in_period` (cờ `will_exceed` nếu `projected_end > amount`; chỉ tin cậy sau ≥ 3 ngày của chu kỳ).
+  4. **Cảnh báo:** sau mỗi lần tạo/sửa/xóa hóa đơn, tính lại **chỉ các ngân sách bị ảnh hưởng** (ngân sách tổng + ngân sách của các danh mục có trong hóa đơn). Với mỗi ngưỡng đã vượt: `INSERT INTO budget_alert_events … ON CONFLICT DO NOTHING`; **chỉ khi chèn được dòng mới** mới tạo `notifications` (`dedupe_key = budget:{id}:{period_start}:{threshold}`). Nhờ UNIQUE, hai request đồng thời cùng vượt ngưỡng vẫn chỉ sinh **một** cảnh báo. Giảm chi tiêu rồi vượt lại **không** bắn lại trong cùng chu kỳ.
+  5. **Tác động tức thì:** response của `POST/PATCH /receipts` và `POST /expenses` có thêm `budget_impact: [{budget_id, name, before_pct, after_pct, status_after, crossed_threshold}]` để FE hiện banner *"Khoản này sẽ làm danh mục Ăn uống đạt 92% ngân sách"* ngay ở màn Review/nhập tay.
+  6. Cảnh báo nếu Σ ngân sách danh mục > ngân sách tổng (chỉ **cảnh báo**, không chặn). Đổi `amount` giữa chu kỳ áp dụng ngay cho chu kỳ hiện tại; mỗi `budget_alert_events` lưu `budget_amount` tại thời điểm bắn để lịch sử không bị sai.
+  7. Ngoài phạm vi v1.1: rollover (chuyển phần dư sang tháng sau), ngân sách tuần/năm, ngân sách theo thẻ.
+* **Hạ tầng đi kèm:**
+  * **Scheduler (ADR-009):** ưu tiên *scheduler ngoài* (Cloud Scheduler/cron của nền tảng) gọi `POST /internal/jobs/{name}` kèm `X-Internal-Token`; hoặc APScheduler trong tiến trình nếu chạy 1 instance. Với cả hai: **job phải idempotent** và bọc bằng `pg_try_advisory_lock(hashtext(job_name))` để nhiều instance không chạy trùng; mỗi lần chạy ghi `job_runs`.
+
+    | Job | Lịch (giờ VN) | Việc |
+    |---|---|---|
+    | `budget_reconcile` | 00:10 hằng ngày | Tính lại toàn bộ ngân sách active (bắt trường hợp lỡ sự kiện, sang chu kỳ mới) |
+    | `notifications_cleanup` | 03:30 hằng ngày | Xóa thông báo đã đọc > 90 ngày |
+    | `cleanup_idempotency_keys` | mỗi giờ | Xóa dòng quá `expires_at` |
+  * **Thông báo trong app (luôn có):** chuông ở header với số chưa đọc, hộp thư `/notifications`, đánh dấu đã đọc/đọc hết, bấm để đi tới `/budgets/{id}` hoặc hóa đơn liên quan.
+  * **Web Push (tùy chọn, user bật):** chuẩn Web Push + VAPID (`pywebpush`), `push` event trong service worker. Chỉ xin quyền **đúng ngữ cảnh** (sau khi user tạo ngân sách đầu tiên), không xin ngay lần đầu mở app. Trên iOS, push chỉ hoạt động khi PWA đã cài lên màn hình chính và phiên bản đủ mới (kiểm tra hỗ trợ hiện hành). **Riêng tư:** nội dung push mặc định *không chứa số tiền* ("Ngân sách Ăn uống đã dùng 92%"), có tùy chọn `show_amounts_in_push`. Gặp `410 Gone` → đặt `revoked_at` cho subscription.
+* **API:** `GET /budgets` (kèm tiến độ, `?on=YYYY-MM-DD`) · `POST /budgets` · `PATCH /budgets/{id}` · `DELETE /budgets/{id}` · `GET /budgets/{id}/history?months=6` · `GET /notifications?unread=true&limit&cursor` · `GET /notifications/unread-count` · `POST /notifications/{id}/read` · `POST /notifications/read-all` · `POST /push/subscribe` · `DELETE /push/subscribe` · `GET/PATCH /me/settings` (ngày bắt đầu tháng, tùy chọn thông báo).
+* **Frontend:** trang `/budgets` (thẻ ngân sách + thanh tiến độ: màu **kèm chữ** "Đã dùng 92% — còn 380.000 đ", vượt 100% hiển thị "Vượt 15%" thay vì tràn thanh), form tạo/sửa (chọn tổng/danh mục, số tiền, ngưỡng), biểu đồ lịch sử 6 chu kỳ, thẻ "Ngân sách" trên dashboard, banner `budget_impact` ở Review/nhập tay, chuông thông báo, màn cài đặt thông báo.
+* **BỘ TEST ĐẦU RA:**
+  * **Lệnh test tự động:** `pytest tests/unit/test_budget_period.py tests/integration/test_budgets.py tests/integration/test_notifications.py tests/integration/test_scheduler.py -v` · `pnpm test budgets` · `pnpm test:e2e --grep budgets`
+  * **Test Cases bắt buộc:**
+    * `TC-15-01` *(chu kỳ)*: `period_bounds` với `start_day` ∈ {1, 5, 28}, tháng 2 (28/29 ngày), giao năm, ngày đầu/cuối chu kỳ; hóa đơn `31/08 23:59` và `01/09 00:00` vào đúng chu kỳ; hypothesis: mọi ngày thuộc **đúng một** chu kỳ và các chu kỳ liền kề không hở/không chồng.
+    * `TC-15-02` *(cách tính)*: "đã chi" dùng `allocated_amount`; không tính hóa đơn `draft`, đã xóa, của user khác, ngoài chu kỳ; ngân sách tổng == Σ ngân sách tính từng danh mục khi mọi món đều thuộc danh mục có ngân sách.
+    * `TC-15-03` *(ngưỡng)*: ngân sách 1.000.000 đ: +700k → không cảnh báo; +150k (850k) → bắn **80%** 1 lần; +100k (950k) → không bắn thêm; +100k (1.050k) → bắn **100%**; thêm nữa → không trùng; DB đúng 2 `budget_alert_events` và 2 `notifications`.
+    * `TC-15-04` *(đồng thời)*: 2 request lưu hóa đơn song song cùng vượt 80% → đúng **1** event/notification (nhờ UNIQUE), không lỗi 500.
+    * `TC-15-05` *(sửa/xóa)*: xóa hóa đơn → `spent` giảm đúng, không âm, không bắn lại cảnh báo; đổi ngày hóa đơn sang chu kỳ khác → chi tiêu chuyển đúng chu kỳ; đổi danh mục món → ngân sách hai danh mục cập nhật đúng.
+    * `TC-15-06` *(dự báo)*: ngày 10/30, đã chi 500k → `projected_end = 1.500k`; ngày đầu chu kỳ không chia 0; `daily_allowance` đúng khi `remaining ≤ 0` (= 0); `will_exceed` chỉ bật sau ≥ 3 ngày.
+    * `TC-15-07` *(validation)*: amount ≤ 0, `scope=category` thiếu `category_id`, `scope=overall` có `category_id`, ngưỡng ngoài 1–200 hoặc trùng → 422; tạo ngân sách thứ hai cùng (scope, category) đang active → `409 BUDGET_ALREADY_EXISTS`; Σ ngân sách danh mục > tổng → 201 kèm `warnings`.
+    * `TC-15-08` *(tác động)*: `POST /receipts` trả `budget_impact` đúng `before/after` và `crossed_threshold`; user không có ngân sách → mảng rỗng.
+    * `TC-15-09` *(bảo mật)*: IDOR cho `budgets`, `notifications`, `push_subscriptions`; user B không đọc/đánh dấu đọc thông báo của A.
+    * `TC-15-10` *(thông báo)*: `unread-count`, đánh dấu đọc/đọc hết, phân trang cursor, `dedupe_key` ngăn trùng, job cleanup xóa đúng thông báo đã đọc > 90 ngày (fake clock).
+    * `TC-15-11` *(push)*: subscribe/unsubscribe; endpoint trả 410 → `revoked_at` được đặt; payload **không chứa số tiền** khi `show_amounts_in_push=false`; lỗi gửi push **không** làm hỏng việc lưu hóa đơn.
+    * `TC-15-12` *(scheduler)*: chạy `budget_reconcile` 2 lần liên tiếp → không tạo event/notification trùng; hai runner đồng thời → chỉ một thực thi (`skipped` còn lại); `job_runs` ghi đủ; gọi `/internal/jobs/*` thiếu/sai token → 401.
+    * `TC-15-13` *(hiệu năng)*: với 20 ngân sách, độ trễ thêm vào `POST /receipts` p95 ≤ 50 ms; `GET /budgets` với 10.000 hóa đơn p95 ≤ 300 ms (kiểm `EXPLAIN` dùng index).
+    * `TC-15-14` *(FE/A11y)*: thanh tiến độ có `role="progressbar"` + `aria-valuenow`, trạng thái có chữ (không chỉ màu), vượt 100% hiển thị "Vượt x%"; axe-core 0 lỗi critical; chuông thông báo thao tác được bằng bàn phím.
+    * `TC-15-15` *(E2E)*: tạo ngân sách Ăn uống 500.000 → lưu hóa đơn đẩy lên 85% → banner `budget_impact` hiện ở Review → chuông hiện 1 thông báo → `/budgets` hiện "warning" → thêm khoản nữa vượt 100% → trạng thái "exceeded" và thông báo thứ hai.
+  * **Kịch bản thủ công:** bật push trên Android + iPhone (PWA đã cài), tạo ngân sách nhỏ, lưu hóa đơn vượt ngưỡng, kiểm tra thông báo hiện trên màn hình khóa và bấm vào đi đúng trang; tắt quyền thông báo rồi thử lại để xem fallback chuông trong app.
+* **Tiêu chí nghiệm thu (DoD):** TC-15-01→15 pass; DoD toàn cục; `docs/runbook.md` có mục "job nền không chạy/chạy trùng"; ADR-009 ghi lại.
+* **Prompt Thực Thi Mẫu:**
+  > "Hãy xây dựng Ngân sách & Cảnh báo: bảng `budgets`, `budget_alert_events` (UNIQUE budget+period+threshold), `notifications` (dedupe_key), `push_subscriptions`, `job_runs`. Hàm thuần `period_bounds(d, start_day)`; 'đã chi' = Σ `allocated_amount` của hóa đơn confirmed; đánh giá lại chỉ các ngân sách bị ảnh hưởng sau mỗi lần ghi hóa đơn và trả `budget_impact` trong response; cảnh báo ngưỡng 80/100% chỉ một lần mỗi chu kỳ bằng `ON CONFLICT DO NOTHING`. Job `budget_reconcile` idempotent với `pg_try_advisory_lock`, endpoint nội bộ có token. Web Push VAPID (nội dung không chứa số tiền mặc định, xử lý 410). Frontend: `/budgets`, chuông thông báo, banner tác động. Viết test theo TC-15-01→15."
+
+---
+
+### FEATURE 16 [v2 – MỚI]: Chi tiêu Định kỳ (Khoản lặp lại & Phát hiện tự động)
+* **Branch:** `feature/16-recurring-expenses`
+* **Mục tiêu:** quản lý các khoản trả đều đặn (tiền nhà, internet, điện–nước, Netflix, học phí); tự nhắc hoặc tự ghi khi đến hạn; **không để ghi trùng** với hóa đơn quét thật; cho thấy "sắp phải trả bao nhiêu" để lập ngân sách; và gợi ý tạo khoản định kỳ từ lịch sử.
+* **Bảng mới (migration riêng của F16; đồng thời thêm FK `receipts.recurring_rule_id`):**
+
+| Bảng | Cột / ràng buộc |
+|---|---|
+| `recurring_rules` | `id`, `user_id`, `name`, `merchant_id NULL`, `category_id`, `amount_expected BIGINT`, `is_variable_amount BOOL` (điện/nước: số tiền đổi mỗi kỳ), `amount_tolerance_pct SMALLINT DEFAULT 20`, `frequency ('weekly','monthly','yearly','custom_days')`, `interval_n SMALLINT DEFAULT 1`, `day_of_month SMALLINT NULL (1–31)`, `weekday SMALLINT NULL (0–6)`, `custom_days INT NULL`, `start_date`, `end_date NULL`, `mode ('remind','auto_post')`, `remind_days_before SMALLINT DEFAULT 1`, `grace_days SMALLINT DEFAULT 7`, `status ('active','paused','ended')`, `created_at`, `updated_at`. CHECK nhất quán: `monthly/yearly ⇒ day_of_month NOT NULL`, `weekly ⇒ weekday NOT NULL`, `custom_days ⇒ custom_days > 0` |
+| `recurring_rule_tags` | `rule_id FK CASCADE`, `tag_id FK CASCADE`, PK(`rule_id`,`tag_id`) — thẻ mặc định cho khoản được tạo ra |
+| `recurring_occurrences` | `id`, `rule_id FK CASCADE`, `due_date DATE`, `status ('pending','posted','matched','skipped','missed')`, `receipt_id FK NULL ON DELETE SET NULL`, `expected_amount`, `actual_amount NULL`, `resolved_at NULL`; **UNIQUE(`rule_id`,`due_date`)** (nền tảng của tính idempotent) |
+| `recurring_suggestions` | `id`, `user_id`, `merchant_id`, `category_id`, `est_amount`, `est_frequency`, `confidence NUMERIC(3,2)`, `sample_receipt_ids JSONB`, `status ('new','accepted','dismissed')`, `dismissed_until NULL`, `created_at`; **UNIQUE(`user_id`,`merchant_id`,`est_frequency`)** |
+
+* **Thuật toán chính:**
+  1. **Tính kỳ hạn tiếp theo (hàm thuần, không phụ thuộc đồng hồ hệ thống):**
+     ```python
+     def monthly_due(y: int, m: int, day: int) -> date:       # ngày 31 ở tháng 30 ngày → ngày cuối tháng
+         return date(y, m, min(day, calendar.monthrange(y, m)[1]))
+
+     def next_due(rule, after: date) -> date | None:
+         """Kỳ hạn nhỏ nhất > after, ≥ start_date; None nếu vượt end_date. Hỗ trợ weekly/monthly(interval_n)/yearly (29/02 → 28/02 năm thường)/custom_days."""
+     ```
+  2. **Job `recurring_generate` (06:00 VN, idempotent):** với mỗi rule `active`, đảm bảo có `recurring_occurrences` đến *horizon* = hôm nay + 30 ngày (`INSERT … ON CONFLICT DO NOTHING`). Với occurrence `pending` có `due_date ≤ hôm nay`:
+     * `mode='auto_post'` → tạo hóa đơn (`source='recurring'`, `invoice_date = due_date` — **không phải ngày chạy job**, 1 món, `allocated_amount = amount_expected`, kế thừa danh mục + thẻ) trong cùng transaction với việc đặt `status='posted'`; tạo thông báo `recurring_posted`.
+     * `mode='remind'` → gửi thông báo `recurring_due` vào `due_date − remind_days_before` (`dedupe_key = recurring:{rule}:{due}`); occurrence vẫn `pending`. User bấm **Xác nhận** (sửa số tiền được) → tạo hóa đơn, `posted`; **Bỏ qua** → `skipped`. Quá `grace_days` chưa xử lý → `missed` + thông báo `recurring_missed`.
+  3. **Bù khi scheduler ngừng:** job chạy lại sẽ tạo/ghi các kỳ `due_date ≤ hôm nay` nhưng không cũ hơn `catchup_days` (mặc định 31); kỳ cũ hơn → `missed`, **không** tự ghi.
+  4. **Chống đếm trùng (quan trọng):**
+     * Khoản **số tiền thay đổi hoặc user sẽ quét hóa đơn thật** (điện, nước, internet) → khuyến nghị `mode='remind'` + `is_variable_amount=true`; UI mặc định như vậy khi chọn các danh mục hóa đơn.
+     * Khi lưu **bất kỳ** hóa đơn nào (quét hoặc nhập tay), BE tìm occurrence `pending/posted` của cùng `merchant_id` (hoặc cùng danh mục khi rule không gắn merchant) có `due_date` trong ±`grace_days` và số tiền trong `amount_tolerance_pct` (bỏ qua điều kiện tiền nếu `is_variable_amount`). Response trả `recurring_match: [{occurrence_id, rule_name, due_date, confidence}]`.
+     * **Đúng 1 ứng viên** → FE hỏi *"Đây có phải khoản 'Tiền điện' kỳ 05/11?"* → **Liên kết**: occurrence → `matched`, `receipt_id` = hóa đơn mới; nếu occurrence đã `posted` bằng hóa đơn tự động thì hóa đơn tự động bị xóa **trong cùng transaction** (tổng chi không đổi, không đếm đôi). **Khác** → không liên kết. Nhiều ứng viên → user chọn.
+  5. **Phát hiện tự động (job `recurring_detect`, hàng tuần, hàm thuần):** với mỗi `merchant_id` có ≥ 3 hóa đơn `confirmed` trong 6 tháng, tính các khoảng cách ngày giữa các lần; nhận là *chu kỳ* khi `median` rơi vào cửa sổ (tuần 6–8, tháng 27–34, năm 360–370) và hệ số biến thiên khoảng cách `CV_interval ≤ 0,2`; số tiền `CV_amount ≤ 0,3` (nếu lớn hơn → gợi ý `is_variable_amount=true`). `confidence = min(1, n/6) × (1 − min(CV_interval/0,25, 1))`; chỉ tạo gợi ý khi `confidence ≥ 0,6`. **Loại trừ thói quen hằng ngày** (cà phê, ăn sáng) bằng điều kiện khoảng cách ≥ 6 ngày. Gợi ý bị bỏ qua không xuất hiện lại trong 90 ngày (`dismissed_until`). Ngưỡng là **giá trị khởi điểm**, hiệu chỉnh bằng dữ liệu thật.
+  6. **Dự báo cam kết:** `GET /recurring/upcoming?days=30` trả các kỳ sắp đến hạn + tổng dự kiến; `GET /budgets` bổ sung `committed` (Σ kỳ `pending` còn lại trong chu kỳ thuộc danh mục đó) và `projected_with_committed = spent + committed` để cảnh báo sớm "sắp vượt vì còn 2 khoản định kỳ".
+  7. **Sửa/tạm dừng/xóa:** sửa rule chỉ ảnh hưởng các kỳ `pending` tương lai (kỳ đã `posted/matched` giữ nguyên); *Tạm dừng* → không tạo kỳ mới; *Tiếp tục* → tính lại `next_due ≥ hôm nay`, **không** bù ngược; xóa rule → hóa đơn đã tạo giữ nguyên (`recurring_rule_id = NULL`), occurrences xóa theo.
+* **API:** `GET /recurring` · `POST /recurring` · `GET/PATCH/DELETE /recurring/{id}` · `POST /recurring/{id}/pause|resume` · `GET /recurring/upcoming` · `GET /recurring/occurrences?status=` · `POST /recurring/occurrences/{id}/confirm` `{amount?, date?}` · `POST /recurring/occurrences/{id}/skip` · `GET /recurring/suggestions` · `POST /recurring/suggestions/{id}/accept` (tạo rule điền sẵn) · `POST /recurring/suggestions/{id}/dismiss`. Mã lỗi mới: `422 RECURRING_INVALID_SCHEDULE`.
+* **Frontend:** trang `/recurring` (danh sách rule: tên, chu kỳ, kỳ tới, trạng thái; chuyển tạm dừng/tiếp tục), form tạo (chọn tần suất, ngày; **xem trước 3 kỳ tới** bằng chữ "Hằng tháng, ngày 5 → 05/12, 05/01, 05/02"), timeline "Sắp đến hạn 30 ngày" + thẻ trên dashboard, hành động *Xác nhận/Bỏ qua* ngay trong thông báo, hộp thoại liên kết khi `recurring_match`, thẻ gợi ý "Có vẻ bạn trả Netflix mỗi tháng ~260.000 đ — Tạo khoản định kỳ?", badge "Định kỳ" ở danh sách hóa đơn.
+* **BỘ TEST ĐẦU RA:**
+  * **Lệnh test tự động:** `pytest tests/unit/test_recurring_schedule.py tests/unit/test_recurring_detect.py tests/integration/test_recurring.py -v` · `pnpm test:e2e --grep recurring`
+  * **Test Cases bắt buộc:**
+    * `TC-16-01` *(lịch)*: bảng ≥ 20 ca cho `next_due`: monthly ngày 31 → 28/29 (tháng 2), 30 (tháng 4); yearly 29/02; weekly; mỗi 2 tháng; `custom_days=45`; `start_date` ở tương lai; vượt `end_date` → `None`. Hypothesis: `next_due(after) > after`, đơn điệu tăng, `monthly_due` luôn là ngày hợp lệ.
+    * `TC-16-02` *(idempotent)*: chạy `recurring_generate` 2 lần → số `occurrences` và số hóa đơn **không đổi**; hai runner đồng thời → một cái `skipped` (advisory lock).
+    * `TC-16-03` *(auto_post)*: đến hạn → đúng **1** hóa đơn `source='recurring'`, `invoice_date = due_date`, số tiền/danh mục/thẻ đúng, `Σ allocated == total`, đúng 1 thông báo `recurring_posted`.
+    * `TC-16-04` *(remind)*: thông báo gửi đúng `due − remind_days` và chỉ một lần; **Xác nhận** với số tiền sửa → hóa đơn đúng số tiền; **Bỏ qua** → `skipped`; quá `grace_days` → `missed` + thông báo.
+    * `TC-16-05` *(bù)*: dừng scheduler 10 ngày → chạy lại ghi đúng các kỳ bị lỡ với `invoice_date` = ngày đến hạn (không phải hôm nay); kỳ cũ hơn `catchup_days` → `missed`, không ghi.
+    * `TC-16-06` *(chống trùng)*: quét hóa đơn cùng merchant, trong cửa sổ, số tiền trong dung sai → `recurring_match` có đúng ứng viên; **Liên kết** với kỳ đã `auto_post` → hóa đơn tự động bị xóa, **tổng chi/stats không đổi**; chọn "Khác" → không liên kết; nhiều ứng viên → trả danh sách xếp theo độ tin cậy.
+    * `TC-16-07` *(tạm dừng/sửa)*: pause → không sinh kỳ mới; resume → không bù ngược, `next_due ≥ hôm nay`; sửa số tiền chỉ đổi các kỳ `pending` tương lai, kỳ đã ghi giữ nguyên.
+    * `TC-16-08` *(phát hiện)*: fixtures vàng — Netflix 12 tháng sai số nhỏ → có gợi ý (`confidence ≥ 0,6`, monthly); cà phê hằng ngày → không; lịch ngẫu nhiên → không; < 3 mẫu → không; gợi ý đã bỏ qua không xuất hiện lại trong 90 ngày; điện–nước biến thiên → gợi ý `is_variable_amount=true`.
+    * `TC-16-09` *(dự báo)*: `upcoming` đúng cửa sổ ngày và tổng; `budget.committed` cộng đúng các kỳ `pending` của danh mục trong chu kỳ, không cộng kỳ đã `posted/skipped`.
+    * `TC-16-10` *(múi giờ/đồng hồ)*: toàn bộ logic nhận `today` được inject; test biên 31/12→01/01, 28/02→29/02 (năm nhuận), job chạy 06:00 VN không lệch ngày.
+    * `TC-16-11` *(validation & bảo mật)*: `monthly` thiếu `day_of_month`, `weekly` thiếu `weekday`, `amount ≤ 0` → `422 RECURRING_INVALID_SCHEDULE`/`VALIDATION_ERROR`; IDOR cho rules/occurrences/suggestions (404); không dùng category/tag/merchant của user khác.
+    * `TC-16-12` *(xóa)*: xóa rule → occurrences bị xóa, hóa đơn cũ còn nguyên với `recurring_rule_id = NULL`; xóa hóa đơn đã `posted` → occurrence chuyển `pending/skipped` theo chính sách đã ghi (không treo FK).
+    * `TC-16-13` *(hiệu năng)*: 10.000 rule → `recurring_generate` xử lý theo lô 500, ≤ 60 s, không N+1 (đếm query), không giữ giao dịch quá dài.
+    * `TC-16-14` *(E2E)*: tạo rule "Tiền nhà hằng tháng, ngày 5" → xem trước 3 kỳ đúng → mô phỏng đến hạn → xác nhận từ thông báo → hóa đơn xuất hiện ở `/receipts` (badge "Định kỳ") và `/stats`; chấp nhận một gợi ý tự động và kiểm tra rule được điền sẵn.
+  * **Kịch bản thủ công:** tạo khoản "Internet" (remind, biến thiên), quét hóa đơn Internet thật khi đến kỳ và xác nhận bước liên kết; tạo khoản "Tiền nhà" (auto_post) rồi thử xóa/sửa để chắc chắn lịch sử không bị đổi.
+* **Tiêu chí nghiệm thu (DoD):** TC-16-01→14 pass; DoD toàn cục; chính sách xóa hóa đơn `posted` ghi trong ADR; ngưỡng phát hiện đã được hiệu chỉnh bằng ≥ 1 bộ dữ liệu thật (ghi vào `docs/benchmarks/`).
+* **Prompt Thực Thi Mẫu:**
+  > "Hãy xây dựng Chi tiêu định kỳ: bảng `recurring_rules`, `recurring_rule_tags`, `recurring_occurrences` (UNIQUE rule+due_date), `recurring_suggestions`; hàm thuần `next_due(rule, after)` (clamp ngày cuối tháng, 29/02) có test bảng + hypothesis; job `recurring_generate` idempotent với advisory lock, hỗ trợ `auto_post` (hóa đơn `source='recurring'`, `invoice_date=due_date`) và `remind` (thông báo, xác nhận/bỏ qua, `missed` sau `grace_days`), bù tối đa `catchup_days`. Khi lưu hóa đơn trả `recurring_match` và hỗ trợ liên kết (thay thế hóa đơn tự động trong 1 transaction, không đếm đôi). Job `recurring_detect` theo CV khoảng cách/số tiền như đặc tả. Tích hợp `committed` vào ngân sách. Frontend `/recurring` có xem trước 3 kỳ, timeline sắp đến hạn, hộp thoại liên kết, thẻ gợi ý. Viết test theo TC-16-01→14."
+
+---
+
 ## 5. HƯỚNG DẪN QUY TRÌNH GIT VÀ PHỐI HỢP CHI TIẾT (STEP-BY-STEP WORKFLOW)
 
 Khi bắt đầu làm bất kỳ feature nào, hãy tuân thủ chính xác quy trình sau (**[v2]** bản gốc ghi "5 bước" nhưng liệt kê 6 bước):
@@ -1415,7 +1730,28 @@ SENTRY_DSN=
 METRICS_TOKEN=
 ```
 
-Frontend (`frontend/.env.example`): `NEXT_PUBLIC_API_BASE_URL`, `NEXT_PUBLIC_SENTRY_DSN`, `NEXT_PUBLIC_APP_VERSION`.
+Frontend (`frontend/.env.example`): `NEXT_PUBLIC_API_BASE_URL`, `NEXT_PUBLIC_SENTRY_DSN`, `NEXT_PUBLIC_APP_VERSION`, `NEXT_PUBLIC_VAPID_PUBLIC_KEY` (Phase 2).
+
+Giai đoạn 2 (F15–F16) thêm vào `backend/.env.example`:
+
+```env
+# Scheduler & job nền (ADR-009)
+INTERNAL_JOB_TOKEN=            # bắt buộc ở production, ≥ 32 ký tự
+SCHEDULER_MODE=external        # external | in_process
+JOB_TIMEZONE=Asia/Ho_Chi_Minh
+
+# Web Push (VAPID)
+VAPID_PUBLIC_KEY=
+VAPID_PRIVATE_KEY=
+VAPID_SUBJECT=mailto:admin@example.com
+
+# Ngân sách / định kỳ / thông báo
+BUDGET_DEFAULT_THRESHOLDS=80,100
+RECURRING_HORIZON_DAYS=30
+RECURRING_CATCHUP_DAYS=31
+RECURRING_DETECT_MIN_CONFIDENCE=0.6    # hiệu chỉnh bằng dữ liệu thật
+NOTIFICATION_RETENTION_DAYS=90
+```
 
 ---
 
@@ -1433,6 +1769,9 @@ Frontend (`frontend/.env.example`): `NEXT_PUBLIC_API_BASE_URL`, `NEXT_PUBLIC_SEN
 | 8 | Nhà cung cấp hạ tầng (Vision/Gemini) ngừng hoạt động | Thấp | Trung bình | Suy giảm có kiểm soát → nhập tay, circuit breaker, runbook | TC-10-10 |
 | 9 | Thay đổi pháp lý về dữ liệu cá nhân | Trung bình | Trung bình | Rà soát trước khi phát hành công khai, consent versioned | Trước release |
 | 10 | Phụ thuộc kiến thức ngoài repo (giáo trình) | Trung bình | Thấp | `docs/algorithms/` mô tả đầy đủ | F03 |
+| 11 | Đếm đôi chi tiêu định kỳ (tự ghi + hóa đơn quét thật) | Trung bình | Cao | Khuyến nghị `remind` cho khoản biến thiên; `recurring_match` + liên kết thay thế trong 1 transaction; TC-16-06 | F16 |
+| 12 | Spam cảnh báo / lộ số tiền trên màn hình khóa | Trung bình | Trung bình | Mỗi ngưỡng 1 lần/chu kỳ (UNIQUE), push mặc định không chứa số tiền, cho phép tắt | F15 |
+| 13 | Job nền không chạy hoặc chạy trùng khi nhiều instance | Trung bình | Trung bình | Idempotent + advisory lock + `job_runs` + runbook + bù `catchup_days` | F15, F16 |
 
 ## 8. [v2] MỐC KIỂM SOÁT CHẤT LƯỢNG (GO / NO-GO GATES)
 
@@ -1441,8 +1780,9 @@ Frontend (`frontend/.env.example`): `NEXT_PUBLIC_API_BASE_URL`, `NEXT_PUBLIC_SEN
 | **G0 – Dữ liệu & kiến trúc** | F00 | Dataset khóa; baseline 3 nhánh có số liệu; ADR-007 quyết định; ngưỡng NFR cập nhật |
 | **G1 – Engine** | F05 | Trên dev set: auto-accept precision ≥ 97%, fallback ≤ 30%; mọi nhánh lỗi có TC; log/audit đầy đủ |
 | **G2 – Backend** | F06 + F11 | Test IDOR 100%; contract OpenAPI ổn định; p95 API đạt ngân sách; mô hình lỗi chuẩn |
-| **G3 – Trải nghiệm** | F07–F09 | E2E luồng chính xanh; test thiết bị thật iOS + Android; a11y không còn lỗi critical |
+| **G3 – Trải nghiệm** | F07–F09 + F13 | E2E luồng chính (quét **và nhập tay**) xanh; test thiết bị thật iOS + Android; a11y không còn lỗi critical |
 | **G4 – Phát hành** | F12 + F10 | Held-out đạt bảng chỉ tiêu; không High/Critical bảo mật; runbook diễn tập; backup/restore thử; staging smoke xanh |
+| **G5 – Giai đoạn 2** | F14–F16 | TC-14/15/16 pass; **không đếm đôi** khi liên kết khoản định kỳ (stats không đổi); cảnh báo ngân sách không trùng dưới tải đồng thời; push thử trên iOS PWA + Android; job nền có runbook và đã diễn tập (chạy lỡ, chạy trùng) |
 
 ## 9. [v2] MẪU PROMPT CHUẨN CHO TRỢ LÝ AI (ÁP DỤNG CHO MỌI FEATURE)
 
