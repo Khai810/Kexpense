@@ -2,8 +2,9 @@ VENV ?= .venv
 PYTHON = $(if $(wildcard $(VENV)/bin/python),$(VENV)/bin/python,python3)
 RUFF = $(if $(wildcard $(VENV)/bin/ruff),$(VENV)/bin/ruff,ruff)
 PYTEST = $(if $(wildcard $(VENV)/bin/pytest),$(VENV)/bin/pytest,pytest)
+ALEMBIC = $(if $(wildcard $(VENV)/bin/alembic),$(VENV)/bin/alembic,alembic)
 
-.PHONY: help setup install lint test test-backend test-frontend dev clean docker-up docker-down
+.PHONY: help setup install lint test test-backend test-frontend dev clean docker-up docker-down migrate seed
 
 help:
 	@echo "Kexpense Monorepo Management"
@@ -12,6 +13,8 @@ help:
 	@echo "  make install     - Install dependencies for backend & frontend"
 	@echo "  make docker-up   - Start local PostgreSQL database container"
 	@echo "  make docker-down - Stop local PostgreSQL database container"
+	@echo "  make migrate     - Run database migrations (Alembic upgrade head)"
+	@echo "  make seed        - Seed default Vietnamese system categories & rules"
 	@echo "  make dev         - Instructions to start local development services"
 	@echo "  make lint        - Run linting and code formatting checks"
 	@echo "  make test        - Run backend and frontend test suite"
@@ -32,6 +35,12 @@ docker-down:
 install:
 	pip install -r backend/requirements-dev.txt
 	cd frontend && npm install
+
+migrate:
+	cd backend && ../$(ALEMBIC) upgrade head
+
+seed:
+	$(PYTHON) -m backend.app.core.seed_categories
 
 lint:
 	cd backend && ../$(RUFF) check . && ../$(RUFF) format --check .
