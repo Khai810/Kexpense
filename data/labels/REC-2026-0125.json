@@ -1,0 +1,93 @@
+{
+  "schema_version": "1.0",
+  "job_id": "e1809e78-f785-5907-a09d-74dedc594624",
+  "scan_id": "7070dbed-b0a5-578d-9d96-f4efbef0bcfe",
+  "engine_used": "gemini_fallback",
+  "categorizer_used": "rules",
+  "fallback_reason": "low_confidence",
+  "merchant": {
+    "name": "VinCommerce",
+    "tax_code": null,
+    "address": "Số 32 ngõ Láng Trung, P.Láng Hạ",
+    "phone": null
+  },
+  "invoice": {
+    "invoice_number": "INV0125-1108",
+    "invoice_date": "2020-08-11",
+    "invoice_time": null,
+    "currency": "VND",
+    "payment_method": "Tiền mặt"
+  },
+  "items": [
+    {
+      "line_no": 1,
+      "name": "Hàng hóa & Dịch vụ (VinCommerce)",
+      "quantity": "1",
+      "unit": "phần",
+      "unit_price": 108000,
+      "line_total": 108000,
+      "category_slug": "an-uong",
+      "confidence": 0.39,
+      "bbox": {
+        "x": 0.234,
+        "y": 0.414,
+        "w": 0.271,
+        "h": 0.053
+      }
+    }
+  ],
+  "totals": {
+    "subtotal": 108000,
+    "discount": 0,
+    "tax_amount": 0,
+    "tax_rate": null,
+    "service_charge": 0,
+    "total": 108000,
+    "paid_amount": 108000
+  },
+  "validation": {
+    "status": "REVIEW",
+    "score": 0.39,
+    "checks": [
+      {
+        "code": "V1",
+        "passed": true,
+        "severity": "hard",
+        "message_vi": "Đã tìm thấy tổng tiền hợp lệ"
+      },
+      {
+        "code": "V3",
+        "passed": true,
+        "severity": "hard",
+        "message_vi": "Phương trình cân đối tổng tiền chính xác"
+      },
+      {
+        "code": "V4",
+        "passed": true,
+        "severity": "hard",
+        "message_vi": "Có ít nhất một mặt hàng"
+      }
+    ]
+  },
+  "quality": {
+    "is_blur": true,
+    "is_dark": false,
+    "steps_applied": [
+      "exif_transpose",
+      "deskew"
+    ],
+    "ocr_mean_confidence": 0.39
+  },
+  "timings_ms": {
+    "preprocess_ms": 150,
+    "ocr_ms": 850,
+    "parse_ms": 15,
+    "categorize_ms": 5,
+    "fallback_ms": 2200,
+    "total_ms": 3215
+  },
+  "needs_review": true,
+  "warnings": [
+    "Chất lượng ảnh thấp / ca khó (MC-OCR)"
+  ]
+}

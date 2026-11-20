@@ -1,0 +1,90 @@
+{
+  "schema_version": "1.0",
+  "job_id": "cd514128-bf7b-5859-9116-26a2775f0fc1",
+  "scan_id": "96e2ae55-d41e-5350-82c7-6ec6781976d1",
+  "engine_used": "google_vision",
+  "categorizer_used": "rules",
+  "fallback_reason": "none",
+  "merchant": {
+    "name": "GERBANG ALAF RESTAURANTS SDN BHD",
+    "tax_code": null,
+    "address": "LEVEL 6, BANGUNAN TH, DAMANSARA UPTOWN3 NO.3, JALAN SS21/39,47400 PETALING JAYA SELANGOR",
+    "phone": null
+  },
+  "invoice": {
+    "invoice_number": "INV0058-1801",
+    "invoice_date": "2018-01-18",
+    "invoice_time": null,
+    "currency": "VND",
+    "payment_method": "Thẻ"
+  },
+  "items": [
+    {
+      "line_no": 1,
+      "name": "Hàng hóa & Dịch vụ (GERBANG ALAF RESTAURANTS SDN BHD)",
+      "quantity": "1",
+      "unit": "phần",
+      "unit_price": 135000,
+      "line_total": 135000,
+      "category_slug": "an-uong",
+      "confidence": 0.95,
+      "bbox": {
+        "x": 0.08,
+        "y": 0.45,
+        "w": 0.84,
+        "h": 0.05
+      }
+    }
+  ],
+  "totals": {
+    "subtotal": 135000,
+    "discount": 0,
+    "tax_amount": 0,
+    "tax_rate": null,
+    "service_charge": 0,
+    "total": 135000,
+    "paid_amount": 135000
+  },
+  "validation": {
+    "status": "PASS",
+    "score": 0.95,
+    "checks": [
+      {
+        "code": "V1",
+        "passed": true,
+        "severity": "hard",
+        "message_vi": "Đã tìm thấy tổng tiền hợp lệ"
+      },
+      {
+        "code": "V3",
+        "passed": true,
+        "severity": "hard",
+        "message_vi": "Phương trình cân đối tổng tiền chính xác"
+      },
+      {
+        "code": "V4",
+        "passed": true,
+        "severity": "hard",
+        "message_vi": "Có ít nhất một mặt hàng"
+      }
+    ]
+  },
+  "quality": {
+    "is_blur": false,
+    "is_dark": false,
+    "steps_applied": [
+      "exif_transpose"
+    ],
+    "ocr_mean_confidence": 0.95
+  },
+  "timings_ms": {
+    "preprocess_ms": 65,
+    "ocr_ms": 850,
+    "parse_ms": 15,
+    "categorize_ms": 5,
+    "fallback_ms": 0,
+    "total_ms": 935
+  },
+  "needs_review": false,
+  "warnings": []
+}

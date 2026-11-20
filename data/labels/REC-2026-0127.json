@@ -1,0 +1,93 @@
+{
+  "schema_version": "1.0",
+  "job_id": "576f12ea-8366-5410-916d-77a4ff9d6506",
+  "scan_id": "4bf73dc0-da4b-5e8e-ad7b-70ca3eb7cc11",
+  "engine_used": "gemini_fallback",
+  "categorizer_used": "rules",
+  "fallback_reason": "low_confidence",
+  "merchant": {
+    "name": "Saigon Co.op",
+    "tax_code": null,
+    "address": "tai Khu do thi moi Van Phu,",
+    "phone": null
+  },
+  "invoice": {
+    "invoice_number": "INV0127-2009",
+    "invoice_date": "2019-09-20",
+    "invoice_time": null,
+    "currency": "VND",
+    "payment_method": "Tiền mặt"
+  },
+  "items": [
+    {
+      "line_no": 1,
+      "name": "Hàng hóa & Dịch vụ (Saigon Co.op)",
+      "quantity": "1",
+      "unit": "phần",
+      "unit_price": 27291,
+      "line_total": 27291,
+      "category_slug": "an-uong",
+      "confidence": 0.59,
+      "bbox": {
+        "x": 0.351,
+        "y": 0.593,
+        "w": 0.39,
+        "h": 0.031
+      }
+    }
+  ],
+  "totals": {
+    "subtotal": 27291,
+    "discount": 0,
+    "tax_amount": 0,
+    "tax_rate": null,
+    "service_charge": 0,
+    "total": 27291,
+    "paid_amount": 27291
+  },
+  "validation": {
+    "status": "REVIEW",
+    "score": 0.59,
+    "checks": [
+      {
+        "code": "V1",
+        "passed": true,
+        "severity": "hard",
+        "message_vi": "Đã tìm thấy tổng tiền hợp lệ"
+      },
+      {
+        "code": "V3",
+        "passed": true,
+        "severity": "hard",
+        "message_vi": "Phương trình cân đối tổng tiền chính xác"
+      },
+      {
+        "code": "V4",
+        "passed": true,
+        "severity": "hard",
+        "message_vi": "Có ít nhất một mặt hàng"
+      }
+    ]
+  },
+  "quality": {
+    "is_blur": true,
+    "is_dark": false,
+    "steps_applied": [
+      "exif_transpose",
+      "deskew"
+    ],
+    "ocr_mean_confidence": 0.59
+  },
+  "timings_ms": {
+    "preprocess_ms": 150,
+    "ocr_ms": 850,
+    "parse_ms": 15,
+    "categorize_ms": 5,
+    "fallback_ms": 2200,
+    "total_ms": 3215
+  },
+  "needs_review": true,
+  "warnings": [
+    "Chất lượng ảnh thấp / ca khó (MC-OCR)"
+  ]
+}

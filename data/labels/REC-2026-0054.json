@@ -1,0 +1,90 @@
+{
+  "schema_version": "1.0",
+  "job_id": "7ef4adfe-2bca-582e-ae21-391b19a0350c",
+  "scan_id": "d2b8050a-82bc-5604-9925-7f30fc77e24b",
+  "engine_used": "google_vision",
+  "categorizer_used": "rules",
+  "fallback_reason": "none",
+  "merchant": {
+    "name": "Hẹl cong to Trung Nguyen Legend",
+    "tax_code": null,
+    "address": "Add: 683 - 685 duong 3/2 P.6 Q.10 - HCM",
+    "phone": null
+  },
+  "invoice": {
+    "invoice_number": "INV0054-1809",
+    "invoice_date": "2026-09-18",
+    "invoice_time": null,
+    "currency": "VND",
+    "payment_method": "Thẻ"
+  },
+  "items": [
+    {
+      "line_no": 1,
+      "name": "Hàng hóa & Dịch vụ (Hẹl cong to Trung Nguyen Legend)",
+      "quantity": "1",
+      "unit": "phần",
+      "unit_price": 42019191125,
+      "line_total": 42019191125,
+      "category_slug": "an-uong",
+      "confidence": 0.73,
+      "bbox": {
+        "x": 0.104,
+        "y": 0.451,
+        "w": 0.367,
+        "h": 0.032
+      }
+    }
+  ],
+  "totals": {
+    "subtotal": 42019191125,
+    "discount": 0,
+    "tax_amount": 0,
+    "tax_rate": null,
+    "service_charge": 0,
+    "total": 42019191125,
+    "paid_amount": 42019191125
+  },
+  "validation": {
+    "status": "PASS",
+    "score": 0.73,
+    "checks": [
+      {
+        "code": "V1",
+        "passed": true,
+        "severity": "hard",
+        "message_vi": "Đã tìm thấy tổng tiền hợp lệ"
+      },
+      {
+        "code": "V3",
+        "passed": true,
+        "severity": "hard",
+        "message_vi": "Phương trình cân đối tổng tiền chính xác"
+      },
+      {
+        "code": "V4",
+        "passed": true,
+        "severity": "hard",
+        "message_vi": "Có ít nhất một mặt hàng"
+      }
+    ]
+  },
+  "quality": {
+    "is_blur": false,
+    "is_dark": false,
+    "steps_applied": [
+      "exif_transpose"
+    ],
+    "ocr_mean_confidence": 0.73
+  },
+  "timings_ms": {
+    "preprocess_ms": 65,
+    "ocr_ms": 850,
+    "parse_ms": 15,
+    "categorize_ms": 5,
+    "fallback_ms": 0,
+    "total_ms": 935
+  },
+  "needs_review": false,
+  "warnings": []
+}

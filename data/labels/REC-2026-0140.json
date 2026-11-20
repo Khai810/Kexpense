@@ -1,0 +1,93 @@
+{
+  "schema_version": "1.0",
+  "job_id": "dfeba9bb-37cb-53c8-acd9-3b09bef3021a",
+  "scan_id": "f7f9eadd-af12-5c6e-9fc3-9bab3698ce45",
+  "engine_used": "gemini_fallback",
+  "categorizer_used": "rules",
+  "fallback_reason": "low_confidence",
+  "merchant": {
+    "name": "SIEU THI BACH HOA TONG HOP",
+    "tax_code": null,
+    "address": "Số 5 Cẩm Tây - Cẩm Phả - QN",
+    "phone": null
+  },
+  "invoice": {
+    "invoice_number": "INV0140-1008",
+    "invoice_date": "2020-08-10",
+    "invoice_time": null,
+    "currency": "VND",
+    "payment_method": "Thẻ"
+  },
+  "items": [
+    {
+      "line_no": 1,
+      "name": "Hàng hóa & Dịch vụ (SIEU THI BACH HOA TONG HOP)",
+      "quantity": "1",
+      "unit": "phần",
+      "unit_price": 38000,
+      "line_total": 38000,
+      "category_slug": "an-uong",
+      "confidence": 0.63,
+      "bbox": {
+        "x": 0.191,
+        "y": 0.51,
+        "w": 0.328,
+        "h": 0.021
+      }
+    }
+  ],
+  "totals": {
+    "subtotal": 38000,
+    "discount": 0,
+    "tax_amount": 0,
+    "tax_rate": null,
+    "service_charge": 0,
+    "total": 38000,
+    "paid_amount": 38000
+  },
+  "validation": {
+    "status": "REVIEW",
+    "score": 0.63,
+    "checks": [
+      {
+        "code": "V1",
+        "passed": true,
+        "severity": "hard",
+        "message_vi": "Đã tìm thấy tổng tiền hợp lệ"
+      },
+      {
+        "code": "V3",
+        "passed": true,
+        "severity": "hard",
+        "message_vi": "Phương trình cân đối tổng tiền chính xác"
+      },
+      {
+        "code": "V4",
+        "passed": true,
+        "severity": "hard",
+        "message_vi": "Có ít nhất một mặt hàng"
+      }
+    ]
+  },
+  "quality": {
+    "is_blur": true,
+    "is_dark": true,
+    "steps_applied": [
+      "exif_transpose",
+      "deskew"
+    ],
+    "ocr_mean_confidence": 0.63
+  },
+  "timings_ms": {
+    "preprocess_ms": 150,
+    "ocr_ms": 850,
+    "parse_ms": 15,
+    "categorize_ms": 5,
+    "fallback_ms": 2200,
+    "total_ms": 3215
+  },
+  "needs_review": true,
+  "warnings": [
+    "Chất lượng ảnh thấp / ca khó (MC-OCR)"
+  ]
+}

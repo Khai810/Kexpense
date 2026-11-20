@@ -1,0 +1,91 @@
+{
+  "schema_version": "1.0",
+  "job_id": "ba5c8da6-e5da-53e5-acfe-6f556ee99aa8",
+  "scan_id": "f86c9988-b195-5316-b7e6-f7e474de16a6",
+  "engine_used": "google_vision",
+  "categorizer_used": "rules",
+  "fallback_reason": "none",
+  "merchant": {
+    "name": "CTY CP SÁCH & TBTH QUẢNG NINH",
+    "tax_code": null,
+    "address": "ĐC Số 10 Long Tien - TP Hạ Long - ON",
+    "phone": null
+  },
+  "invoice": {
+    "invoice_number": "INV0079-1008",
+    "invoice_date": "2020-08-10",
+    "invoice_time": null,
+    "currency": "VND",
+    "payment_method": "Tiền mặt"
+  },
+  "items": [
+    {
+      "line_no": 1,
+      "name": "Hàng hóa & Dịch vụ (CTY CP SÁCH & TBTH QUẢNG NINH)",
+      "quantity": "1",
+      "unit": "phần",
+      "unit_price": 33212050,
+      "line_total": 33212050,
+      "category_slug": "mua-sam",
+      "confidence": 0.61,
+      "bbox": {
+        "x": 0.092,
+        "y": 0.553,
+        "w": 0.305,
+        "h": 0.024
+      }
+    }
+  ],
+  "totals": {
+    "subtotal": 33212050,
+    "discount": 0,
+    "tax_amount": 0,
+    "tax_rate": null,
+    "service_charge": 0,
+    "total": 33212050,
+    "paid_amount": 33212050
+  },
+  "validation": {
+    "status": "PASS",
+    "score": 0.61,
+    "checks": [
+      {
+        "code": "V1",
+        "passed": true,
+        "severity": "hard",
+        "message_vi": "Đã tìm thấy tổng tiền hợp lệ"
+      },
+      {
+        "code": "V3",
+        "passed": true,
+        "severity": "hard",
+        "message_vi": "Phương trình cân đối tổng tiền chính xác"
+      },
+      {
+        "code": "V4",
+        "passed": true,
+        "severity": "hard",
+        "message_vi": "Có ít nhất một mặt hàng"
+      }
+    ]
+  },
+  "quality": {
+    "is_blur": false,
+    "is_dark": false,
+    "steps_applied": [
+      "exif_transpose",
+      "deskew"
+    ],
+    "ocr_mean_confidence": 0.61
+  },
+  "timings_ms": {
+    "preprocess_ms": 65,
+    "ocr_ms": 850,
+    "parse_ms": 15,
+    "categorize_ms": 5,
+    "fallback_ms": 0,
+    "total_ms": 935
+  },
+  "needs_review": false,
+  "warnings": []
+}

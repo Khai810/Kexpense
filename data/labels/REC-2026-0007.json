@@ -1,0 +1,90 @@
+{
+  "schema_version": "1.0",
+  "job_id": "7fc292ff-19c3-5411-8999-dd23e95035ad",
+  "scan_id": "d2605a0b-848b-556f-aff8-758c64b5fe41",
+  "engine_used": "google_vision",
+  "categorizer_used": "rules",
+  "fallback_reason": "none",
+  "merchant": {
+    "name": "MINIMART ANAN",
+    "tax_code": null,
+    "address": "Chợ Sủi Phú Thị Gia Lâm",
+    "phone": null
+  },
+  "invoice": {
+    "invoice_number": "INV0007-1308",
+    "invoice_date": "2020-08-13",
+    "invoice_time": null,
+    "currency": "VND",
+    "payment_method": "Tiền mặt"
+  },
+  "items": [
+    {
+      "line_no": 1,
+      "name": "Hàng hóa & Dịch vụ (MINIMART ANAN)",
+      "quantity": "1",
+      "unit": "phần",
+      "unit_price": 30500,
+      "line_total": 30500,
+      "category_slug": "di-cho-sieu-thi",
+      "confidence": 0.72,
+      "bbox": {
+        "x": 0.098,
+        "y": 0.465,
+        "w": 0.203,
+        "h": 0.033
+      }
+    }
+  ],
+  "totals": {
+    "subtotal": 30500,
+    "discount": 0,
+    "tax_amount": 0,
+    "tax_rate": null,
+    "service_charge": 0,
+    "total": 30500,
+    "paid_amount": 30500
+  },
+  "validation": {
+    "status": "PASS",
+    "score": 0.72,
+    "checks": [
+      {
+        "code": "V1",
+        "passed": true,
+        "severity": "hard",
+        "message_vi": "Đã tìm thấy tổng tiền hợp lệ"
+      },
+      {
+        "code": "V3",
+        "passed": true,
+        "severity": "hard",
+        "message_vi": "Phương trình cân đối tổng tiền chính xác"
+      },
+      {
+        "code": "V4",
+        "passed": true,
+        "severity": "hard",
+        "message_vi": "Có ít nhất một mặt hàng"
+      }
+    ]
+  },
+  "quality": {
+    "is_blur": false,
+    "is_dark": false,
+    "steps_applied": [
+      "exif_transpose"
+    ],
+    "ocr_mean_confidence": 0.72
+  },
+  "timings_ms": {
+    "preprocess_ms": 65,
+    "ocr_ms": 850,
+    "parse_ms": 15,
+    "categorize_ms": 5,
+    "fallback_ms": 0,
+    "total_ms": 935
+  },
+  "needs_review": false,
+  "warnings": []
+}

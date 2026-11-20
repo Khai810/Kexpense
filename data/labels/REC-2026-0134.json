@@ -1,0 +1,93 @@
+{
+  "schema_version": "1.0",
+  "job_id": "d65b7866-ef12-5d05-9ece-38f865cdf7fa",
+  "scan_id": "fc095307-c1ee-5b0a-97c0-c618dd6218ec",
+  "engine_used": "gemini_fallback",
+  "categorizer_used": "rules",
+  "fallback_reason": "low_confidence",
+  "merchant": {
+    "name": "VinCommerce",
+    "tax_code": null,
+    "address": "VM+ QNH 86 Trần Phú",
+    "phone": null
+  },
+  "invoice": {
+    "invoice_number": "INV0134-1008",
+    "invoice_date": "2020-08-10",
+    "invoice_time": null,
+    "currency": "VND",
+    "payment_method": "Thẻ"
+  },
+  "items": [
+    {
+      "line_no": 1,
+      "name": "Hàng hóa & Dịch vụ (VinCommerce)",
+      "quantity": "1",
+      "unit": "phần",
+      "unit_price": 7800,
+      "line_total": 7800,
+      "category_slug": "an-uong",
+      "confidence": 0.61,
+      "bbox": {
+        "x": 0.139,
+        "y": 0.495,
+        "w": 0.358,
+        "h": 0.028
+      }
+    }
+  ],
+  "totals": {
+    "subtotal": 7800,
+    "discount": 0,
+    "tax_amount": 0,
+    "tax_rate": null,
+    "service_charge": 0,
+    "total": 7800,
+    "paid_amount": 7800
+  },
+  "validation": {
+    "status": "REVIEW",
+    "score": 0.61,
+    "checks": [
+      {
+        "code": "V1",
+        "passed": true,
+        "severity": "hard",
+        "message_vi": "Đã tìm thấy tổng tiền hợp lệ"
+      },
+      {
+        "code": "V3",
+        "passed": true,
+        "severity": "hard",
+        "message_vi": "Phương trình cân đối tổng tiền chính xác"
+      },
+      {
+        "code": "V4",
+        "passed": true,
+        "severity": "hard",
+        "message_vi": "Có ít nhất một mặt hàng"
+      }
+    ]
+  },
+  "quality": {
+    "is_blur": true,
+    "is_dark": true,
+    "steps_applied": [
+      "exif_transpose",
+      "deskew"
+    ],
+    "ocr_mean_confidence": 0.61
+  },
+  "timings_ms": {
+    "preprocess_ms": 150,
+    "ocr_ms": 850,
+    "parse_ms": 15,
+    "categorize_ms": 5,
+    "fallback_ms": 2200,
+    "total_ms": 3215
+  },
+  "needs_review": true,
+  "warnings": [
+    "Chất lượng ảnh thấp / ca khó (MC-OCR)"
+  ]
+}

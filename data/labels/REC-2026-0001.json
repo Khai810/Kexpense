@@ -1,0 +1,90 @@
+{
+  "schema_version": "1.0",
+  "job_id": "e159252a-d41d-5620-a2a4-9f774a748783",
+  "scan_id": "a9ad2a45-68bc-5b7f-8a78-7252693913c6",
+  "engine_used": "google_vision",
+  "categorizer_used": "rules",
+  "fallback_reason": "none",
+  "merchant": {
+    "name": "co.op mart",
+    "tax_code": null,
+    "address": "188 Hau Giang, P.6, Q.6, TpHCM",
+    "phone": null
+  },
+  "invoice": {
+    "invoice_number": "INV0001-2105",
+    "invoice_date": "2020-05-21",
+    "invoice_time": null,
+    "currency": "VND",
+    "payment_method": "Tiền mặt"
+  },
+  "items": [
+    {
+      "line_no": 1,
+      "name": "Hàng hóa & Dịch vụ (co.op mart)",
+      "quantity": "1",
+      "unit": "phần",
+      "unit_price": 16200,
+      "line_total": 16200,
+      "category_slug": "di-cho-sieu-thi",
+      "confidence": 0.72,
+      "bbox": {
+        "x": 0.554,
+        "y": 0.512,
+        "w": 0.179,
+        "h": 0.022
+      }
+    }
+  ],
+  "totals": {
+    "subtotal": 16200,
+    "discount": 0,
+    "tax_amount": 0,
+    "tax_rate": null,
+    "service_charge": 0,
+    "total": 16200,
+    "paid_amount": 16200
+  },
+  "validation": {
+    "status": "PASS",
+    "score": 0.72,
+    "checks": [
+      {
+        "code": "V1",
+        "passed": true,
+        "severity": "hard",
+        "message_vi": "Đã tìm thấy tổng tiền hợp lệ"
+      },
+      {
+        "code": "V3",
+        "passed": true,
+        "severity": "hard",
+        "message_vi": "Phương trình cân đối tổng tiền chính xác"
+      },
+      {
+        "code": "V4",
+        "passed": true,
+        "severity": "hard",
+        "message_vi": "Có ít nhất một mặt hàng"
+      }
+    ]
+  },
+  "quality": {
+    "is_blur": false,
+    "is_dark": false,
+    "steps_applied": [
+      "exif_transpose"
+    ],
+    "ocr_mean_confidence": 0.72
+  },
+  "timings_ms": {
+    "preprocess_ms": 65,
+    "ocr_ms": 850,
+    "parse_ms": 15,
+    "categorize_ms": 5,
+    "fallback_ms": 0,
+    "total_ms": 935
+  },
+  "needs_review": false,
+  "warnings": []
+}

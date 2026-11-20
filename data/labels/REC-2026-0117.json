@@ -1,0 +1,91 @@
+{
+  "schema_version": "1.0",
+  "job_id": "8fc1c64c-54c3-5a8e-b7b0-1d4591d71f76",
+  "scan_id": "a6326fdb-99f4-5913-ab67-141c6b6ad727",
+  "engine_used": "google_vision",
+  "categorizer_used": "rules",
+  "fallback_reason": "none",
+  "merchant": {
+    "name": "BOOK TA .K (TAMAN DAYA) SDN BHD",
+    "tax_code": null,
+    "address": "NO.53 55,57 & 59, JALAN SAGU 18, TAMAN DAYA, 81100 JOHOR BAHRU, JOHOR.",
+    "phone": null
+  },
+  "invoice": {
+    "invoice_number": "INV0117-2512",
+    "invoice_date": "2018-12-25",
+    "invoice_time": null,
+    "currency": "VND",
+    "payment_method": "Tiền mặt"
+  },
+  "items": [
+    {
+      "line_no": 1,
+      "name": "Hàng hóa & Dịch vụ (BOOK TA .K (TAMAN DAYA) SDN BHD)",
+      "quantity": "1",
+      "unit": "phần",
+      "unit_price": 45000,
+      "line_total": 45000,
+      "category_slug": "suc-khoe",
+      "confidence": 0.95,
+      "bbox": {
+        "x": 0.08,
+        "y": 0.45,
+        "w": 0.84,
+        "h": 0.05
+      }
+    }
+  ],
+  "totals": {
+    "subtotal": 45000,
+    "discount": 0,
+    "tax_amount": 0,
+    "tax_rate": null,
+    "service_charge": 0,
+    "total": 45000,
+    "paid_amount": 45000
+  },
+  "validation": {
+    "status": "PASS",
+    "score": 0.95,
+    "checks": [
+      {
+        "code": "V1",
+        "passed": true,
+        "severity": "hard",
+        "message_vi": "Đã tìm thấy tổng tiền hợp lệ"
+      },
+      {
+        "code": "V3",
+        "passed": true,
+        "severity": "hard",
+        "message_vi": "Phương trình cân đối tổng tiền chính xác"
+      },
+      {
+        "code": "V4",
+        "passed": true,
+        "severity": "hard",
+        "message_vi": "Có ít nhất một mặt hàng"
+      }
+    ]
+  },
+  "quality": {
+    "is_blur": false,
+    "is_dark": false,
+    "steps_applied": [
+      "exif_transpose",
+      "deskew"
+    ],
+    "ocr_mean_confidence": 0.95
+  },
+  "timings_ms": {
+    "preprocess_ms": 65,
+    "ocr_ms": 850,
+    "parse_ms": 15,
+    "categorize_ms": 5,
+    "fallback_ms": 0,
+    "total_ms": 935
+  },
+  "needs_review": false,
+  "warnings": []
+}

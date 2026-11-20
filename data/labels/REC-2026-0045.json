@@ -1,0 +1,90 @@
+{
+  "schema_version": "1.0",
+  "job_id": "ce25dec7-88e0-563d-bb93-03136ade0d3a",
+  "scan_id": "7139b40e-ce5b-5644-81a3-ded0a5c731f0",
+  "engine_used": "google_vision",
+  "categorizer_used": "rules",
+  "fallback_reason": "none",
+  "merchant": {
+    "name": "Laha Cafe",
+    "tax_code": null,
+    "address": "857 Nguyễn Kiên, P3, Q.Gò Vấp",
+    "phone": null
+  },
+  "invoice": {
+    "invoice_number": "INV0045-3108",
+    "invoice_date": "2026-08-31",
+    "invoice_time": null,
+    "currency": "VND",
+    "payment_method": "Tiền mặt"
+  },
+  "items": [
+    {
+      "line_no": 1,
+      "name": "Hàng hóa & Dịch vụ (Laha Cafe)",
+      "quantity": "1",
+      "unit": "phần",
+      "unit_price": 19000,
+      "line_total": 19000,
+      "category_slug": "an-uong",
+      "confidence": 0.49,
+      "bbox": {
+        "x": 0.13,
+        "y": 0.664,
+        "w": 0.222,
+        "h": 0.029
+      }
+    }
+  ],
+  "totals": {
+    "subtotal": 19000,
+    "discount": 0,
+    "tax_amount": 0,
+    "tax_rate": null,
+    "service_charge": 0,
+    "total": 19000,
+    "paid_amount": 19000
+  },
+  "validation": {
+    "status": "PASS",
+    "score": 0.49,
+    "checks": [
+      {
+        "code": "V1",
+        "passed": true,
+        "severity": "hard",
+        "message_vi": "Đã tìm thấy tổng tiền hợp lệ"
+      },
+      {
+        "code": "V3",
+        "passed": true,
+        "severity": "hard",
+        "message_vi": "Phương trình cân đối tổng tiền chính xác"
+      },
+      {
+        "code": "V4",
+        "passed": true,
+        "severity": "hard",
+        "message_vi": "Có ít nhất một mặt hàng"
+      }
+    ]
+  },
+  "quality": {
+    "is_blur": false,
+    "is_dark": false,
+    "steps_applied": [
+      "exif_transpose"
+    ],
+    "ocr_mean_confidence": 0.49
+  },
+  "timings_ms": {
+    "preprocess_ms": 65,
+    "ocr_ms": 850,
+    "parse_ms": 15,
+    "categorize_ms": 5,
+    "fallback_ms": 0,
+    "total_ms": 935
+  },
+  "needs_review": false,
+  "warnings": []
+}

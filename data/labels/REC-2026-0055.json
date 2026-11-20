@@ -1,0 +1,90 @@
+{
+  "schema_version": "1.0",
+  "job_id": "c1e3d1c0-1a09-5d46-a87e-445666c71d79",
+  "scan_id": "dd9ee2a8-184d-5c1e-a3cf-9e63f162c9e6",
+  "engine_used": "google_vision",
+  "categorizer_used": "rules",
+  "fallback_reason": "none",
+  "merchant": {
+    "name": "Legend",
+    "tax_code": null,
+    "address": "Add: 683 - 685 duong 3/2 P.6 Q.10 - HCM",
+    "phone": null
+  },
+  "invoice": {
+    "invoice_number": "INV0055-2009",
+    "invoice_date": "2026-09-20",
+    "invoice_time": null,
+    "currency": "VND",
+    "payment_method": "Tiền mặt"
+  },
+  "items": [
+    {
+      "line_no": 1,
+      "name": "Hàng hóa & Dịch vụ (Legend)",
+      "quantity": "1",
+      "unit": "phần",
+      "unit_price": 64000,
+      "line_total": 64000,
+      "category_slug": "an-uong",
+      "confidence": 0.77,
+      "bbox": {
+        "x": 0.236,
+        "y": 0.611,
+        "w": 0.137,
+        "h": 0.023
+      }
+    }
+  ],
+  "totals": {
+    "subtotal": 64000,
+    "discount": 0,
+    "tax_amount": 0,
+    "tax_rate": null,
+    "service_charge": 0,
+    "total": 64000,
+    "paid_amount": 64000
+  },
+  "validation": {
+    "status": "PASS",
+    "score": 0.77,
+    "checks": [
+      {
+        "code": "V1",
+        "passed": true,
+        "severity": "hard",
+        "message_vi": "Đã tìm thấy tổng tiền hợp lệ"
+      },
+      {
+        "code": "V3",
+        "passed": true,
+        "severity": "hard",
+        "message_vi": "Phương trình cân đối tổng tiền chính xác"
+      },
+      {
+        "code": "V4",
+        "passed": true,
+        "severity": "hard",
+        "message_vi": "Có ít nhất một mặt hàng"
+      }
+    ]
+  },
+  "quality": {
+    "is_blur": false,
+    "is_dark": false,
+    "steps_applied": [
+      "exif_transpose"
+    ],
+    "ocr_mean_confidence": 0.77
+  },
+  "timings_ms": {
+    "preprocess_ms": 65,
+    "ocr_ms": 850,
+    "parse_ms": 15,
+    "categorize_ms": 5,
+    "fallback_ms": 0,
+    "total_ms": 935
+  },
+  "needs_review": false,
+  "warnings": []
+}
