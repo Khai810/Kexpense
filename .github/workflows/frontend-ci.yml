@@ -15,9 +15,6 @@ on:
 jobs:
   lint-test-build:
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: frontend
     steps:
       - name: Checkout Code
         uses: actions/checkout@v4
@@ -32,19 +29,19 @@ jobs:
         with:
           node-version-file: ".nvmrc"
           cache: "pnpm"
-          cache-dependency-path: frontend/pnpm-lock.yaml
+          cache-dependency-path: pnpm-lock.yaml
 
       - name: Install Dependencies
         run: pnpm install --frozen-lockfile
 
       - name: Run ESLint
-        run: pnpm run lint
+        run: pnpm --dir frontend run lint
 
       - name: Type Check
-        run: pnpm run type-check
+        run: pnpm --dir frontend run type-check
 
       - name: Run Unit Tests
-        run: pnpm run test
+        run: pnpm --dir frontend run test
 
       - name: Build Next.js
-        run: pnpm run build
+        run: pnpm --dir frontend run build
