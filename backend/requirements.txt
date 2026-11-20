@@ -18,5 +18,11 @@ python-multipart>=0.0.17
 
 # Utilities & Image
 Pillow>=11.0.0
+pillow-heif>=1.8.0
+opencv-python-headless>=4.10.0
+numpy>=2.0.0
 python-dotenv>=1.0.1
 httpx>=0.28.0
+
+# Cloud & AI Services
+google-cloud-vision>=3.16.0

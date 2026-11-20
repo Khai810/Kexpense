@@ -1,0 +1,544 @@
+[
+  {
+    "id": "rec_01_highlands",
+    "lines": [
+      "CÔNG TY CỔ PHẦN DỊCH VỤ CÀ PHÊ CAO NGUYÊN",
+      "Đ/C: 123 Lê Lợi, P. Bến Nghé, Quận 1, TP.HCM",
+      "MST: 0302008899",
+      "Số HĐ: HD-2026-001",
+      "Ngày: 10/01/2026 08:30",
+      "1. Phin Sữa Đá (L) 1 x 39.000 39.000",
+      "2. Freeze Trà Xanh (M) 1 x 55.000 55.000",
+      "Tạm tính: 94.000",
+      "VAT (8%): 7.520",
+      "TỔNG CỘNG: 101.520 đ",
+      "Tiền mặt: 150.000 đ",
+      "Tiền thối: 48.480 đ"
+    ],
+    "expected": {
+      "total": 101520,
+      "date": "2026-01-10",
+      "tax_code": "0302008899"
+    }
+  },
+  {
+    "id": "rec_02_phuclong",
+    "lines": [
+      "TRÀ SỮA PHÚC LONG",
+      "MST: 0302223344",
+      "Số bill: PL-88990",
+      "Ngày 12 tháng 02 năm 2026",
+      "Trà Đào Cam Sả (L)",
+      "50% Đường 2 x 55.000 110.000",
+      "Bánh Mì Phúc Long 1 x 35.000 35.000",
+      "TỔNG TIỀN: 145.000",
+      "Tiền khách đưa: 200.000",
+      "Tiền thừa: 55.000"
+    ],
+    "expected": {
+      "total": 145000,
+      "date": "2026-02-12",
+      "tax_code": "0302223344"
+    }
+  },
+  {
+    "id": "rec_03_coopmart",
+    "lines": [
+      "SIÊU THỊ CO.OPMART NGUYỄN KIỆM",
+      "Đ/C: 571 Nguyễn Kiệm, Gò Vấp",
+      "MST: 0300481559-001",
+      "Ngày: 2026-03-05 19:15",
+      "Gạo Nàng Sen 5kg 1 x 125.000 125.000",
+      "Nước mắm Nam Ngư 1 x 38.000 38.000",
+      "Dầu ăn Simply 1L 2 x 52.000 104.000",
+      "TỔNG CỘNG: 267.000",
+      "Thanh toán thẻ: 267.000"
+    ],
+    "expected": {
+      "total": 267000,
+      "date": "2026-03-05",
+      "tax_code": "0300481559001"
+    }
+  },
+  {
+    "id": "rec_04_winmart",
+    "lines": [
+      "WINMART+ CỬA HÀNG 122",
+      "MST: 0104918404",
+      "Số HD: WM-9912",
+      "15-03-2026 10:20",
+      "Bánh snack Oishi 3 x 6.500 19.500",
+      "Coca Cola 320ml 4 x 10.000 40.000",
+      "Tạm tính: 59.500",
+      "Giảm giá: 5.000",
+      "TỔNG THANH TOÁN: 54.500"
+    ],
+    "expected": {
+      "total": 54500,
+      "date": "2026-03-15",
+      "tax_code": "0104918404"
+    }
+  },
+  {
+    "id": "rec_05_circle_k",
+    "lines": [
+      "CIRCLE K VIETNAM",
+      "MST: 0306140525",
+      "Ngày: 22/03/2026 23:45",
+      "Mì trộn xúc xích trứng 1 x 28.000 28.000",
+      "Nước suối Aquafina 1 x 7.000 7.000",
+      "TỔNG TIỀN: 35.000 đ",
+      "Tiền khách đưa: 50.000",
+      "Tiền thối: 15.000"
+    ],
+    "expected": {
+      "total": 35000,
+      "date": "2026-03-22",
+      "tax_code": "0306140525"
+    }
+  },
+  {
+    "id": "rec_06_starbucks",
+    "lines": [
+      "CÔNG TY TNHH COFFEE CONCEPTS (STARBUCKS)",
+      "MST: 0312015248",
+      "Date: 2026-04-01 09:12",
+      "Caramel Macchiato Grande 1 x 105.000 105.000",
+      "Chocolate Croissant 1 x 50.000 50.000",
+      "Subtotal: 155.000",
+      "VAT (10%): 15.500",
+      "TOTAL AMOUNT: 170.500"
+    ],
+    "expected": {
+      "total": 170500,
+      "date": "2026-04-01",
+      "tax_code": "0312015248"
+    }
+  },
+  {
+    "id": "rec_07_lotteria",
+    "lines": [
+      "LOTTERIA VIETNAM",
+      "MST: 0301138855",
+      "Ngày 08/04/2026",
+      "Gà rán giòn cay 2 x 38.000 76.000",
+      "Khoai tây lắc 1 x 42.000 42.000",
+      "Pepsi cỡ vừa 2 x 18.000 36.000",
+      "TỔNG PHẢI TRẢ: 154.000 đ"
+    ],
+    "expected": {
+      "total": 154000,
+      "date": "2026-04-08",
+      "tax_code": "0301138855"
+    }
+  },
+  {
+    "id": "rec_08_kfc",
+    "lines": [
+      "KFC VIETNAM",
+      "MST: 0100773885",
+      "Ngày: 12-04-2026 18:22",
+      "Combo Gà Rán 1 người 1 x 89.000 89.000",
+      "Bánh trứng Egg Tart 2 x 19.000 38.000",
+      "CẦN THANH TOÁN: 127.000"
+    ],
+    "expected": {
+      "total": 127000,
+      "date": "2026-04-12",
+      "tax_code": "0100773885"
+    }
+  },
+  {
+    "id": "rec_09_the_coffee_house",
+    "lines": [
+      "THE COFFEE HOUSE",
+      "MST: 0312867172",
+      "Ngày: 15/04/2026 14:10",
+      "Trà sữa mắc ca trân châu 1 x 59.000 59.000",
+      "Cà phê sữa đá 1 x 35.000 35.000",
+      "TỔNG TIỀN: 94.000"
+    ],
+    "expected": {
+      "total": 94000,
+      "date": "2026-04-15",
+      "tax_code": "0312867172"
+    }
+  },
+  {
+    "id": "rec_10_pizza_4ps",
+    "lines": [
+      "PIZZA 4PS VIETNAM",
+      "MST: 0311494881",
+      "Date: 2026-04-20 20:30",
+      "4 Cheese Pizza 1 x 280.000 280.000",
+      "Crab Tomato Spaghetti 1 x 245.000 245.000",
+      "Service charge (5%): 26.250",
+      "VAT (10%): 55.125",
+      "GRAND TOTAL: 606.375"
+    ],
+    "expected": {
+      "total": 606375,
+      "date": "2026-04-20",
+      "tax_code": "0311494881"
+    }
+  },
+  {
+    "id": "rec_11_bachhoaxanh",
+    "lines": [
+      "BÁCH HÓA XANH",
+      "MST: 0310471746",
+      "25/04/2026 07:45",
+      "Thịt ba rọi heo 1 x 85.000 85.000",
+      "Rau muống 2 x 10.000 20.000",
+      "Trứng gà Ba Huân 1 x 32.000 32.000",
+      "TỔNG CỘNG: 137.000"
+    ],
+    "expected": {
+      "total": 137000,
+      "date": "2026-04-25",
+      "tax_code": "0310471746"
+    }
+  },
+  {
+    "id": "rec_12_fahasa",
+    "lines": [
+      "NHÀ SÁCH FAHASA",
+      "MST: 0301121054",
+      "Ngày 01/05/2026",
+      "Sách Đắc Nhân Tâm 1 x 88.000 88.000",
+      "Bút bi Thiên Long 5 x 5.000 25.000",
+      "Sổ tay lò xo 1 x 35.000 35.000",
+      "TỔNG TIỀN: 148.000"
+    ],
+    "expected": {
+      "total": 148000,
+      "date": "2026-05-01",
+      "tax_code": "0301121054"
+    }
+  },
+  {
+    "id": "rec_13_petrolimex",
+    "lines": [
+      "CỬA HÀNG XĂNG DẦU SỐ 1 - PETROLIMEX",
+      "MST: 0100107873",
+      "Ngày: 05-05-2026 11:30",
+      "Xăng RON 95-III 2.5 x 24.000 60.000",
+      "TỔNG CỘNG: 60.000 đ"
+    ],
+    "expected": {
+      "total": 60000,
+      "date": "2026-05-05",
+      "tax_code": "0100107873"
+    }
+  },
+  {
+    "id": "rec_14_pharmacity",
+    "lines": [
+      "NHÀ THUỐC PHARMACITY",
+      "MST: 0311781238",
+      "Ngày: 10/05/2026",
+      "Panadol Extra 1 x 45.000 45.000",
+      "Khẩu trang y tế 4D 2 x 25.000 50.000",
+      "Cần thanh toán: 95.000"
+    ],
+    "expected": {
+      "total": 95000,
+      "date": "2026-05-10",
+      "tax_code": "0311781238"
+    }
+  },
+  {
+    "id": "rec_15_an_nam_gourmet",
+    "lines": [
+      "AN NAM GOURMET MARKET",
+      "MST: 0302778844",
+      "Date: 2026-05-15",
+      "French Butter Isigny 1 x 95.000 95.000",
+      "Baguette Bread 2 x 22.000 44.000",
+      "TOTAL: 139.000"
+    ],
+    "expected": {
+      "total": 139000,
+      "date": "2026-05-15",
+      "tax_code": "0302778844"
+    }
+  },
+  {
+    "id": "rec_16_pho24",
+    "lines": [
+      "PHỞ 24 NGUYỄN TRÃI",
+      "MST: 0303123456",
+      "Ngày: 18/05/2026",
+      "Phở tái bắp hoa 2 x 65.000 130.000",
+      "Quẩy giòn 2 x 10.000 20.000",
+      "Trà đá 2 x 5.000 10.000",
+      "TỔNG CỘNG: 160.000"
+    ],
+    "expected": {
+      "total": 160000,
+      "date": "2026-05-18",
+      "tax_code": "0303123456"
+    }
+  },
+  {
+    "id": "rec_17_haidilao",
+    "lines": [
+      "HAIDILAO HOTPOT VIETNAM",
+      "MST: 0315758899",
+      "Ngày: 22/05/2026 21:00",
+      "Nước lẩu cà chua 1 x 120.000 120.000",
+      "Bò Haidilao 2 x 165.000 330.000",
+      "Tôm viên phô mai 1 x 115.000 115.000",
+      "Tạm tính: 565.000",
+      "Thuế GTGT (8%): 45.200",
+      "TỔNG TIỀN THANH TOÁN: 610.200"
+    ],
+    "expected": {
+      "total": 610200,
+      "date": "2026-05-22",
+      "tax_code": "0315758899"
+    }
+  },
+  {
+    "id": "rec_18_koi_the",
+    "lines": [
+      "KOI THÉ VIETNAM",
+      "MST: 0313459988",
+      "25-05-2026",
+      "Golden Bubble Milk Tea (M) 2 x 58.000 116.000",
+      "TỔNG CỘNG: 116.000",
+      "Tiền khách đưa: 200.000",
+      "Tiền thối: 84.000"
+    ],
+    "expected": {
+      "total": 116000,
+      "date": "2026-05-25",
+      "tax_code": "0313459988"
+    }
+  },
+  {
+    "id": "rec_19_tokyodeli",
+    "lines": [
+      "TOKYO DELI SUSHI",
+      "MST: 0304987654",
+      "Ngày: 28/05/2026",
+      "Salmon Sashimi 2 x 125.000 250.000",
+      "California Roll 1 x 88.000 88.000",
+      "TỔNG TIỀN: 338.000"
+    ],
+    "expected": {
+      "total": 338000,
+      "date": "2026-05-28",
+      "tax_code": "0304987654"
+    }
+  },
+  {
+    "id": "rec_20_guardian",
+    "lines": [
+      "GUARDIAN VIETNAM",
+      "MST: 0311029384",
+      "30/05/2026",
+      "Sữa rửa mặt Cetaphil 1 x 135.000 135.000",
+      "Bông tẩy trang Silcot 2 x 35.000 70.000",
+      "TỔNG CỘNG: 205.000"
+    ],
+    "expected": {
+      "total": 205000,
+      "date": "2026-05-30",
+      "tax_code": "0311029384"
+    }
+  },
+  {
+    "id": "rec_21_katinat",
+    "lines": [
+      "KATINAT SAIGON KAFE",
+      "MST: 0316223311",
+      "Ngày: 02/06/2026 15:30",
+      "Trà Sữa Chôm Chôm (L) 2 x 65.000 130.000",
+      "Bơ Già Dừa Non 1 x 60.000 60.000",
+      "TỔNG TIỀN: 190.000 đ"
+    ],
+    "expected": {
+      "total": 190000,
+      "date": "2026-06-02",
+      "tax_code": "0316223311"
+    }
+  },
+  {
+    "id": "rec_22_ministop",
+    "lines": [
+      "MINISTOP VIETNAM",
+      "MST: 0311223344",
+      "Ngày: 05-06-2026",
+      "Cơm nắm cá ngừ 2 x 16.000 32.000",
+      "Trà xanh Oolong Tea+ 1 x 11.000 11.000",
+      "TỔNG PHẢI TRẢ: 43.000"
+    ],
+    "expected": {
+      "total": 43000,
+      "date": "2026-06-05",
+      "tax_code": "0311223344"
+    }
+  },
+  {
+    "id": "rec_23_gs25",
+    "lines": [
+      "GS25 CONVENIENCE STORE",
+      "MST: 0314556677",
+      "08/06/2026 12:10",
+      "Lẩu ly tokbokki 1 x 39.000 39.000",
+      "Trứng luộc lòng đào 2 x 12.000 24.000",
+      "CẦN THANH TOÁN: 63.000"
+    ],
+    "expected": {
+      "total": 63000,
+      "date": "2026-06-08",
+      "tax_code": "0314556677"
+    }
+  },
+  {
+    "id": "rec_24_seven_eleven",
+    "lines": [
+      "7-ELEVEN VIETNAM",
+      "MST: 0313889900",
+      "10-06-2026 08:00",
+      "Bánh mì xíu mại 1 x 25.000 25.000",
+      "Cà phê sữa đá 7E 1 x 20.000 20.000",
+      "TỔNG CỘNG: 45.000"
+    ],
+    "expected": {
+      "total": 45000,
+      "date": "2026-06-10",
+      "tax_code": "0313889900"
+    }
+  },
+  {
+    "id": "rec_25_jollibee",
+    "lines": [
+      "JOLLIBEE VIETNAM",
+      "MST: 0303889911",
+      "Ngày: 12/06/2026",
+      "Gà giòn vui vẻ 2 x 35.000 70.000",
+      "Mì Ý sốt bò bằm 1 x 40.000 40.000",
+      "TỔNG TIỀN: 110.000 đ"
+    ],
+    "expected": {
+      "total": 110000,
+      "date": "2026-06-12",
+      "tax_code": "0303889911"
+    }
+  },
+  {
+    "id": "rec_26_marukame_udon",
+    "lines": [
+      "MARUKAME UDON VIETNAM",
+      "MST: 0312667788",
+      "15/06/2026 13:00",
+      "Mì Udon Bò Kake 1 x 89.000 89.000",
+      "Tempura Tôm 2 x 22.000 44.000",
+      "TỔNG CỘNG: 133.000"
+    ],
+    "expected": {
+      "total": 133000,
+      "date": "2026-06-15",
+      "tax_code": "0312667788"
+    }
+  },
+  {
+    "id": "rec_27_phuong_nam_bookstore",
+    "lines": [
+      "NHÀ SÁCH PHƯƠNG NAM",
+      "MST: 0302881122",
+      "Ngày 18 tháng 06 năm 2026",
+      "Tiểu thuyết Cây Cam Ngọt 1 x 110.000 110.000",
+      "Bút highlight Pastel 3 x 15.000 45.000",
+      "TỔNG TIỀN THANH TOÁN: 155.000"
+    ],
+    "expected": {
+      "total": 155000,
+      "date": "2026-06-18",
+      "tax_code": "0302881122"
+    }
+  },
+  {
+    "id": "rec_28_con_cung",
+    "lines": [
+      "CỬA HÀNG CON CƯNG",
+      "MST: 0313334455",
+      "Ngày: 20-06-2026",
+      "Tã dán Bobby sơ sinh 1 x 175.000 175.000",
+      "Khăn ướt Nuna 2 x 30.000 60.000",
+      "TỔNG CỘNG: 235.000"
+    ],
+    "expected": {
+      "total": 235000,
+      "date": "2026-06-20",
+      "tax_code": "0313334455"
+    }
+  },
+  {
+    "id": "rec_29_local_cafe_no_mst",
+    "lines": [
+      "CÀ PHÊ GÓC PHỐ",
+      "Đ/C: 45 Đường số 7, Bình Tân",
+      "Ngày: 22/06/2026 09:00",
+      "Cà phê đen 2 x 18.000 36.000",
+      "Nước cam vắt 1 x 25.000 25.000",
+      "TỔNG TIỀN: 61.000 đ"
+    ],
+    "expected": {
+      "total": 61000,
+      "date": "2026-06-22",
+      "tax_code": null
+    }
+  },
+  {
+    "id": "rec_30_bun_bo_no_mst",
+    "lines": [
+      "QUÁN BÚN BÒ HUẾ O PHƯỢNG",
+      "Đ/C: 12 Hoàng Diệu, Thủ Đức",
+      "25/06/2026 12:30",
+      "Tô đặc biệt nạm chả cua 2 x 60.000 120.000",
+      "Trà đá 2 x 3.000 6.000",
+      "TỔNG CỘNG: 126.000"
+    ],
+    "expected": {
+      "total": 126000,
+      "date": "2026-06-25",
+      "tax_code": null
+    }
+  },
+  {
+    "id": "rec_31_banh_mi_huynh_hoa",
+    "lines": [
+      "BÁNH MÌ HUỲNH HOA",
+      "Đ/C: 26 Lê Thị Riêng, Q.1",
+      "Ngày: 28-06-2026",
+      "Bánh mì đặc biệt chả pate 2 x 68.000 136.000",
+      "TỔNG TIỀN: 136.000"
+    ],
+    "expected": {
+      "total": 136000,
+      "date": "2026-06-28",
+      "tax_code": null
+    }
+  },
+  {
+    "id": "rec_32_tiem_tra_thang_nam",
+    "lines": [
+      "TIỆM TRÀ THÁNG NĂM",
+      "Đ/C: 102 Cô Giang, Q.1",
+      "Ngày 30 tháng 06 năm 2026",
+      "Trà dâu tây đông du 2 x 45.000 90.000",
+      "Bánh tiramisu 1 x 40.000 40.000",
+      "TỔNG CỘNG: 130.000",
+      "Tiền khách đưa: 200.000",
+      "Tiền thối: 70.000"
+    ],
+    "expected": {
+      "total": 130000,
+      "date": "2026-06-30",
+      "tax_code": null
+    }
+  }
+]
