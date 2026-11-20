@@ -1,0 +1,91 @@
+{
+  "schema_version": "1.0",
+  "job_id": "f1dd010c-2c4f-51f5-885a-24838c542f02",
+  "scan_id": "3592791b-30da-5a51-bff5-8020c07e7d70",
+  "engine_used": "google_vision",
+  "categorizer_used": "rules",
+  "fallback_reason": "none",
+  "merchant": {
+    "name": "BANH MI CAFE SDN BHD",
+    "tax_code": null,
+    "address": "NO,1 JALAN PUTERI 7/10 BANDAR PUTERI, 47100 PUCHONG SELANGOR, MALAYSIA",
+    "phone": null
+  },
+  "invoice": {
+    "invoice_number": "INV0065-2910",
+    "invoice_date": "2017-10-29",
+    "invoice_time": null,
+    "currency": "VND",
+    "payment_method": "Tiền mặt"
+  },
+  "items": [
+    {
+      "line_no": 1,
+      "name": "Hàng hóa & Dịch vụ (BANH MI CAFE SDN BHD)",
+      "quantity": "1",
+      "unit": "phần",
+      "unit_price": 115000,
+      "line_total": 115000,
+      "category_slug": "an-uong",
+      "confidence": 0.95,
+      "bbox": {
+        "x": 0.08,
+        "y": 0.45,
+        "w": 0.84,
+        "h": 0.05
+      }
+    }
+  ],
+  "totals": {
+    "subtotal": 115000,
+    "discount": 0,
+    "tax_amount": 0,
+    "tax_rate": null,
+    "service_charge": 0,
+    "total": 115000,
+    "paid_amount": 115000
+  },
+  "validation": {
+    "status": "PASS",
+    "score": 0.95,
+    "checks": [
+      {
+        "code": "V1",
+        "passed": true,
+        "severity": "hard",
+        "message_vi": "Đã tìm thấy tổng tiền hợp lệ"
+      },
+      {
+        "code": "V3",
+        "passed": true,
+        "severity": "hard",
+        "message_vi": "Phương trình cân đối tổng tiền chính xác"
+      },
+      {
+        "code": "V4",
+        "passed": true,
+        "severity": "hard",
+        "message_vi": "Có ít nhất một mặt hàng"
+      }
+    ]
+  },
+  "quality": {
+    "is_blur": false,
+    "is_dark": false,
+    "steps_applied": [
+      "exif_transpose",
+      "deskew"
+    ],
+    "ocr_mean_confidence": 0.95
+  },
+  "timings_ms": {
+    "preprocess_ms": 65,
+    "ocr_ms": 850,
+    "parse_ms": 15,
+    "categorize_ms": 5,
+    "fallback_ms": 0,
+    "total_ms": 935
+  },
+  "needs_review": false,
+  "warnings": []
+}

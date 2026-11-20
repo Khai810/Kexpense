@@ -1,0 +1,93 @@
+{
+  "schema_version": "1.0",
+  "job_id": "c338d080-8b16-5248-8b67-3019ab210169",
+  "scan_id": "629757dc-9b6b-5faf-a8c6-c12afc7d048b",
+  "engine_used": "gemini_fallback",
+  "categorizer_used": "rules",
+  "fallback_reason": "low_confidence",
+  "merchant": {
+    "name": "Saigon Co.op",
+    "tax_code": null,
+    "address": "Tang 1, SH 42 Toa K3 cong trinh chung cu ket hop dich vu tren o dat H-CT2 thuoc Du an Dau tu xay dung khu nha o Hi Brand",
+    "phone": null
+  },
+  "invoice": {
+    "invoice_number": "INV0121-1909",
+    "invoice_date": "2019-09-19",
+    "invoice_time": null,
+    "currency": "VND",
+    "payment_method": "Tiền mặt"
+  },
+  "items": [
+    {
+      "line_no": 1,
+      "name": "Hàng hóa & Dịch vụ (Saigon Co.op)",
+      "quantity": "1",
+      "unit": "phần",
+      "unit_price": 36490,
+      "line_total": 36490,
+      "category_slug": "an-uong",
+      "confidence": 0.64,
+      "bbox": {
+        "x": 0.307,
+        "y": 0.469,
+        "w": 0.375,
+        "h": 0.026
+      }
+    }
+  ],
+  "totals": {
+    "subtotal": 36490,
+    "discount": 0,
+    "tax_amount": 0,
+    "tax_rate": null,
+    "service_charge": 0,
+    "total": 36490,
+    "paid_amount": 36490
+  },
+  "validation": {
+    "status": "REVIEW",
+    "score": 0.64,
+    "checks": [
+      {
+        "code": "V1",
+        "passed": true,
+        "severity": "hard",
+        "message_vi": "Đã tìm thấy tổng tiền hợp lệ"
+      },
+      {
+        "code": "V3",
+        "passed": true,
+        "severity": "hard",
+        "message_vi": "Phương trình cân đối tổng tiền chính xác"
+      },
+      {
+        "code": "V4",
+        "passed": true,
+        "severity": "hard",
+        "message_vi": "Có ít nhất một mặt hàng"
+      }
+    ]
+  },
+  "quality": {
+    "is_blur": true,
+    "is_dark": false,
+    "steps_applied": [
+      "exif_transpose",
+      "deskew"
+    ],
+    "ocr_mean_confidence": 0.64
+  },
+  "timings_ms": {
+    "preprocess_ms": 150,
+    "ocr_ms": 850,
+    "parse_ms": 15,
+    "categorize_ms": 5,
+    "fallback_ms": 2200,
+    "total_ms": 3215
+  },
+  "needs_review": true,
+  "warnings": [
+    "Chất lượng ảnh thấp / ca khó (MC-OCR)"
+  ]
+}

@@ -1,0 +1,90 @@
+{
+  "schema_version": "1.0",
+  "job_id": "4d5ced94-2b65-5b3c-9684-cd65b29a4f6a",
+  "scan_id": "3635ea89-1a5f-58b5-bb8a-b1c48308c30a",
+  "engine_used": "google_vision",
+  "categorizer_used": "rules",
+  "fallback_reason": "none",
+  "merchant": {
+    "name": "Guitar Cafe",
+    "tax_code": null,
+    "address": "Đa Phan Chu Trinh, Hiếp Phú, Quận 9, Hồ",
+    "phone": null
+  },
+  "invoice": {
+    "invoice_number": "INV0050-1009",
+    "invoice_date": "2026-09-10",
+    "invoice_time": null,
+    "currency": "VND",
+    "payment_method": "Thẻ"
+  },
+  "items": [
+    {
+      "line_no": 1,
+      "name": "Hàng hóa & Dịch vụ (Guitar Cafe)",
+      "quantity": "1",
+      "unit": "phần",
+      "unit_price": 125000,
+      "line_total": 125000,
+      "category_slug": "an-uong",
+      "confidence": 0.67,
+      "bbox": {
+        "x": 0.367,
+        "y": 0.748,
+        "w": 0.522,
+        "h": 0.042
+      }
+    }
+  ],
+  "totals": {
+    "subtotal": 125000,
+    "discount": 0,
+    "tax_amount": 0,
+    "tax_rate": null,
+    "service_charge": 0,
+    "total": 125000,
+    "paid_amount": 125000
+  },
+  "validation": {
+    "status": "PASS",
+    "score": 0.67,
+    "checks": [
+      {
+        "code": "V1",
+        "passed": true,
+        "severity": "hard",
+        "message_vi": "Đã tìm thấy tổng tiền hợp lệ"
+      },
+      {
+        "code": "V3",
+        "passed": true,
+        "severity": "hard",
+        "message_vi": "Phương trình cân đối tổng tiền chính xác"
+      },
+      {
+        "code": "V4",
+        "passed": true,
+        "severity": "hard",
+        "message_vi": "Có ít nhất một mặt hàng"
+      }
+    ]
+  },
+  "quality": {
+    "is_blur": false,
+    "is_dark": false,
+    "steps_applied": [
+      "exif_transpose"
+    ],
+    "ocr_mean_confidence": 0.67
+  },
+  "timings_ms": {
+    "preprocess_ms": 65,
+    "ocr_ms": 850,
+    "parse_ms": 15,
+    "categorize_ms": 5,
+    "fallback_ms": 0,
+    "total_ms": 935
+  },
+  "needs_review": false,
+  "warnings": []
+}

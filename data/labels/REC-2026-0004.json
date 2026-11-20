@@ -1,0 +1,90 @@
+{
+  "schema_version": "1.0",
+  "job_id": "932c5cd1-6737-54d7-ba9d-90eb186318e0",
+  "scan_id": "52d7b788-55e0-505d-a2f7-ef7d99ad8dd9",
+  "engine_used": "google_vision",
+  "categorizer_used": "rules",
+  "fallback_reason": "none",
+  "merchant": {
+    "name": "Phúc Anh Minimart",
+    "tax_code": null,
+    "address": "248 Cổ Bi- Gia Lâm - Hà Nội",
+    "phone": null
+  },
+  "invoice": {
+    "invoice_number": "INV0004-1608",
+    "invoice_date": "2020-08-16",
+    "invoice_time": null,
+    "currency": "VND",
+    "payment_method": "Thẻ"
+  },
+  "items": [
+    {
+      "line_no": 1,
+      "name": "Hàng hóa & Dịch vụ (Phúc Anh Minimart)",
+      "quantity": "1",
+      "unit": "phần",
+      "unit_price": 585500,
+      "line_total": 585500,
+      "category_slug": "di-cho-sieu-thi",
+      "confidence": 0.72,
+      "bbox": {
+        "x": 0.065,
+        "y": 0.823,
+        "w": 0.249,
+        "h": 0.023
+      }
+    }
+  ],
+  "totals": {
+    "subtotal": 585500,
+    "discount": 0,
+    "tax_amount": 0,
+    "tax_rate": null,
+    "service_charge": 0,
+    "total": 585500,
+    "paid_amount": 585500
+  },
+  "validation": {
+    "status": "PASS",
+    "score": 0.72,
+    "checks": [
+      {
+        "code": "V1",
+        "passed": true,
+        "severity": "hard",
+        "message_vi": "Đã tìm thấy tổng tiền hợp lệ"
+      },
+      {
+        "code": "V3",
+        "passed": true,
+        "severity": "hard",
+        "message_vi": "Phương trình cân đối tổng tiền chính xác"
+      },
+      {
+        "code": "V4",
+        "passed": true,
+        "severity": "hard",
+        "message_vi": "Có ít nhất một mặt hàng"
+      }
+    ]
+  },
+  "quality": {
+    "is_blur": false,
+    "is_dark": false,
+    "steps_applied": [
+      "exif_transpose"
+    ],
+    "ocr_mean_confidence": 0.72
+  },
+  "timings_ms": {
+    "preprocess_ms": 65,
+    "ocr_ms": 850,
+    "parse_ms": 15,
+    "categorize_ms": 5,
+    "fallback_ms": 0,
+    "total_ms": 935
+  },
+  "needs_review": false,
+  "warnings": []
+}

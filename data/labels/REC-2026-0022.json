@@ -1,0 +1,90 @@
+{
+  "schema_version": "1.0",
+  "job_id": "cf228754-37ca-55b2-9dcb-958b5a8d9696",
+  "scan_id": "cac85742-cf00-510d-9449-0c6ddb7b3d36",
+  "engine_used": "google_vision",
+  "categorizer_used": "rules",
+  "fallback_reason": "none",
+  "merchant": {
+    "name": "MINIMART ANAN",
+    "tax_code": null,
+    "address": "Chợ Sủi Phú Thị Gia Lâm",
+    "phone": null
+  },
+  "invoice": {
+    "invoice_number": "INV0022-1108",
+    "invoice_date": "2020-08-11",
+    "invoice_time": null,
+    "currency": "VND",
+    "payment_method": "Thẻ"
+  },
+  "items": [
+    {
+      "line_no": 1,
+      "name": "Hàng hóa & Dịch vụ (MINIMART ANAN)",
+      "quantity": "1",
+      "unit": "phần",
+      "unit_price": 40000002,
+      "line_total": 40000002,
+      "category_slug": "di-cho-sieu-thi",
+      "confidence": 0.85,
+      "bbox": {
+        "x": 0.165,
+        "y": 0.668,
+        "w": 0.115,
+        "h": 0.023
+      }
+    }
+  ],
+  "totals": {
+    "subtotal": 40000002,
+    "discount": 0,
+    "tax_amount": 0,
+    "tax_rate": null,
+    "service_charge": 0,
+    "total": 40000002,
+    "paid_amount": 40000002
+  },
+  "validation": {
+    "status": "PASS",
+    "score": 0.85,
+    "checks": [
+      {
+        "code": "V1",
+        "passed": true,
+        "severity": "hard",
+        "message_vi": "Đã tìm thấy tổng tiền hợp lệ"
+      },
+      {
+        "code": "V3",
+        "passed": true,
+        "severity": "hard",
+        "message_vi": "Phương trình cân đối tổng tiền chính xác"
+      },
+      {
+        "code": "V4",
+        "passed": true,
+        "severity": "hard",
+        "message_vi": "Có ít nhất một mặt hàng"
+      }
+    ]
+  },
+  "quality": {
+    "is_blur": false,
+    "is_dark": false,
+    "steps_applied": [
+      "exif_transpose"
+    ],
+    "ocr_mean_confidence": 0.85
+  },
+  "timings_ms": {
+    "preprocess_ms": 65,
+    "ocr_ms": 850,
+    "parse_ms": 15,
+    "categorize_ms": 5,
+    "fallback_ms": 0,
+    "total_ms": 935
+  },
+  "needs_review": false,
+  "warnings": []
+}

@@ -1,0 +1,19 @@
+{
+  "folders": [
+    {
+      "name": "Root (Config & Docs)",
+      "path": "."
+    },
+    {
+      "name": "Backend (FastAPI)",
+      "path": "backend"
+    },
+    {
+      "name": "Frontend (Next.js 15)",
+      "path": "frontend"
+    }
+  ],
+  "settings": {
+    "python.defaultInterpreterPath": "${workspaceFolder:Root (Config & Docs)}/.venv/bin/python"
+  }
+}

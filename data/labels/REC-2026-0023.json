@@ -1,0 +1,90 @@
+{
+  "schema_version": "1.0",
+  "job_id": "303c4546-3efc-5842-982c-6bfc7820dfd8",
+  "scan_id": "f6c0192b-4a83-5b50-9979-feb9ae5b1afe",
+  "engine_used": "google_vision",
+  "categorizer_used": "rules",
+  "fallback_reason": "none",
+  "merchant": {
+    "name": "MINIMART ANAN",
+    "tax_code": null,
+    "address": "Chợ Sủi Phú Thị Gia Lâm",
+    "phone": null
+  },
+  "invoice": {
+    "invoice_number": "INV0023-1608",
+    "invoice_date": "2020-08-16",
+    "invoice_time": null,
+    "currency": "VND",
+    "payment_method": "Tiền mặt"
+  },
+  "items": [
+    {
+      "line_no": 1,
+      "name": "Hàng hóa & Dịch vụ (MINIMART ANAN)",
+      "quantity": "1",
+      "unit": "phần",
+      "unit_price": 211500,
+      "line_total": 211500,
+      "category_slug": "di-cho-sieu-thi",
+      "confidence": 0.86,
+      "bbox": {
+        "x": 0.639,
+        "y": 0.805,
+        "w": 0.092,
+        "h": 0.027
+      }
+    }
+  ],
+  "totals": {
+    "subtotal": 211500,
+    "discount": 0,
+    "tax_amount": 0,
+    "tax_rate": null,
+    "service_charge": 0,
+    "total": 211500,
+    "paid_amount": 211500
+  },
+  "validation": {
+    "status": "PASS",
+    "score": 0.86,
+    "checks": [
+      {
+        "code": "V1",
+        "passed": true,
+        "severity": "hard",
+        "message_vi": "Đã tìm thấy tổng tiền hợp lệ"
+      },
+      {
+        "code": "V3",
+        "passed": true,
+        "severity": "hard",
+        "message_vi": "Phương trình cân đối tổng tiền chính xác"
+      },
+      {
+        "code": "V4",
+        "passed": true,
+        "severity": "hard",
+        "message_vi": "Có ít nhất một mặt hàng"
+      }
+    ]
+  },
+  "quality": {
+    "is_blur": false,
+    "is_dark": false,
+    "steps_applied": [
+      "exif_transpose"
+    ],
+    "ocr_mean_confidence": 0.86
+  },
+  "timings_ms": {
+    "preprocess_ms": 65,
+    "ocr_ms": 850,
+    "parse_ms": 15,
+    "categorize_ms": 5,
+    "fallback_ms": 0,
+    "total_ms": 935
+  },
+  "needs_review": false,
+  "warnings": []
+}

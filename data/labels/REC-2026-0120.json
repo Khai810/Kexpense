@@ -1,0 +1,93 @@
+{
+  "schema_version": "1.0",
+  "job_id": "7115b5c5-9023-5436-955c-2513bd36f115",
+  "scan_id": "dde313ad-45b4-5e9d-bb79-0b8681a45a14",
+  "engine_used": "gemini_fallback",
+  "categorizer_used": "rules",
+  "fallback_reason": "low_confidence",
+  "merchant": {
+    "name": "MINIMART ANAN",
+    "tax_code": null,
+    "address": "Chợ Sủi Phú Thị Gia Lâm",
+    "phone": null
+  },
+  "invoice": {
+    "invoice_number": "INV0120-1108",
+    "invoice_date": "2020-08-11",
+    "invoice_time": null,
+    "currency": "VND",
+    "payment_method": "Thẻ"
+  },
+  "items": [
+    {
+      "line_no": 1,
+      "name": "Hàng hóa & Dịch vụ (MINIMART ANAN)",
+      "quantity": "1",
+      "unit": "phần",
+      "unit_price": 74000,
+      "line_total": 74000,
+      "category_slug": "an-uong",
+      "confidence": 0.64,
+      "bbox": {
+        "x": 0.044,
+        "y": 0.568,
+        "w": 0.177,
+        "h": 0.03
+      }
+    }
+  ],
+  "totals": {
+    "subtotal": 74000,
+    "discount": 0,
+    "tax_amount": 0,
+    "tax_rate": null,
+    "service_charge": 0,
+    "total": 74000,
+    "paid_amount": 74000
+  },
+  "validation": {
+    "status": "REVIEW",
+    "score": 0.64,
+    "checks": [
+      {
+        "code": "V1",
+        "passed": true,
+        "severity": "hard",
+        "message_vi": "Đã tìm thấy tổng tiền hợp lệ"
+      },
+      {
+        "code": "V3",
+        "passed": true,
+        "severity": "hard",
+        "message_vi": "Phương trình cân đối tổng tiền chính xác"
+      },
+      {
+        "code": "V4",
+        "passed": true,
+        "severity": "hard",
+        "message_vi": "Có ít nhất một mặt hàng"
+      }
+    ]
+  },
+  "quality": {
+    "is_blur": true,
+    "is_dark": true,
+    "steps_applied": [
+      "exif_transpose",
+      "deskew"
+    ],
+    "ocr_mean_confidence": 0.64
+  },
+  "timings_ms": {
+    "preprocess_ms": 150,
+    "ocr_ms": 850,
+    "parse_ms": 15,
+    "categorize_ms": 5,
+    "fallback_ms": 2200,
+    "total_ms": 3215
+  },
+  "needs_review": true,
+  "warnings": [
+    "Chất lượng ảnh thấp / ca khó (MC-OCR)"
+  ]
+}

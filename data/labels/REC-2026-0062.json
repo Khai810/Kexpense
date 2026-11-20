@@ -1,0 +1,90 @@
+{
+  "schema_version": "1.0",
+  "job_id": "a33e3c51-cbbd-55cb-85f4-bad9e6923406",
+  "scan_id": "f6256352-a6c5-5b65-86e3-eb0429b6e51b",
+  "engine_used": "google_vision",
+  "categorizer_used": "rules",
+  "fallback_reason": "none",
+  "merchant": {
+    "name": "CARREFOUR RESTAURANT",
+    "tax_code": null,
+    "address": "18,JALAN PERMAS 10/7 BANDAR BARU PERMAS JAYA, MASAI,JOHOR",
+    "phone": null
+  },
+  "invoice": {
+    "invoice_number": "INV0062-2003",
+    "invoice_date": "2018-03-20",
+    "invoice_time": null,
+    "currency": "VND",
+    "payment_method": "Thẻ"
+  },
+  "items": [
+    {
+      "line_no": 1,
+      "name": "Hàng hóa & Dịch vụ (CARREFOUR RESTAURANT)",
+      "quantity": "1",
+      "unit": "phần",
+      "unit_price": 70000,
+      "line_total": 70000,
+      "category_slug": "an-uong",
+      "confidence": 0.95,
+      "bbox": {
+        "x": 0.08,
+        "y": 0.45,
+        "w": 0.84,
+        "h": 0.05
+      }
+    }
+  ],
+  "totals": {
+    "subtotal": 70000,
+    "discount": 0,
+    "tax_amount": 0,
+    "tax_rate": null,
+    "service_charge": 0,
+    "total": 70000,
+    "paid_amount": 70000
+  },
+  "validation": {
+    "status": "PASS",
+    "score": 0.95,
+    "checks": [
+      {
+        "code": "V1",
+        "passed": true,
+        "severity": "hard",
+        "message_vi": "Đã tìm thấy tổng tiền hợp lệ"
+      },
+      {
+        "code": "V3",
+        "passed": true,
+        "severity": "hard",
+        "message_vi": "Phương trình cân đối tổng tiền chính xác"
+      },
+      {
+        "code": "V4",
+        "passed": true,
+        "severity": "hard",
+        "message_vi": "Có ít nhất một mặt hàng"
+      }
+    ]
+  },
+  "quality": {
+    "is_blur": false,
+    "is_dark": false,
+    "steps_applied": [
+      "exif_transpose"
+    ],
+    "ocr_mean_confidence": 0.95
+  },
+  "timings_ms": {
+    "preprocess_ms": 65,
+    "ocr_ms": 850,
+    "parse_ms": 15,
+    "categorize_ms": 5,
+    "fallback_ms": 0,
+    "total_ms": 935
+  },
+  "needs_review": false,
+  "warnings": []
+}

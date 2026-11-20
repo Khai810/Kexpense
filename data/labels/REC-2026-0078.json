@@ -1,0 +1,91 @@
+{
+  "schema_version": "1.0",
+  "job_id": "89d14cd3-f0de-5055-82e9-b5caa993d780",
+  "scan_id": "21c943b6-017b-58c5-aed5-fdecfec95bad",
+  "engine_used": "google_vision",
+  "categorizer_used": "rules",
+  "fallback_reason": "none",
+  "merchant": {
+    "name": "Công ty Cổ Phần Thế Giới Di Động",
+    "tax_code": null,
+    "address": "5780 - TINO - Kho CN DMX Dong Anh",
+    "phone": null
+  },
+  "invoice": {
+    "invoice_number": "INV0078-0609",
+    "invoice_date": "2026-09-06",
+    "invoice_time": null,
+    "currency": "VND",
+    "payment_method": "Thẻ"
+  },
+  "items": [
+    {
+      "line_no": 1,
+      "name": "Hàng hóa & Dịch vụ (Công ty Cổ Phần Thế Giới Di Động)",
+      "quantity": "1",
+      "unit": "phần",
+      "unit_price": 400000,
+      "line_total": 400000,
+      "category_slug": "mua-sam",
+      "confidence": 0.13,
+      "bbox": {
+        "x": 0.44,
+        "y": 0.576,
+        "w": 0.065,
+        "h": 0.01
+      }
+    }
+  ],
+  "totals": {
+    "subtotal": 400000,
+    "discount": 0,
+    "tax_amount": 0,
+    "tax_rate": null,
+    "service_charge": 0,
+    "total": 400000,
+    "paid_amount": 400000
+  },
+  "validation": {
+    "status": "PASS",
+    "score": 0.13,
+    "checks": [
+      {
+        "code": "V1",
+        "passed": true,
+        "severity": "hard",
+        "message_vi": "Đã tìm thấy tổng tiền hợp lệ"
+      },
+      {
+        "code": "V3",
+        "passed": true,
+        "severity": "hard",
+        "message_vi": "Phương trình cân đối tổng tiền chính xác"
+      },
+      {
+        "code": "V4",
+        "passed": true,
+        "severity": "hard",
+        "message_vi": "Có ít nhất một mặt hàng"
+      }
+    ]
+  },
+  "quality": {
+    "is_blur": false,
+    "is_dark": false,
+    "steps_applied": [
+      "exif_transpose",
+      "deskew"
+    ],
+    "ocr_mean_confidence": 0.13
+  },
+  "timings_ms": {
+    "preprocess_ms": 65,
+    "ocr_ms": 850,
+    "parse_ms": 15,
+    "categorize_ms": 5,
+    "fallback_ms": 0,
+    "total_ms": 935
+  },
+  "needs_review": false,
+  "warnings": []
+}

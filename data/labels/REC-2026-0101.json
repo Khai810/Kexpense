@@ -1,0 +1,91 @@
+{
+  "schema_version": "1.0",
+  "job_id": "9d1da20e-5c91-5d98-bde9-987dc6059a66",
+  "scan_id": "6013e28e-3602-5e52-ae49-6eb759475e9c",
+  "engine_used": "google_vision",
+  "categorizer_used": "rules",
+  "fallback_reason": "none",
+  "merchant": {
+    "name": "SHELL ISNI PETRO TRADING",
+    "tax_code": null,
+    "address": "LOT 2685 JLN GENTING KLANG 53300 KL SITE 1066",
+    "phone": null
+  },
+  "invoice": {
+    "invoice_number": "INV0101-1803",
+    "invoice_date": "2018-03-18",
+    "invoice_time": null,
+    "currency": "VND",
+    "payment_method": "Tiền mặt"
+  },
+  "items": [
+    {
+      "line_no": 1,
+      "name": "Hàng hóa & Dịch vụ (SHELL ISNI PETRO TRADING)",
+      "quantity": "1",
+      "unit": "phần",
+      "unit_price": 430000,
+      "line_total": 430000,
+      "category_slug": "hoa-don-dien-nuoc",
+      "confidence": 0.95,
+      "bbox": {
+        "x": 0.08,
+        "y": 0.45,
+        "w": 0.84,
+        "h": 0.05
+      }
+    }
+  ],
+  "totals": {
+    "subtotal": 430000,
+    "discount": 0,
+    "tax_amount": 0,
+    "tax_rate": null,
+    "service_charge": 0,
+    "total": 430000,
+    "paid_amount": 430000
+  },
+  "validation": {
+    "status": "PASS",
+    "score": 0.95,
+    "checks": [
+      {
+        "code": "V1",
+        "passed": true,
+        "severity": "hard",
+        "message_vi": "Đã tìm thấy tổng tiền hợp lệ"
+      },
+      {
+        "code": "V3",
+        "passed": true,
+        "severity": "hard",
+        "message_vi": "Phương trình cân đối tổng tiền chính xác"
+      },
+      {
+        "code": "V4",
+        "passed": true,
+        "severity": "hard",
+        "message_vi": "Có ít nhất một mặt hàng"
+      }
+    ]
+  },
+  "quality": {
+    "is_blur": false,
+    "is_dark": false,
+    "steps_applied": [
+      "exif_transpose",
+      "deskew"
+    ],
+    "ocr_mean_confidence": 0.95
+  },
+  "timings_ms": {
+    "preprocess_ms": 65,
+    "ocr_ms": 850,
+    "parse_ms": 15,
+    "categorize_ms": 5,
+    "fallback_ms": 0,
+    "total_ms": 935
+  },
+  "needs_review": false,
+  "warnings": []
+}

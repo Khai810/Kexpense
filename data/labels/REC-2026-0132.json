@@ -1,0 +1,93 @@
+{
+  "schema_version": "1.0",
+  "job_id": "5bcba4c8-2b74-5752-b893-d5c5e294860c",
+  "scan_id": "43ae1ec6-1f44-5bd4-a840-9ccbe55d852d",
+  "engine_used": "gemini_fallback",
+  "categorizer_used": "rules",
+  "fallback_reason": "low_confidence",
+  "merchant": {
+    "name": "MILANO COFFEE",
+    "tax_code": null,
+    "address": "186 Cây Trâm, P.11, Q.Gò Vấp, TP.HCM",
+    "phone": null
+  },
+  "invoice": {
+    "invoice_number": "INV0132-0210",
+    "invoice_date": "2020-10-02",
+    "invoice_time": null,
+    "currency": "VND",
+    "payment_method": "Thẻ"
+  },
+  "items": [
+    {
+      "line_no": 1,
+      "name": "Hàng hóa & Dịch vụ (MILANO COFFEE)",
+      "quantity": "1",
+      "unit": "phần",
+      "unit_price": 19000,
+      "line_total": 19000,
+      "category_slug": "an-uong",
+      "confidence": 0.63,
+      "bbox": {
+        "x": 0.198,
+        "y": 0.557,
+        "w": 0.304,
+        "h": 0.032
+      }
+    }
+  ],
+  "totals": {
+    "subtotal": 19000,
+    "discount": 0,
+    "tax_amount": 0,
+    "tax_rate": null,
+    "service_charge": 0,
+    "total": 19000,
+    "paid_amount": 19000
+  },
+  "validation": {
+    "status": "REVIEW",
+    "score": 0.63,
+    "checks": [
+      {
+        "code": "V1",
+        "passed": true,
+        "severity": "hard",
+        "message_vi": "Đã tìm thấy tổng tiền hợp lệ"
+      },
+      {
+        "code": "V3",
+        "passed": true,
+        "severity": "hard",
+        "message_vi": "Phương trình cân đối tổng tiền chính xác"
+      },
+      {
+        "code": "V4",
+        "passed": true,
+        "severity": "hard",
+        "message_vi": "Có ít nhất một mặt hàng"
+      }
+    ]
+  },
+  "quality": {
+    "is_blur": true,
+    "is_dark": true,
+    "steps_applied": [
+      "exif_transpose",
+      "deskew"
+    ],
+    "ocr_mean_confidence": 0.63
+  },
+  "timings_ms": {
+    "preprocess_ms": 150,
+    "ocr_ms": 850,
+    "parse_ms": 15,
+    "categorize_ms": 5,
+    "fallback_ms": 2200,
+    "total_ms": 3215
+  },
+  "needs_review": true,
+  "warnings": [
+    "Chất lượng ảnh thấp / ca khó (MC-OCR)"
+  ]
+}
