@@ -2,7 +2,7 @@
   "name": "kexpense-frontend",
   "version": "1.0.0",
   "private": true,
-  "packageManager": "pnpm@12.21.0",
+  "packageManager": "pnpm@9.15.9",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
