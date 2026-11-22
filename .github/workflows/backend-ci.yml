@@ -15,6 +15,27 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest
+
+    services:
+      postgres:
+        image: postgres:16-alpine
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: test
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
+    env:
+      ENVIRONMENT: development
+      SECRET_KEY: test-secret-key-at-least-32-characters-long
+      DATABASE_URL: postgresql+asyncpg://postgres:postgres@localhost:5432/test
+
     steps:
       - name: Checkout Code
         uses: actions/checkout@v4
@@ -35,10 +56,11 @@ jobs:
           ruff check backend/
           ruff format --check backend/
 
+      - name: Run Database Migrations & Seeds
+        run: |
+          alembic -c backend/alembic.ini upgrade head
+          PYTHONPATH=. python -m backend.app.core.seed_categories
+
       - name: Run Tests
-        env:
-          ENVIRONMENT: development
-          SECRET_KEY: test-secret-key-at-least-32-characters-long
-          DATABASE_URL: postgresql+asyncpg://postgres:postgres@localhost:5432/test
         run: |
           PYTHONPATH=. pytest backend/tests/ -v
